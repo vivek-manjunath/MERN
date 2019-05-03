@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "client": "react-scripts start",
     "server": "cd server && nodemon server",
-    "start": "nodemon server",
+    "start": "npm run server",
     "dev-start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm build"
   },
