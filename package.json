@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "client": "react-scripts start",
     "server": "cd server && nodemon server",
-    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start": "nodemon server",
+    "dev-start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm build"
   },
   "eslintConfig": {
