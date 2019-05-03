@@ -14,7 +14,7 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
     .then(() => console.log('Mongodb connection established'))
     .catch(err => console.log('Mongodb connection error - ' + err));
 
-app.use('/assets', express.static(path.join(__dirname, '../client/assets')))
+app.use('/assets', express.static(path.join(__dirname, '../src/assets')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors());

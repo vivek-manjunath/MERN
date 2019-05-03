@@ -20,13 +20,13 @@ export default class Home extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-xl-4">
+          <div className="col-12 col-xl-4 mb-2">
             <TopPlayers title="Most Valuable Players" />
           </div>
-          <div className="col-12 col-xl-4">
+          <div className="col-12 col-xl-4 mb-2">
             <TopPlayers title="Top Batsmen" />
           </div>
-          <div className="col-12 col-xl-4">
+          <div className="col-12 col-xl-4 mb-2">
             <TopPlayers title="Top Bowlers" />
           </div>
         </div>
