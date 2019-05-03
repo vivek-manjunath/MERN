@@ -21,7 +21,7 @@ app.use(cors());
 app.use(routes);
 
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('./build'));
+    app.use(express.static('build'));
     app.get('*', (req, res) => {
         console.log('Path -> ' + path.join(__dirname, './build/index.html'));
         res.sendFile(path.join(__dirname, './build/index.html'))
