@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 module.exports = {
     findAll: function(req, res){
         Team.find({isActive: true})
-            .sort('name')            
+            .sort('name')
+            .select({_id: 1, name: 1})            
             .then(teams => res.json(teams))
             .catch(err => res.status(422).json(err));
     },
