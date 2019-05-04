@@ -6,15 +6,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const path = require('path')
 
+
 const app = express();
 const API_PORT = process.env.PORT || 3001;
 const MONGODB_URI = process.env.MONGODB_URI || URI; 
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
-    .then(() => console.log('Mongodb connection established'))
+    .then(() => {
+        console.log('Mongodb connection established');      
+    })
     .catch(err => console.log('Mongodb connection error - ' + err));
 
-app.use('/assets', express.static(path.join(__dirname, '../src/assets')))
+app.use('/assets', express.static(path.join(__dirname, 'src','assets')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cors());
