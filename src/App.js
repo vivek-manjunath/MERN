@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-//import '../node_modules/jquery/dist/jquery';
+//import './assets/jquery.min.js';
 //import '../node_modules/bootstrap/dist/css/bootstrap.css'
-//import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
+//import './assets/bootstrap.bundle.js'
 //import './script.js';
+//import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import './theme.css';
-import Navbar from './components/Navbar';
+import TopNavigation from './components/TopNavigation';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Tournaments from "./components/Tournaments";
@@ -30,7 +31,7 @@ class App extends Component {
     return (
         <Router>
             <div>
-              <Navbar></Navbar>
+              <TopNavigation></TopNavigation>
               <main role="main" className="container">
                 <Route className="fade" exact path="/" component={Home} />
                 <Route className="fade" path="/Home" component={Home} />
