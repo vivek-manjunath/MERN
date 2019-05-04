@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 module.exports = {
     findAll: function(req, res){
-        Team.find({isActive: true})            
+        Team.find({isActive: true})
+            .sort('name')            
             .then(teams => res.json(teams))
             .catch(err => res.status(422).json(err));
     },
