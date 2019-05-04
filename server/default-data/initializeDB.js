@@ -572,4 +572,10 @@ module.exports = [{
             "isActive": true
         }
     ]
+},
+{
+    model: 'Tournament',
+    documents: [{
+        name: 'TCL 2019 Edition 1'
+    }]
 }];

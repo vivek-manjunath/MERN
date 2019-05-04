@@ -6,10 +6,11 @@ const MONGODB_URI = process.env.MONGODB_URI || URI;
 seeder.connect(MONGODB_URI, () => {
     console.log('Seeding mongodb...');
 
-    seeder.loadModels(['./server/models/Team.js'])
+    seeder.loadModels(['./server/models/Team.js',
+    './server/models/Tournament.js'])
 
     // Clear specified collections
-    seeder.clearModels(['Team'], function () {
+    seeder.clearModels(['Team', 'Tournament'], function () {
 
         // Callback to populate DB once collections have been cleared
         seeder.populateModels(data, function () {
