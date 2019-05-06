@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import TextInput from "../Elements/TextInput";
+import Select from "react-select";
 
 export default class CreateFixture extends Component {
   constructor() {

@@ -24,7 +24,7 @@ import ScorecardMain from './components/Scorecard/ScorecardMain';
 import TournamentMain from './components/Tournament/TournamentMain';
 import Login from './components/Login';
 import FixtureList from './components/Fixture/FixtureList';
-import Footer from './components/Footer';
+import AddScorecard from './components/Scorecard/AddScorecard';
 
 class App extends Component {
   render() {
@@ -45,7 +45,8 @@ class App extends Component {
                 <Route className="fade" exact path="/CreateFixture" component={CreateFixture} />
                 <Route className="fade" exact path="/PlayerProfile/:playerId" component={PlayerProfile} />
                 <Route className="fade" exact path="/ManagePlayer" component={ManagePlayer} />
-                <Route className="fade" exact path="/Scorecard/:matchid" component={ScorecardMain} />      
+                <Route className="fade" exact path="/Scorecard/:scorecardId" component={ScorecardMain} />    
+                <Route className="fade" exact path="/AddScorecard/:matchId" component={AddScorecard} />      
                 <Route className="fade" exact path="/Tournament" component={TournamentMain} />      
                 <Route className="fade" exact path="/Login" component={Login} />
                 <Route className="fade" exact path="/Fixtures" component={FixtureList} />                

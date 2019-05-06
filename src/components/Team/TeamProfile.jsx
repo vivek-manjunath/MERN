@@ -13,7 +13,7 @@ export default class TeamProfile extends Component {
   componentDidMount() {
     API.getTeam(this.props.match.params.id).then(res => {
       this.setState({ teamData: res.data }, () => {
-        // console.log(this.state.teamData);
+        console.log(this.state.teamData);
       });
     });
   }

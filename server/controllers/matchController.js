@@ -12,7 +12,9 @@ module.exports = {
     },
     findById: function (req, res) {
         console.log(req.params.id)
-        Match.find(mongoose.Types.ObjectId(req.params.id))
+        Match.findOne(mongoose.Types.ObjectId(req.params.id))
+            .populate("homeTeamId")
+            .populate("awayTeamId")
             .then(match => res.json(match))
             .catch(err => res.status(422).json(err));
     },

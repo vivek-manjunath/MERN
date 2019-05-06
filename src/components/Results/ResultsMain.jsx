@@ -202,16 +202,27 @@ export default class ResultsMain extends Component {
                           </p>
                         </td>
                         <td className="align-middle text-center">
-                          <p>
-                            <small>
+                          <p>       
+                            {
+                              (match.scorecardId) ? (
+                                                
                               <Link
                                 href="#"
                                 to={`/Scorecard/${match.scorecardId}`}
                                 className="card-link text-info"
                               >
                                 Scorecard
+                              </Link>   
+                              ) : (
+                                <Link
+                                href="#"
+                                to={`/AddScorecard/${match._id}`}
+                                className="card-link text-info"
+                              >
+                                Add
                               </Link>
-                            </small>
+                              )
+                            }                         
                           </p>
                         </td>
                       </tr>

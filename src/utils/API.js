@@ -60,4 +60,21 @@ export default {
     filterMatches: function (filterInfo) {
         return axios.post('/api/matches/filter', filterInfo);
     },
+
+    /*Scorecard API methods*/
+    getScorecards: function () {
+        return axios.get('/api/scorecards');
+    },
+    getScorecard: function (id) {
+        return axios.get('/api/scorecards/' + id);
+    },
+    deleteScorecard: function (id) {
+        return axios.delete('/api/scorecards/' + id);
+    },
+    saveScorecard: function (scorecardData) {
+        return axios.post('/api/scorecards', scorecardData);
+    },
+    // filterMatches: function (filterInfo) {
+    //     return axios.post('/api/matches/filter', filterInfo);
+    // },
 }

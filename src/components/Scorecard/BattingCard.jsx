@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 
 export default class BattingCard extends Component {
+  constructor(props) {
+    super(props);    
+    
+  }
+  componentDidMount(){
+    console.log('Child')
+    console.log(this.props)
+  }
   render() {
     return (
       <div>
@@ -24,15 +32,28 @@ export default class BattingCard extends Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">Vivek Manjunath</th>
-                <td>c&nbsp;Uday Kumar&nbsp;b&nbsp;Piyush Joshi</td>
-                <td>10</td>
-                <td>10</td>
-                <td>100</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
+              
+                {/* {
+                  this.props.scorecardData.map(player => {
+                    let playerFullName =
+                       player.firstName + " " + player.middleName + " " + player.lastName;
+
+                       return(
+                         <tr>
+
+                         
+                        <th scope="row">{playerFullName}</th>
+                        <td>c&nbsp;Uday Kumar&nbsp;b&nbsp;Piyush Joshi</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>100</td>
+                        <td>1</td>
+                        <td>1</td>
+                        </tr>
+                       )
+                  })
+                } */}
+                              
               <tr>
                 <th scope="row">Vivek Manjunath</th>
                 <td>not out</td>

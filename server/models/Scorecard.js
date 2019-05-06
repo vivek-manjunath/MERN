@@ -2,46 +2,61 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const scorecardSchema = new Schema({
-  firstName: {
-    type: String,
-    required: true
+  teamA: {
+    teamId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Team'
+    },
+    battingScorecard: [{
+      playerId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Player'
+      },
+      dismissal: {
+        type: String
+      },
+      runs: {
+        type: Number
+      },
+      balls: {
+        type: Number
+      },
+      strikeRate: {
+        type: Number
+      },
+      numberOfFours: {
+        type: Number
+      },
+      numberOfSixes: {
+        type: Number
+      }
+    }],
+    // bowlingScorecardId: {type
+    // }
   },
-  middleName: {
-    type: String
-  },
-  lastName: {
-    type: String,
-    required: true
-  },
-  dob: {
-    type: Date
-  },
-  teamsPlayedFor: [
-    {
-      _id: { type: Schema.Types.ObjectId, ref: 'Team' }
-    ,    
-    isActiveMember: Boolean
-    }
-  ],
+  // teamB: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Team'
+  // },
   isActive: {
     type: Boolean,
     required: true
   },
   createdDate: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   createdBy: {
-      type: String,
-      default: "System"
+    type: String,
+    default: "System"
   },
   updatedDate: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   updatedBy: {
-      type: String,
-      default: "System"
+    type: String,
+    default: "System"
   }
 });
 
