@@ -92,13 +92,17 @@ export default class AddScorecard extends Component {
         <div>
           <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
             <Tab eventKey="firstInning" title="First Inning">
-              <h5>Batting</h5>
+            <div className="row mb-2">
+                  <div className="col-lg-12">
+                  <h5>Batting</h5>
               <button className="btn btn-sm btn-success" onClick={this.addBatsman}>
                 Add Batsman
               </button>
               <button className="btn btn-sm btn-success" onClick="">
                 Add Extras
               </button>
+                  </div>            
+            </div>              
               <form action="">
                 {this.state.battingScorecard.map(item => {
                   return (

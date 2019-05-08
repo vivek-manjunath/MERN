@@ -26,9 +26,11 @@ export default class TeamSquad extends Component {
   };
 
   render() {
+    if(this.state.players && this.state.players.length > 0){
     return (
       <div style={playerItemStyle}>
-        {this.state.players.map(player => {
+        {          
+          this.state.players.map(player => {
           let playerFullName =
             player.firstName + " " + player.middleName + " " + player.lastName;
           return (
@@ -50,5 +52,13 @@ export default class TeamSquad extends Component {
         })}
       </div>
     );
+      }
+      else{
+        return(
+          <div>
+            <h6>Squad not available</h6>
+          </div>
+        )
+      }
   }
 }
