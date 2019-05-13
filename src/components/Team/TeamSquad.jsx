@@ -19,7 +19,7 @@ export default class TeamSquad extends Component {
   }
 
   getPlayersByTeam = () => {
-    API.getPlayersByTeam(this.props.teamId) //TODO: repace with team id
+    API.getPlayersByTeam(this.props.teamId)
       .then(res => {
         this.setState({ players: res.data });
       });
