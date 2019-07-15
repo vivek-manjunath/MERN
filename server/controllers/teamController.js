@@ -25,8 +25,7 @@ module.exports = {
             .then(team => res.json(team))
             .catch(err => res.status(422).json(err));
     },
-    remove: function(req, res){
-        console.log('Delete request: ' + req.params.id)
+    remove: function(req, res){        
         Team.findById(mongoose.Types.ObjectId(req.params.id))
             .then(team => {
                 team.remove();

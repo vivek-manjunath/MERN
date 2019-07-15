@@ -33,9 +33,13 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     remove: function(req, res){
-        Player.findById({playerId: req.params.id})
-            .then(player => player.remove())
-            .then(allPlayers => res.json(allPlayers))
-            .catch(err => res.status(422).json(err));
+        Player.findById(mongoose.Types.ObjectId(req.params.id))
+        .then(player => {
+            player.remove();
+            Player.find()
+                .then(players => res.json(players))
+                .catch(err => res.status(422).json(err));
+        })           
+        .catch(err => res.status(422).json(err));
     },
 }

@@ -92,10 +92,9 @@ class TopNavigation extends Component {
   <Navbar.Brand href="#home">TCL</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link as={Link} to="/Home">Home</Nav.Link>
-      <Nav.Link as={Link} to="/Results">Results</Nav.Link>
+    <Nav className="mr-auto">      
       <Nav.Link as={Link} to="/Teams">Teams</Nav.Link>
+      <Nav.Link as={Link} to="/Results">Results</Nav.Link>      
       <Nav.Link as={Link} to="/Stats">Stats</Nav.Link>
       <Nav.Link as={Link} to="/About">About TCL</Nav.Link>      
     </Nav>

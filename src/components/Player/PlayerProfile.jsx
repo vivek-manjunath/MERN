@@ -26,7 +26,7 @@ export default class PlayerProfile extends Component {
       " " +
       this.state.playerInfo.lastName;
     return (
-      <div class="jumbotron jumbotron-fluid bg-white bd-callout-warning shadow">
+      <div class="jumbotron jumbotron-fluid bg-grey">
         <div class="container">
           <h1 class="display-4">{playerFullName}</h1>
           <p class="lead">

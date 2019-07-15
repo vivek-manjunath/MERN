@@ -4,7 +4,7 @@ export default class About extends Component {
   render() {
     return (
       <div>
-        <div class="card bg-light mb-3">
+        <div class="card bg-white mb-3">
           <div class="card-body">
             <p class="card-text">
               Tampa Cricket league is a senior and junior cricket leaue

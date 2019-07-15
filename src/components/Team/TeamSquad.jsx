@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
+import { Table } from "react-bootstrap";
 
-const playerItemStyle = {  
+const playerItemStyle = {
   width: "20rem"
 };
 
@@ -18,47 +19,73 @@ export default class TeamSquad extends Component {
     this.getPlayersByTeam();
   }
 
+  componentWillReceiveProps(props){
+    const {refresh} = this.props;
+    if(props.refresh != refresh){
+      this.getPlayersByTeam();
+    }
+  }
+
   getPlayersByTeam = () => {
-    API.getPlayersByTeam(this.props.teamId)
-      .then(res => {
-        this.setState({ players: res.data });
-      });
+    API.getPlayersByTeam(this.props.teamId).then(res => {
+      this.setState({ players: res.data });
+    });
   };
 
+  deletePlayer = (id, e) => {
+    e.preventDefault();
+    API.deletePlayer(id)
+      .then(res => {
+        this.getPlayersByTeam();
+      })
+  }
+
   render() {
-    if(this.state.players && this.state.players.length > 0){
-    return (
-      <div style={playerItemStyle}>
-        {          
-          this.state.players.map(player => {
-          let playerFullName =
-            player.firstName + " " + player.middleName + " " + player.lastName;
-          return (
-            <Link
-              key={player._id}
-              href="#"
-              className="list-group-item list-group-item-action"
-              to={`/PlayerProfile/${player._id}`}
-            >
-              {" "}
-              <div className="row">
-                <div className="col-9">{playerFullName}</div>
-                <div className="col-3 text-right">
-                  <FontAwesomeIcon icon={faChevronCircleRight} />
-                </div>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-    );
-      }
-      else{
-        return(
-          <div>
-            <h6>Squad not available</h6>
-          </div>
-        )
-      }
+    if (this.state.players && this.state.players.length > 0) {
+      return (
+        <div style={playerItemStyle}>
+          <Table striped hover size="sm">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th />
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.players.map(player => {
+                let playerFullName =
+                  player.firstName +
+                  " " +
+                  player.middleName +
+                  " " +
+                  player.lastName;
+                return (
+                  <tr>
+                    <td>{playerFullName}</td>
+                    <td>
+                      <Link to={`/PlayerProfile/${player._id}`}>
+                        <small>View profile</small>
+                      </Link>
+                    </td>
+                    <td className="text-danger">
+                      <a onClick={this.deletePlayer.bind(this, player._id)}>
+                        <small>Delete</small>
+                      </a>                      
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h6 className="text-muted">Squad information not available</h6>
+        </div>
+      );
+    }
   }
 }

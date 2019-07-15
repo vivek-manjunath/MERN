@@ -3,11 +3,13 @@ import TeamOverview from "./TeamOverview";
 import TeamSquad from "./TeamSquad";
 import TeamContact from "./TeamContact";
 import API from "../../utils/API";
+import ManagePlayer from "../Player/ManagePlayer";
+
 
 export default class TeamProfile extends Component {
   constructor() {
     super();
-    this.state = { teamData: { captainId: {} } };
+    this.state = { teamData: { captainId: {}, refershSquad: false } };
   }
 
   componentDidMount() {
@@ -18,12 +20,16 @@ export default class TeamProfile extends Component {
     });
   }
 
+  refreshSquadCallBack = () =>{    
+    this.setState({refershSquad: !this.state.refershSquad});
+  }
+
   render() {
     return (
       <div>
         {this.state.teamData.name && (
           <div>
-            <div className="card bg-light mb-3">
+            <div className="card bg-white mb-3">
               <div className="card-body">
                 <h1>{this.state.teamData.name}</h1>
                 <h5 className="text-dark">
@@ -77,10 +83,19 @@ export default class TeamProfile extends Component {
                 <TeamContact />
               </div>
             </div> */}
-            <div>
-              <h3>Squad</h3>
-              <TeamSquad teamId = {this.state.teamData._id}></TeamSquad>
-            </div>            
+            <div className="row">
+              <div className="col-1">
+              <h4>Squad</h4> 
+                </div>
+                <div className="col-11">
+                <ManagePlayer teamId = {this.state.teamData._id} refreshSquad={this.refreshSquadCallBack}></ManagePlayer>
+                </div>                                                       
+            </div>    
+            <div className="row">
+              <div className="col-12">
+              <TeamSquad teamId = {this.state.teamData._id} refresh={this.state.refershSquad}></TeamSquad>              
+                </div>        
+              </div>
           </div>
         )}
       </div>

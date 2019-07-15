@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import TextInput from "../Elements/TextInput";
 import Select from "react-select";
+import Common from "../../utils/Common";
 
 export default class CreateFixture extends Component {
   constructor() {
@@ -58,7 +59,7 @@ export default class CreateFixture extends Component {
       },
       () => {
         API.saveMatch(this.state.fixtureInfo)
-          .then(res => console.log("new match created"))
+          .then(res => Common.alertSuccess("new match created"))
           .catch(err => console.log(err));
       }
     );

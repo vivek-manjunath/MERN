@@ -10,11 +10,11 @@ export default class TopPlayers extends Component {
   render() {
     return (
       <div>
-        <div className="card bg-primary text-white">
+        <div className="card bg-white text-dark">
           <div className="card-header">
             <div className="row align-items-center">
               <div class="col">
-                <h4 class="card-header-title">{this.props.title}</h4>
+                <h6 class="">{this.props.title}</h6>
               </div>
               <div class="col-auto">
                 <a href="#!" class="small">
@@ -36,7 +36,7 @@ export default class TopPlayers extends Component {
                 </a>
               </div>
               <div class="col ml-n2">
-                <h6 class="card-title mb-1">
+                <h6 class="card-title">
                   <a href="project-overview.html">Player 1</a>
                 </h6>
 
