@@ -67,7 +67,7 @@ export default class ManagePlayer extends Component {
   render() {
     return (      
       <>
-        <Button variant="outline-info" size="sm" onClick={this.handleShow}>
+        <Button className="btn btn-sm btn-primary" onClick={this.handleShow}>
         <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>&nbsp;
           Add player
         </Button>

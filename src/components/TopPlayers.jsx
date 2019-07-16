@@ -4,69 +4,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default class TopPlayers extends Component {
-    constructor(props){
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div>
-        <div className="card bg-white text-dark">
-          <div className="card-header">
-            <div className="row align-items-center">
-              <div class="col">
-                <h6 class="">{this.props.title}</h6>
-              </div>
-              <div class="col-auto">
-                <a href="#!" class="small">
-                  View all
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="card-body">
-            <div className="row align-items-center">
-              <div class="col-auto">
-                <a href="project-overview.html" class="avatar avatar-4by3">
-                  {/* <img
-                    src="assets/img/avatars/projects/project-1.jpg"
-                    alt="..."
-                    class="avatar-img rounded"
-                  /> */}
-                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
-                </a>
-              </div>
-              <div class="col ml-n2">
-                <h6 class="card-title">
-                  <a href="project-overview.html">Player 1</a>
-                </h6>
-
-                <p class="card-text small text-muted">
-                  <time datetime="2018-05-24">Points: 6705</time>
-                </p>
-              </div>
-            </div>
-            <hr />
-            <div className="row align-items-center">
-              <div class="col-auto">
-                <a href="project-overview.html" class="avatar avatar-4by3">
-                  {/* <img
-                    src="assets/img/avatars/projects/project-1.jpg"
-                    alt="..."
-                    class="avatar-img rounded"
-                  /> */}
-                  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
-                </a>
-              </div>
-              <div class="col ml-n2">
-                <h6 class="card-title mb-1">
-                  <a href="project-overview.html">Player 2</a>
-                </h6>
-
-                <p class="card-text small text-muted">
-                  <time datetime="2018-05-24">Points: 5555</time>
-                </p>
-              </div>
-            </div>
+        <div class="ibox">
+          <div class="ibox-content">
+            <h4>Most Valuable Players</h4>
+            <table class="table table-stripped small m-t-md">
+              <tbody>
+                <tr>
+                  <td class="no-borders">
+                    <i class="fa fa-circle text-navy" />
+                  </td>
+                  <td class="no-borders">Example element 1</td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-circle text-navy" />
+                  </td>
+                  <td>Example element 2</td>
+                </tr>
+                <tr>
+                  <td>
+                    <i class="fa fa-circle text-navy" />
+                  </td>
+                  <td>Example element 3</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import {Navbar, Nav,NavDropdown} from "react-bootstrap";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 const navBarStyle = {
   backgroundColor: "#e3f2fd"
@@ -53,7 +53,7 @@ class TopNavigation extends Component {
       //         <Link className="nav-link" to="/About">
       //           About TCL
       //         </Link>
-      //       </li>            
+      //       </li>
       //     </ul>
       //     <ul className="navbar-nav">
       //     <li className="nav-item my-2 my-lg-0">
@@ -81,33 +81,58 @@ class TopNavigation extends Component {
       //           </Link>
       //           <Link className="dropdown-item" to="/ManagePlayer">
       //             Manage Player
-      //           </Link>                
+      //           </Link>
       //         </div>
       //       </li>
       //     </ul>
       //   </div>
       //   <hr />
       // </nav>
-      <Navbar className="navbar navbar-expand-lg navbar-dark fixed-top bg-primary" expand="lg">
-  <Navbar.Brand href="#home">TCL</Navbar.Brand>
-  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-  <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">      
-      <Nav.Link as={Link} to="/Teams">Teams</Nav.Link>
-      <Nav.Link as={Link} to="/Results">Results</Nav.Link>      
-      <Nav.Link as={Link} to="/Stats">Stats</Nav.Link>
-      <Nav.Link as={Link} to="/About">About TCL</Nav.Link>      
-    </Nav>
-    <Nav>
-      <Nav.Link as={Link} to="/Login">Login</Nav.Link>
-      <NavDropdown title="Admin" className="navbar-nav" id="basic-nav-dropdown">
-        <NavDropdown.Item  as={Link} to="/NewTeam">Add New Team</NavDropdown.Item>
-        <NavDropdown.Item  as={Link} to="/CreateFixture">Create Fixture</NavDropdown.Item>
-        <NavDropdown.Item  as={Link} to="/ManagePlayer">Manage Player</NavDropdown.Item>        
-      </NavDropdown>
-    </Nav>    
-  </Navbar.Collapse>
-</Navbar>
+      <Navbar
+        className="navbar navbar-expand-lg navbar-dark fixed-top bg-primary"
+        expand="lg"
+      >
+        <Navbar.Brand as={Link} to="/Home">
+          TCL
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link as={Link} to="/Teams">
+              Teams
+            </Nav.Link>
+            <Nav.Link as={Link} to="/Results">
+              Results
+            </Nav.Link>
+            <Nav.Link as={Link} to="/Stats">
+              Stats
+            </Nav.Link>
+            <Nav.Link as={Link} to="/About">
+              About TCL
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/Login">
+              Login
+            </Nav.Link>
+            <NavDropdown
+              title="Admin"
+              className="navbar-nav"
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item as={Link} to="/NewTeam">
+                Add New Team
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/CreateFixture">
+                Create Fixture
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/ManagePlayer">
+                Manage Player
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }

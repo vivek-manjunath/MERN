@@ -6,7 +6,7 @@ import API from "../../utils/API";
 import { Table } from "react-bootstrap";
 
 const playerItemStyle = {
-  width: "20rem"
+  width: '50%'
 };
 
 export default class TeamSquad extends Component {
@@ -19,9 +19,9 @@ export default class TeamSquad extends Component {
     this.getPlayersByTeam();
   }
 
-  componentWillReceiveProps(props){
-    const {refresh} = this.props;
-    if(props.refresh != refresh){
+  componentWillReceiveProps(props) {
+    const { refresh } = this.props;
+    if (props.refresh != refresh) {
       this.getPlayersByTeam();
     }
   }
@@ -34,17 +34,16 @@ export default class TeamSquad extends Component {
 
   deletePlayer = (id, e) => {
     e.preventDefault();
-    API.deletePlayer(id)
-      .then(res => {
-        this.getPlayersByTeam();
-      })
-  }
+    API.deletePlayer(id).then(res => {
+      this.getPlayersByTeam();
+    });
+  };
 
   render() {
     if (this.state.players && this.state.players.length > 0) {
       return (
-        <div style={playerItemStyle}>
-          <Table striped hover size="sm">
+        <div style={playerItemStyle} className="ibox-content">
+          <Table hover className="table-striped" size="sm">
             <thead>
               <tr>
                 <th>Name</th>
@@ -64,15 +63,22 @@ export default class TeamSquad extends Component {
                   <tr>
                     <td>{playerFullName}</td>
                     <td>
-                      <Link to={`/PlayerProfile/${player._id}`}>
+                      <div class="btn-group">
+                        <button class="btn-white btn btn-xs">
+                          View Profile
+                        </button>
+                        <button class="btn-white btn btn-xs">Edit</button>
+                        <button class="btn-danger btn btn-xs" onClick={this.deletePlayer.bind(this, player._id)}>Delete</button>
+                      </div>
+                      {/* <Link to={`/PlayerProfile/${player._id}`}>
                         <small>View profile</small>
-                      </Link>
+                      </Link> */}
                     </td>
-                    <td className="text-danger">
+                    {/* <td className="text-danger">
                       <a onClick={this.deletePlayer.bind(this, player._id)}>
                         <small>Delete</small>
                       </a>                      
-                    </td>
+                    </td> */}
                   </tr>
                 );
               })}

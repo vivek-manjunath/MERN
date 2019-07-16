@@ -38,16 +38,16 @@ class Teams extends Component {
           {this.state.teams.map(team => {
             return (
               <div className="col-md-3" key={team._id}>
-                <div key={team._id} className="card text-center text-white bg-primary mb-4">
-                  <div className="card-body">
-                    <h5 className="card-title">{team.name}</h5>
+                <div key={team._id} className="ibox">
+                  <div className="ibox-content text-center">
+                    <h3>{team.name}</h3>
                     <Link
-                      className="card-link"
+                      className="btn btn-xs btn-outline btn-primary"
                       to={`${this.props.match.path}/${team._id}`}
                     >
                       Team Profile
                     </Link>                    
-                    <a className="card-link text-danger" href="" onClick={this.deleteTeamClick.bind(this, team._id)}>Delete Team</a>
+                    <a className="btn btn-xs btn-outline btn-danger" href="" onClick={this.deleteTeamClick.bind(this, team._id)}>Delete Team</a>
                   </div>
                 </div>
               </div>
