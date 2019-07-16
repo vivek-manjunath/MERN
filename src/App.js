@@ -11,7 +11,7 @@ import TopNavigation from './components/TopNavigation';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Tournaments from "./components/Tournaments";
-import Teams from "./components/Teams";
+import Teams from "./components/Team/Teams";
 import TeamProfile from "./components/Team/TeamProfile";
 import ResultsMain from './components/Results/ResultsMain';
 import NewTeam from './components/Team/NewTeam';
@@ -32,7 +32,7 @@ class App extends Component {
         <Router>
             <div>
               <TopNavigation></TopNavigation>
-              <main role="main" className="container">
+              <div className="container">
                 <Route className="fade" exact path="/" component={Home} />
                 <Route className="fade" path="/Home" component={Home} />
                 <Route className="fade" path="/Results" component={ResultsMain} />
@@ -50,7 +50,7 @@ class App extends Component {
                 <Route className="fade" exact path="/Tournament" component={TournamentMain} />      
                 <Route className="fade" exact path="/Login" component={Login} />
                 <Route className="fade" exact path="/Fixtures" component={FixtureList} />                
-              </main>                             
+              </div>                             
             </div>            
           </Router>
     );

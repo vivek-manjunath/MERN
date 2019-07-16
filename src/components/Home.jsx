@@ -25,7 +25,7 @@ export default class Home extends Component {
           <div className="col-8 mb-2">
             <div className="row">
               <div className="col-12">
-              <div class="article">
+              <div class="jumbotron">
                 <div class="container">
                   <h1>Tampa Cricket League</h1>                  
                 </div>
