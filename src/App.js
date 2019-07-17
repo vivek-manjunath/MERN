@@ -25,6 +25,8 @@ import TournamentMain from './components/Tournament/TournamentMain';
 import Login from './components/Login';
 import FixtureList from './components/Fixture/FixtureList';
 import AddScorecard from './components/Scorecard/AddScorecard';
+import Standings from './components/Standings/Standings';
+import Schedule from './components/Schedule/Schedule';
 
 class App extends Component {
   render() {
@@ -49,7 +51,9 @@ class App extends Component {
                 <Route className="fade" exact path="/AddScorecard/:matchId" component={AddScorecard} />      
                 <Route className="fade" exact path="/Tournament" component={TournamentMain} />      
                 <Route className="fade" exact path="/Login" component={Login} />
-                <Route className="fade" exact path="/Fixtures" component={FixtureList} />                
+                <Route className="fade" exact path="/Fixtures" component={FixtureList} />     
+                <Route className="fade" exact path="/Standings" component={Standings} />   
+                <Route className="fade" exact path="/Schedule" component={Schedule} />     
               </div>                             
             </div>            
           </Router>

@@ -43,7 +43,7 @@ export default class TeamSquad extends Component {
     if (this.state.players && this.state.players.length > 0) {
       return (
         <div style={playerItemStyle} className="ibox-content">
-          <Table hover className="table-striped" size="sm">
+          <Table hover className="table-condensed table-small" size="sm">
             <thead>
               <tr>
                 <th>Name</th>
@@ -63,12 +63,12 @@ export default class TeamSquad extends Component {
                   <tr>
                     <td>{playerFullName}</td>
                     <td>
-                      <div class="btn-group">
-                        <button class="btn-white btn btn-xs">
+                      <div className="btn-group">
+                        <button className="btn btn-xs btn-primary">
                           View Profile
                         </button>
-                        <button class="btn-white btn btn-xs">Edit</button>
-                        <button class="btn-danger btn btn-xs" onClick={this.deletePlayer.bind(this, player._id)}>Delete</button>
+                        <button className="btn btn-xs btn-default">Edit</button>
+                        <button className="btn-danger btn btn-xs" onClick={this.deletePlayer.bind(this, player._id)}>Delete</button>
                       </div>
                       {/* <Link to={`/PlayerProfile/${player._id}`}>
                         <small>View profile</small>

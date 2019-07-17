@@ -7,13 +7,13 @@ export default function TeamCard(props) {
       <div className="ibox-content text-center">
         <h3>{props.teamName}</h3>
         <Link
-          className="btn btn-sm btn-primary"
+          className="btn btn-xs btn-primary"
          to={props.teamProfileUrl}
         >
           Team Profile
         </Link>
         <a
-          className="btn-xs btn-danger"
+          className="btn btn-xs btn-danger"
           href=""
           onClick={props.deleteClickHandler}
         >

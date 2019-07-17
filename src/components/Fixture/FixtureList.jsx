@@ -29,6 +29,7 @@ componentDidMount() {
             </thead>
             <tbody>
                 {
+                    (this.state.matches) ?
                     this.state.matches.map((match) => {
                         return(
                             <tr>                                
@@ -66,7 +67,9 @@ componentDidMount() {
                                 </td>
                             </tr>
                         )
-                    })
+                    }) : 
+                    <h5>Fixture data not available</h5>
+                }
                 }                
             </tbody>
             </table>
