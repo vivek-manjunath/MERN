@@ -31,11 +31,11 @@ export default class TeamProfile extends Component {
             <div>
               <div className="card bg-white mb-3">
                 <div className="card-body">
-                  <h1>{this.state.teamData.name}</h1>
-                  <h5 className="text-dark">
+                  <h1><strong>{this.state.teamData.name}</strong></h1>
+                  <h6 className="text-dark">
                     <strong>Captain:&nbsp;</strong>
                     {(this.state.teamData.captainId)?this.state.teamData.captainId.firstName : 'FNU'}
-                  </h5>
+                  </h6>
                 </div>
               </div>
 

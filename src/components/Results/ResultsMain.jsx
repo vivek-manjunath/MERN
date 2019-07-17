@@ -7,6 +7,7 @@ import Select from "react-select";
 import { Link } from "react-router-dom";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
+import TeamName from "../Team/TeamName";
 
 export default class ResultsMain extends Component {
   constructor() {
@@ -150,6 +151,8 @@ export default class ResultsMain extends Component {
                   {
                     (this.state.matches && this.state.matches.length > 0) ? 
                     this.state.matches.map(match => {
+                      const homeTeamName = match.homeTeamId ? match.homeTeamId.name : 'Unkown';
+                      const awayTeamName = match.awayTeamId ? match.awayTeamId.name : 'Unkown';
                     return (
                       <tr key={match._id}>
                         <td>
@@ -162,7 +165,7 @@ export default class ResultsMain extends Component {
                             }
                           >
                             <div className="col-md-9">
-                              {match.homeTeamId.name}
+                                <TeamName teamName={homeTeamName} teamProfileUrl={`teams/${match.homeTeamId._id}`}></TeamName>                                                            
                             </div>
                             <div className="col-md-3">100/2&nbsp;(16)</div>
                           </div>
@@ -175,7 +178,7 @@ export default class ResultsMain extends Component {
                             }
                           >
                             <div className="col-md-9">
-                              <strong>{match.awayTeamId.name}</strong>
+                            <TeamName teamName={awayTeamName} teamProfileUrl={`/teams/${match.awayTeamId._id}`}></TeamName>                                                            
                             </div>
                             <div className="col-md-3">
                               <strong>102/2&nbsp;(15.3)</strong>

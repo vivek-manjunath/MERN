@@ -15,7 +15,7 @@ export default class TopPlayers extends Component {
             {this.props.title}
           </div>
           <div className="card-body">
-
+            
           </div>
         </div>
       </div>
