@@ -13,7 +13,7 @@ export default function TeamCard(props) {
           Team Profile
         </Link>
         <a
-          className="btn btn-sm btn-danger"
+          className="btn-xs btn-danger"
           href=""
           onClick={props.deleteClickHandler}
         >

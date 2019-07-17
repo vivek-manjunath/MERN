@@ -34,7 +34,7 @@ export default class TeamProfile extends Component {
                   <h1>{this.state.teamData.name}</h1>
                   <h5 className="text-dark">
                     <strong>Captain:&nbsp;</strong>
-                    {this.state.teamData.captainId.firstName}
+                    {(this.state.teamData.captainId)?this.state.teamData.captainId.firstName : 'FNU'}
                   </h5>
                 </div>
               </div>
