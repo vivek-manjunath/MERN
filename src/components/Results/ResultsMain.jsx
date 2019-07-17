@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 import TeamName from "../Team/TeamName";
+import ErrorBoundary from "../ErrorBoundary";
 
 export default class ResultsMain extends Component {
   constructor() {
@@ -78,6 +79,7 @@ export default class ResultsMain extends Component {
   };
   render() {
     return (
+      <ErrorBoundary>
       <BlockUi tag="div" blocking={this.state.showBlockUi}>
         <div className="row">
           <div className="col-md-2 right-vertical-line">
@@ -243,6 +245,7 @@ export default class ResultsMain extends Component {
           {/* <ResultList /> */}
         </div>
       </BlockUi>
+      </ErrorBoundary>      
     );
   }
 }
