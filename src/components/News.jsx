@@ -6,12 +6,8 @@ export default class News extends Component {
     return (
       <div>
         <div className="card mb-3">
-          <div className="card-header">
-            <div className="row align-items-center">
-              <div class="col">
-                <h4 class="card-header-title">{this.props.title}</h4>
-              </div>
-            </div>
+          <div className="card-header">            
+              {this.props.title}
           </div>
           <div className="card-body">
             <ListGroup variant="flush">

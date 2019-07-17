@@ -10,31 +10,12 @@ export default class TopPlayers extends Component {
   render() {
     return (
       <div>
-        <div class="ibox">
-          <div class="ibox-content">
-            <h4>Most Valuable Players</h4>
-            <table class="table table-stripped small m-t-md">
-              <tbody>
-                <tr>
-                  <td class="no-borders">
-                    <i class="fa fa-circle text-navy" />
-                  </td>
-                  <td class="no-borders">Example element 1</td>
-                </tr>
-                <tr>
-                  <td>
-                    <i class="fa fa-circle text-navy" />
-                  </td>
-                  <td>Example element 2</td>
-                </tr>
-                <tr>
-                  <td>
-                    <i class="fa fa-circle text-navy" />
-                  </td>
-                  <td>Example element 3</td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="card">
+          <div class="card-header">
+            {this.props.title}
+          </div>
+          <div className="card-body">
+
           </div>
         </div>
       </div>

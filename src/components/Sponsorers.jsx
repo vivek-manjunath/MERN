@@ -7,11 +7,7 @@ export default class Sponsorers extends Component {
       <div>
         <div className="card mb-3">
           <div className="card-header">
-            <div className="row align-items-center">
-              <div class="col">
-                <h4 class="card-header-title">{this.props.title}</h4>
-              </div>
-            </div>
+            {this.props.title}
           </div>
           <div className="card-body" />
         </div>

@@ -147,7 +147,9 @@ export default class ResultsMain extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.matches.map(match => {
+                  {
+                    (this.state.matches && this.state.matches.length > 0) ? 
+                    this.state.matches.map(match => {
                     return (
                       <tr key={match._id}>
                         <td>
@@ -227,7 +229,9 @@ export default class ResultsMain extends Component {
                         </td>
                       </tr>
                     );
-                  })}
+                  }) : 
+                  <h5>Result data not available</h5>
+                  }
                 </tbody>
               </table>
             </div>
