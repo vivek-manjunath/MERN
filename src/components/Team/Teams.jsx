@@ -44,7 +44,7 @@ class Teams extends Component {
                   teamId={team._id}
                   teamName={team.name}
                   deleteClickHandler={this.deleteTeamClick.bind(this, team._id)}
-                  // teamProfileUrl={`${this.props.match.path}/${props.teamId}`}
+                  teamProfileUrl={`${this.props.match.path}/${team._id}`}
                 />
               </div>
             );
