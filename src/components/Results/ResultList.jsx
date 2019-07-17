@@ -22,7 +22,9 @@ export default class ResultList extends Component {
       <div>
         <div className="row success">
           <div className="col-md-12">
-            {this.state.matches.map(match => {
+            {
+              (this.state.matches) ?
+              this.state.matches.map(match => {
               return (
                 <div>
                   <div className="card" style={resultCardStyle}>
@@ -70,7 +72,8 @@ export default class ResultList extends Component {
                   </div>
                 </div>
               );
-            })}
+            }) :
+            <h5>Result data not available</h5>}
           </div>
         </div>
       </div>
