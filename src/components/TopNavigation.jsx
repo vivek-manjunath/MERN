@@ -102,7 +102,8 @@ class TopNavigation extends Component {
     </Nav>
     <Nav>
       <Nav.Link as={Link} to="/Login">Login</Nav.Link>
-      <NavDropdown title="Admin" className="navbar-nav" id="basic-nav-dropdown">
+      <Nav.Link as={Link} to="/Register">Register</Nav.Link>
+      <NavDropdown title="User" className="navbar-nav" id="basic-nav-dropdown">
         <NavDropdown.Item  as={Link} to="/NewTeam">Add New Team</NavDropdown.Item>
         <NavDropdown.Item  as={Link} to="/CreateFixture">Create Fixture</NavDropdown.Item>
         <NavDropdown.Item  as={Link} to="/ManagePlayer">Manage Player</NavDropdown.Item>        

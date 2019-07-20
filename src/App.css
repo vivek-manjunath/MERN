@@ -1,4 +1,4 @@
-body{
+body {
   padding-top: 80px;
 }
 
@@ -8,19 +8,24 @@ body{
   margin-top: 0;
   padding: 0;
 }
+
 .ibox.collapsed .ibox-content {
   display: none;
 }
+
 .ibox.collapsed .fa.fa-chevron-up:before {
   content: "\f078";
 }
+
 .ibox.collapsed .fa.fa-chevron-down:before {
   content: "\f077";
 }
+
 .ibox:after,
 .ibox:before {
   display: table;
 }
+
 .ibox-title {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
@@ -28,7 +33,7 @@ body{
   -moz-border-top-colors: none;
   background-color: #ffffff;
   border-color: #e7eaec;
-  border-image: none;    
+  border-image: none;
   color: inherit;
   margin-bottom: 0;
   padding: 15px 90px 8px 15px;
@@ -36,6 +41,7 @@ body{
   position: relative;
   clear: both;
 }
+
 .ibox-content {
   background-color: #ffffff;
   color: inherit;
@@ -45,6 +51,7 @@ body{
   border-style: solid solid none;
   border-width: 1px 0;
 }
+
 .ibox-footer {
   color: inherit;
   border-top: 1px solid #e7eaec;
@@ -53,10 +60,16 @@ body{
   padding: 10px 15px;
 }
 
-.ibox-title{
+.ibox-title {
   font-size: 16px;
-    font-weight: 600;
-    color: #676a6c;
-    display: block;    
+  font-weight: 600;
+  color: #676a6c;
+  display: block;
 }
 
+.tcl-form {
+  background-color: #e9ecef;
+  border: 1px solid #babbbb;
+  border-radius: 5px;
+  padding: 10px;
+}

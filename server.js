@@ -1,15 +1,14 @@
 const express = require('express');
 const routes = require('./server/routes');
 const mongoose = require('mongoose');
-const URI = require('./server/config');
+const config = require('./server/config');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const path = require('path')
 
-
 const app = express();
 const API_PORT = process.env.PORT || 3001;
-const MONGODB_URI = process.env.MONGODB_URI || URI; 
+const MONGODB_URI = process.env.MONGODB_URI || config.DB_URI; 
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
     .then(() => {

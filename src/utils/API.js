@@ -77,4 +77,9 @@ export default {
     // filterMatches: function (filterInfo) {
     //     return axios.post('/api/matches/filter', filterInfo);
     // },
+
+    /*Authentication methods*/
+    register: function (userData) {
+        return axios.post('/api/auth/register', userData)
+    }
 }
