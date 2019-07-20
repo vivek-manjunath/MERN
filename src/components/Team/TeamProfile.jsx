@@ -1,26 +1,28 @@
-import React, { Component } from "react";
-import TeamOverview from "./TeamOverview";
-import TeamSquad from "./TeamSquad";
-import TeamContact from "./TeamContact";
-import API from "../../utils/API";
-import ManagePlayer from "../Player/ManagePlayer";
+/** @format */
+
+import React, {Component} from 'react';
+import TeamOverview from './TeamOverview';
+import TeamSquad from './TeamSquad';
+import TeamContact from './TeamContact';
+import API from '../../utils/API';
+import ManagePlayer from '../Player/ManagePlayer';
 
 export default class TeamProfile extends Component {
   constructor() {
     super();
-    this.state = { teamData: { captainId: {}, refershSquad: false } };
+    this.state = {teamData: {captainId: {}, refershSquad: false}};
   }
 
   componentDidMount() {
     API.getTeam(this.props.match.params.id).then(res => {
-      this.setState({ teamData: res.data }, () => {
+      this.setState({teamData: res.data}, () => {
         console.log(this.state.teamData);
       });
     });
   }
 
   refreshSquadCallBack = () => {
-    this.setState({ refershSquad: !this.state.refershSquad });
+    this.setState({refershSquad: !this.state.refershSquad});
   };
 
   render() {
@@ -29,12 +31,16 @@ export default class TeamProfile extends Component {
         <div>
           {this.state.teamData.name && (
             <div>
-              <div className="card bg-white mb-3">
+              <div className="card bg-primary text-white mb-3 border-radius-5px">
                 <div className="card-body">
-                  <h1><strong>{this.state.teamData.name}</strong></h1>
-                  <h6 className="text-dark">
+                  <h1>
+                    <strong>{this.state.teamData.name}</strong>
+                  </h1>
+                  <h6>
                     <strong>Captain:&nbsp;</strong>
-                    {(this.state.teamData.captainId)?this.state.teamData.captainId.firstName : 'FNU'}
+                    {this.state.teamData.captainId
+                      ? this.state.teamData.captainId.firstName
+                      : 'FNU'}
                   </h6>
                 </div>
               </div>

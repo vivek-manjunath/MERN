@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import API from "../../utils/API";
-import TextInput from "../Elements/TextInput";
-import Select from "react-select";
-import Common from "../../utils/Common";
+/** @format */
+
+import React, {Component} from 'react';
+import API from '../../utils/API';
+import TextInput from '../Elements/TextInput';
+import Select from 'react-select';
+import Common from '../../utils/Common';
 
 export default class CreateFixture extends Component {
   constructor() {
@@ -12,10 +14,10 @@ export default class CreateFixture extends Component {
       teams: [],
       venues: [],
       fixtureInfo: {
-        tournamentId: "",
-        homeTeamId: "",
-        awayTeamId: ""
-      }
+        tournamentId: '',
+        homeTeamId: '',
+        awayTeamId: '',
+      },
     };
   }
 
@@ -26,20 +28,20 @@ export default class CreateFixture extends Component {
     this.setState(
       prevState => {
         return {
-          fixtureInfo: { ...prevState.fixtureInfo, [name]: value }
+          fixtureInfo: {...prevState.fixtureInfo, [name]: value},
         };
       },
-      () => console.log(this.state.fixtureInfo)
+      () => console.log(this.state.fixtureInfo),
     );
   };
 
   componentDidMount() {
     API.getTournaments()
-      .then(res => this.setState({ tournaments: res.data }))
+      .then(res => this.setState({tournaments: res.data}))
       .catch(err => console.log(err));
 
     API.getTeams()
-      .then(res => this.setState({ teams: res.data }))
+      .then(res => this.setState({teams: res.data}))
       .catch(err => console.log(err));
 
     // axios.get('api/getVenues')
@@ -54,125 +56,132 @@ export default class CreateFixture extends Component {
     this.setState(
       prevState => {
         return {
-          fixtureInfo: { ...prevState.fixtureInfo }
+          fixtureInfo: {...prevState.fixtureInfo},
         };
       },
       () => {
         API.saveMatch(this.state.fixtureInfo)
-          .then(res => Common.alertSuccess("new match created"))
+          .then(res => Common.alertSuccess('new match created'))
           .catch(err => console.log(err));
-      }
+      },
     );
   };
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-row">
-            <div class="form-group col-md-6">
-              <label for="inputDate">Date</label>
-              <input
-                type="Date"
-                class="form-control"
-                id="inputDate"
-                placeholder="Date"
-                name="datePlayed"
-              />
-            </div>
-            <div class="form-group col-md-6">
-              <label for="inputTime">Time</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputTime"
-                placeholder="Time"
-                name="timePlayed"
-              />
-            </div>
-          </div>
-          <div className="form-row">
-            <div class="form-group col-md-6">
-              <label htmlFor="selectTeam1">Team 1</label>
-              <select
-                id="selectTeam1"
-                name="homeTeamId"
-                class="form-control"
-                onChange={this.changeHandler}
-              >
-                <option selected>Choose...</option>
-                {this.state.teams.map(team => {
-                  return (
-                    <option id={team._id} key={team._id} value={team._id}>
-                      {team.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="selectTeam2">Team 2</label>
-              <select
-                id="selectTeam2"
-                name="awayTeamId"
-                class="form-control"
-                onChange={this.changeHandler}
-              >
-                <option selected>Choose...</option>
-                {this.state.teams.map(team => {
-                  return (
-                    <option id={team._id} key={team._id} value={team._id}>
-                      {team.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          <div className="form-row">
-            <div class="form-group col-md-6">
-              <label for="selectVenue">Venue</label>
-              <select
-                id="selectVenue"
-                class="form-control"
-                onChange={this.changeHandler}
-              >
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="selectUmpiringTeam">Umpiring Team</label>
-              <select id="selectUmpiringTeam" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
-            </div>
-          </div>
-          <div className="form-row">
-            <div class="form-group col-md-6">
-              <label htmlFor="selectTournament">Tournament</label>
-              <select
-                id="selectTournament"
-                name="tournamentId"
-                class="form-control"
-                onChange={this.changeHandler}
-              >
-                <option selected>Choose...</option>
-                {this.state.tournaments.map(tournament => {
-                  return (
-                    <option
-                      id={tournament._id}
-                      key={tournament._id}
-                      value={tournament._id}
-                    >
-                      {tournament.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-          {/* <div class="form-group">
+          <div className="row justify-content-center">
+            <div className="col-10">
+              <div className="card bg-light border-radius-5px">
+                <div className="card-header">Create fixture</div>
+                <div className="card-body">
+                  <div className="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputDate">Date</label>
+                      <input
+                        type="Date"
+                        class="form-control"
+                        id="inputDate"
+                        placeholder="Date"
+                        name="datePlayed"
+                      />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputTime">Time</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputTime"
+                        placeholder="Time"
+                        name="timePlayed"
+                      />
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div class="form-group col-md-6">
+                      <label htmlFor="selectTeam1">Team 1</label>
+                      <select
+                        id="selectTeam1"
+                        name="homeTeamId"
+                        class="form-control"
+                        onChange={this.changeHandler}>
+                        <option selected>Choose...</option>
+                        {this.state.teams.map(team => {
+                          return (
+                            <option
+                              id={team._id}
+                              key={team._id}
+                              value={team._id}>
+                              {team.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="selectTeam2">Team 2</label>
+                      <select
+                        id="selectTeam2"
+                        name="awayTeamId"
+                        class="form-control"
+                        onChange={this.changeHandler}>
+                        <option selected>Choose...</option>
+                        {this.state.teams.map(team => {
+                          return (
+                            <option
+                              id={team._id}
+                              key={team._id}
+                              value={team._id}>
+                              {team.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="selectVenue">Venue</label>
+                      <select
+                        id="selectVenue"
+                        class="form-control"
+                        onChange={this.changeHandler}>
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="selectUmpiringTeam">Umpiring Team</label>
+                      <select id="selectUmpiringTeam" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div class="form-group col-md-6">
+                      <label htmlFor="selectTournament">Tournament</label>
+                      <select
+                        id="selectTournament"
+                        name="tournamentId"
+                        class="form-control"
+                        onChange={this.changeHandler}>
+                        <option selected>Choose...</option>
+                        {this.state.tournaments.map(tournament => {
+                          return (
+                            <option
+                              id={tournament._id}
+                              key={tournament._id}
+                              value={tournament._id}>
+                              {tournament.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                {/* <div class="form-group">
                 <label for="inputAddress">Address</label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
             </div>
@@ -205,9 +214,14 @@ export default class CreateFixture extends Component {
                 </label>
                 </div>
             </div> */}
-          <button type="submit" class="btn btn-success">
-            Save
-          </button>
+                <div className="card-footer text-center">
+                  <button type="submit" class="btn btn-primary">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     );

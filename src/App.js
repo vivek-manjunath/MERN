@@ -56,7 +56,7 @@ class App extends Component {
               className="fade"
               path="/Tournaments"
               component={Tournaments}
-            />{' '}
+            />
             <Route className="fade" exact path="/Teams" component={Teams} />{' '}
             <Route
               className="fade"

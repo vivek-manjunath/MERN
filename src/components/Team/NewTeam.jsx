@@ -45,21 +45,31 @@ export default class NewTeam extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="form-row">
-          <div className="form-group col-md-4">
-            <label htmlFor="selectTeam1">Team Name</label>
-            <TextInput
-              id="inputTeamName"
-              name="name"
-              value={this.state.teamInfo.name.value}
-              placeholder={this.state.teamInfo.name.placeholder}
-              onChange={this.changeHandler}
-            />
+        <div className="row justify-content-center">
+          <div className="col-5">
+            <div className="card bg-light border-radius-5px">
+              <div className="card-header">Add new team</div>
+              <div className="card-body">
+                <div className="form-group">
+                  <label for="ipTeamName">Team Name</label>
+                  <TextInput
+                    id="ipTeamName"
+                    name="name"
+                    className="form-control"
+                    value={this.state.teamInfo.name.value}
+                    placeholder={this.state.teamInfo.name.placeholder}
+                    onChange={this.changeHandler}
+                  />
+                </div>
+              </div>
+              <div className="card-footer text-center">
+                <button type="submit" className="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-success">
-          Save
-        </button>
       </form>
     );
   }
