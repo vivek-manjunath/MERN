@@ -35,46 +35,51 @@ export default class Register extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="row justify-content-center">
-            <div className="col-5 tcl-form">
-              <div class="form-group">
-                <label for="ipName">Full Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="ipName"
-                  name="name"
-                  onChange={this.changeHandler}
-                  aria-describedby="emailHelp"
-                  placeholder="Enter full name"
-                />
-              </div>
-              <div class="form-group">
-                <label for="ipEmail">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="ipEmail"
-                  name="email"
-                  onChange={this.changeHandler}
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                />
-              </div>
-              <div class="form-group">
-                <label for="ipPassword">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="ipPassword"
-                  name="password"
-                  onChange={this.changeHandler}
-                  placeholder="Password"
-                />
-              </div>
-              <div className="">
-                <button type="submit" class="btn btn-primary">
-                  Register
-                </button>
+            <div className="col-5">
+              <div className="card bg-light border-radius-5px">
+                <div className="card-header">User Registration</div>
+                <div className="card-body">
+                  <div class="form-group">
+                    <label for="ipName">Full Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="ipName"
+                      name="name"
+                      onChange={this.changeHandler}
+                      aria-describedby="emailHelp"
+                      placeholder="Enter full name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="ipEmail">Email address</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="ipEmail"
+                      name="email"
+                      onChange={this.changeHandler}
+                      aria-describedby="emailHelp"
+                      placeholder="Enter email"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="ipPassword">Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="ipPassword"
+                      name="password"
+                      onChange={this.changeHandler}
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+                <div className="card-footer text-center">
+                  <button type="submit" class="btn btn-primary">
+                    Register
+                  </button>
+                </div>
               </div>
             </div>
           </div>
