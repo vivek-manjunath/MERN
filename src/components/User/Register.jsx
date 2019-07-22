@@ -2,6 +2,7 @@
 
 import React, {Component} from 'react';
 import API from '../../utils/API';
+import Alert from 'react-s-alert';
 
 export default class Register extends Component {
   constructor() {
@@ -26,7 +27,10 @@ export default class Register extends Component {
   handleSubmit = event => {
     event.preventDefault();
     API.register(this.state.userInfo).then(res =>
-      console.log('User registered'),
+      Alert.success(`User created`, {
+        position: 'bottom-right',
+        effect: 'slide',
+      }),
     );
   };
 

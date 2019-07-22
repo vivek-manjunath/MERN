@@ -15,6 +15,7 @@ import 'react-s-alert/dist/s-alert-css-effects/flip.css';
 import 'react-s-alert/dist/s-alert-css-effects/genie.css';
 import 'react-s-alert/dist/s-alert-css-effects/jelly.css';
 import 'react-s-alert/dist/s-alert-css-effects/stackslide.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 import './theme.css';
 import TopNavigation from './components/TopNavigation';

@@ -1,13 +1,15 @@
-import React, { Component } from "react";
-import TopPlayers from "./TopPlayers";
-import Footer from "./Footer";
-import News from "./News";
-import Sponsorers from "./Sponsorers";
+/** @format */
+
+import React, {Component} from 'react';
+import TopPlayers from './TopPlayers';
+import Footer from './Footer';
+import News from './News';
+import Sponsorers from './Sponsorers';
 
 const homeJumbotronStyle = {
   backgroundImage: 'url("assets/tcl_home.jpg")',
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat"
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
 };
 
 export default class Home extends Component {
@@ -25,11 +27,38 @@ export default class Home extends Component {
           <div className="col-8 mb-2">
             <div className="row">
               <div className="col-12">
-              <div class="jumbotron">
-                <div class="container">
-                  <h1>Tampa Cricket League</h1>                  
-                </div>
-              </div>
+                {/* <div class="jumbotron bg-white text-dark">
+                  <div class="container">
+                    <h1>
+                      <strong>Tampa Cricket League</strong>
+                    </h1>
+                  </div>
+                </div> */}
+                {/* <table className="table table-sm">
+                  <tr>
+                    <td>
+                      <div className="card">
+                        <div className="card-body">
+                          <h6>Best 11 vs Allies</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="card">
+                        <div className="card-body">
+                          <h6>Best 11 vs Allies</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="card">
+                        <div className="card-body">
+                          <h6>Best 11 vs Allies</h6>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table> */}
               </div>
             </div>
             <div className="row">
@@ -47,10 +76,14 @@ export default class Home extends Component {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-12">
+                <Sponsorers title="Sponsorers" />
+              </div>
+            </div>
           </div>
           <div className="col-4 mb-2">
             <News title="Latest News" />
-            <Sponsorers title="Sponsorers" />
           </div>
         </div>
         <Footer />

@@ -8,7 +8,7 @@ export default function PlayerCard(props) {
       <div className="col-4">
         <div className="bd-callout bd-callout-info">
           <div>
-            <h6>{props.playerFullName}</h6>
+            <h3>{props.playerFullName} 1</h3>
           </div>
 
           <div className="btn-group">

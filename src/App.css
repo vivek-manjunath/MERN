@@ -90,3 +90,7 @@ body {
 .bd-callout-info {
   border-left-color: #5bc0de;
 }
+
+.react-datepicker-wrapper {
+  display: block
+}

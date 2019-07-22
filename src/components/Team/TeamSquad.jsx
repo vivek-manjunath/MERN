@@ -56,7 +56,9 @@ export default class TeamSquad extends Component {
               <div className="col-4">
                 <div className="bd-callout bd-callout-info">
                   <div>
-                    <h6>{playerFullName}</h6>
+                    <h4>
+                      <strong>{playerFullName}</strong>
+                    </h4>
                   </div>
 
                   <div className="btn-group">

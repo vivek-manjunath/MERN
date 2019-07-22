@@ -5,6 +5,9 @@ import API from '../../utils/API';
 import TextInput from '../Elements/TextInput';
 import Select from 'react-select';
 import Common from '../../utils/Common';
+import DatePicker, {registerLocale} from 'react-datepicker';
+import es from 'date-fns/locale/es';
+registerLocale('es', es);
 
 export default class CreateFixture extends Component {
   constructor() {
@@ -12,7 +15,11 @@ export default class CreateFixture extends Component {
     this.state = {
       tournaments: [],
       teams: [],
-      venues: [],
+      venues: [
+        {venueId: 1, venueName: 'Evans 1'},
+        {venueId: 1, venueName: 'Evans 2'},
+        {venueId: 1, venueName: 'Evans Center'},
+      ],
       fixtureInfo: {
         tournamentId: '',
         homeTeamId: '',
@@ -21,18 +28,23 @@ export default class CreateFixture extends Component {
     };
   }
 
+  handleDateChange = date => {
+    this.setState(prevState => {
+      return {
+        fixtureInfo: {...prevState.fixtureInfo, datePlayed: date},
+      };
+    });
+  };
+
   changeHandler = e => {
     const name = e.target.name;
     const value = e.target.value;
 
-    this.setState(
-      prevState => {
-        return {
-          fixtureInfo: {...prevState.fixtureInfo, [name]: value},
-        };
-      },
-      () => console.log(this.state.fixtureInfo),
-    );
+    this.setState(prevState => {
+      return {
+        fixtureInfo: {...prevState.fixtureInfo, [name]: value},
+      };
+    });
   };
 
   componentDidMount() {
@@ -43,13 +55,6 @@ export default class CreateFixture extends Component {
     API.getTeams()
       .then(res => this.setState({teams: res.data}))
       .catch(err => console.log(err));
-
-    // axios.get('api/getVenues')
-    // .then((res) => res.data )
-    // .then( (res) => {
-    //     this.setState({venues: res})
-    //     console.log(res);
-    // })
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -71,41 +76,19 @@ export default class CreateFixture extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div className="row justify-content-center">
-            <div className="col-10">
+            <div className="col-8">
               <div className="card bg-light border-radius-5px">
                 <div className="card-header">Create fixture</div>
                 <div className="card-body">
                   <div className="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputDate">Date</label>
-                      <input
-                        type="Date"
-                        class="form-control"
-                        id="inputDate"
-                        placeholder="Date"
-                        name="datePlayed"
-                      />
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="inputTime">Time</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="inputTime"
-                        placeholder="Time"
-                        name="timePlayed"
-                      />
-                    </div>
-                  </div>
-                  <div className="form-row">
-                    <div class="form-group col-md-6">
-                      <label htmlFor="selectTeam1">Team 1</label>
+                      <label htmlFor="selectTeam1">Home Team</label>
                       <select
-                        id="selectTeam1"
+                        id="selHomeTeam"
                         name="homeTeamId"
                         class="form-control"
                         onChange={this.changeHandler}>
-                        <option selected>Choose...</option>
+                        <option selected>Select</option>
                         {this.state.teams.map(team => {
                           return (
                             <option
@@ -119,13 +102,13 @@ export default class CreateFixture extends Component {
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="selectTeam2">Team 2</label>
+                      <label for="selectTeam2">Away Team</label>
                       <select
-                        id="selectTeam2"
+                        id="selAwayTeam"
                         name="awayTeamId"
                         class="form-control"
                         onChange={this.changeHandler}>
-                        <option selected>Choose...</option>
+                        <option selected>Select</option>
                         {this.state.teams.map(team => {
                           return (
                             <option
@@ -141,24 +124,25 @@ export default class CreateFixture extends Component {
                   </div>
                   <div className="form-row">
                     <div class="form-group col-md-6">
-                      <label for="selectVenue">Venue</label>
-                      <select
-                        id="selectVenue"
-                        class="form-control"
-                        onChange={this.changeHandler}>
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-6">
                       <label for="selectUmpiringTeam">Umpiring Team</label>
-                      <select id="selectUmpiringTeam" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                      <select
+                        id="selectUmpiringTeam"
+                        class="form-control"
+                        name="umpiringTeamId"
+                        onChange={this.changeHandler}>
+                        <option selected>Select</option>
+                        {this.state.teams.map(team => {
+                          return (
+                            <option
+                              id={team._id}
+                              key={team._id}
+                              value={team._id}>
+                              {team.name}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
-                  </div>
-                  <div className="form-row">
                     <div class="form-group col-md-6">
                       <label htmlFor="selectTournament">Tournament</label>
                       <select
@@ -180,6 +164,41 @@ export default class CreateFixture extends Component {
                       </select>
                     </div>
                   </div>
+
+                  <div className="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="selectVenue">Venue</label>
+                      <select
+                        id="selectVenue"
+                        name="venue"
+                        class="form-control"
+                        onChange={this.changeHandler}>
+                        <option selected>Select</option>
+                        {this.state.venues.map(venue => {
+                          return (
+                            <option value={venue.venueName}>
+                              {venue.venueName}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputDate">Date</label>
+                      <DatePicker
+                        id="inputDate"
+                        className="form-control"
+                        placeholder="mm/dd/yyyy"
+                        name="datePlayed"
+                        showTimeSelect
+                        dateFormat="MM/dd/yyyy h:mm aa"
+                        timeFormat="h:mm aa"
+                        selected={this.state.fixtureInfo.datePlayed}
+                        onChange={this.handleDateChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-row" />
                 </div>
                 {/* <div class="form-group">
                 <label for="inputAddress">Address</label>

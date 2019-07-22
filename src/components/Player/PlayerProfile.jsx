@@ -1,11 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
-import API from "../../utils/API";
+/** @format */
+
+import React, {Component} from 'react';
+import axios from 'axios';
+import API from '../../utils/API';
 
 export default class PlayerProfile extends Component {
   constructor() {
     super();
-    this.state = { playerInfo: {} };
+    this.state = {playerInfo: {}};
   }
 
   componentDidMount() {
@@ -13,17 +15,16 @@ export default class PlayerProfile extends Component {
   }
 
   getPlayersById = () => {
-    API.getPlayer(this.props.match.params.playerId)      
-      .then(res => {
-        this.setState({ playerInfo: res.data });
-      });
+    API.getPlayer(this.props.match.params.playerId).then(res => {
+      this.setState({playerInfo: res.data});
+    });
   };
   render() {
     let playerFullName =
       this.state.playerInfo.firstName +
-      " " +
+      ' ' +
       this.state.playerInfo.middleName +
-      " " +
+      ' ' +
       this.state.playerInfo.lastName;
     return (
       <div class="jumbotron jumbotron-fluid bg-grey">

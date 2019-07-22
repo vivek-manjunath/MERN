@@ -94,7 +94,7 @@ class TopNavigation extends Component {
         className="navbar navbar-expand-lg navbar-dark fixed-top bg-primary"
         expand="lg">
         <Navbar.Brand as={Link} to="/Home">
-          <strong>TCL</strong>
+          <strong>Tampa Cricket League</strong>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
