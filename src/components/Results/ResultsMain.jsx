@@ -169,10 +169,13 @@ export default class ResultsMain extends Component {
                             <td>
                               <div
                                 className={
-                                  'row font-weight-bold ' +
-                                  (match.homeTeamId._id === match.winningTeamId
-                                    ? 'text-muted'
-                                    : 'text-dark')
+                                  'row ' +
+                                  (match.homeTeamId &&
+                                  match.winningTeamId &&
+                                  match.homeTeamId._id ===
+                                    match.winningTeamId._id
+                                    ? 'text-dark font-weight-bold'
+                                    : 'text-muted')
                                 }>
                                 <div className="col-md-9">
                                   <TeamName
@@ -186,10 +189,13 @@ export default class ResultsMain extends Component {
                               </div>
                               <div
                                 className={
-                                  'row font-weight-bold ' +
-                                  (match.awayTeamId._id === match.winningTeamId
-                                    ? 'text-muted'
-                                    : 'text-dark')
+                                  'row ' +
+                                  (match.awayTeamId &&
+                                  match.winningTeamId &&
+                                  match.awayTeamId._id ===
+                                    match.winningTeamId._id
+                                    ? 'text-dark font-weight-bold'
+                                    : 'text-muted')
                                 }>
                                 <div className="col-md-9">
                                   <TeamName
@@ -200,7 +206,7 @@ export default class ResultsMain extends Component {
                                   />
                                 </div>
                                 <div className="col-md-3">
-                                  <strong>102/2&nbsp;(15.3)</strong>
+                                  <span>102/2&nbsp;(15.3)</span>
                                 </div>
                               </div>
                               {/* <td>{match.awayTeamId.name}</td> */}

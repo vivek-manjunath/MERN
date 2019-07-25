@@ -5,32 +5,34 @@ const scorecardSchema = new Schema({
   teamA: {
     teamId: {
       type: Schema.Types.ObjectId,
-      ref: 'Team'
+      ref: "Team"
     },
-    battingScorecard: [{
-      playerId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Player'
-      },
-      dismissal: {
-        type: String
-      },
-      runs: {
-        type: Number
-      },
-      balls: {
-        type: Number
-      },
-      strikeRate: {
-        type: Number
-      },
-      numberOfFours: {
-        type: Number
-      },
-      numberOfSixes: {
-        type: Number
+    battingScorecard: [
+      {
+        playerId: {
+          type: Schema.Types.ObjectId,
+          ref: "Player"
+        },
+        dismissal: {
+          type: String
+        },
+        runs: {
+          type: Number
+        },
+        balls: {
+          type: Number
+        },
+        strikeRate: {
+          type: Number
+        },
+        numberOfFours: {
+          type: Number
+        },
+        numberOfSixes: {
+          type: Number
+        }
       }
-    }],
+    ]
     // bowlingScorecardId: {type
     // }
   },
@@ -39,8 +41,7 @@ const scorecardSchema = new Schema({
   //   ref: 'Team'
   // },
   isActive: {
-    type: Boolean,
-    required: true
+    type: Boolean
   },
   createdDate: {
     type: Date,

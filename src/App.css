@@ -94,3 +94,7 @@ body {
 .react-datepicker-wrapper {
   display: block
 }
+
+.font-weight-bold {
+  font-weight: bold;
+}

@@ -7,20 +7,9 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../Elements/TextInput';
 
 export default class BatsmanInfo extends Component {
-  constructor() {
-    super();
-    this.state = {
-      teams: [],
-      playerInfo: {
-        firstName: {
-          value: '',
-          placeholder: 'First Name',
-        },
-        middleName: '',
-        lastName: '',
-      },
-      show: false,
-    };
+  constructor(props) {
+    super(props);
+    this.state = {batsmanInfo: {}};
   }
   handleClose = e => {
     this.setState({show: false});
@@ -28,6 +17,25 @@ export default class BatsmanInfo extends Component {
 
   handleShow = e => {
     this.setState({show: true});
+  };
+
+  changeHandler = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    this.setState(
+      prevState => {
+        return {
+          batsmanInfo: {...prevState.batsmanInfo, [name]: value},
+        };
+      },
+      () => console.log(this.state.batsmanInfo),
+    );
+  };
+
+  saveClick = () => {
+    this.props.addBatsmanClickHandler(this.state.batsmanInfo);
+    this.handleClose();
   };
 
   render() {
@@ -47,13 +55,24 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Batsman</label>
-                  <TextInput
+                  {/* <TextInput
                     id="selBatsman"
-                    name="firstName"
-                    value={this.state.playerInfo.firstName.value}
-                    placeholder={this.state.playerInfo.firstName.placeholder}
+                    name="playerId"
+                    value={this.state.batsmanInfo.playerId}
                     onChange={this.changeHandler}
-                  />
+                  /> */}
+                  <select
+                    name="playerId"
+                    className="form-control"
+                    onChange={this.changeHandler}>
+                    <option>Choose</option>
+                    {this.props.playersLookup &&
+                      this.props.playersLookup.map(player => {
+                        return (
+                          <option value={player._id}>{player.firstName}</option>
+                        );
+                      })}
+                  </select>
                 </div>
               </div>
               <div className="form-row">
@@ -63,7 +82,7 @@ export default class BatsmanInfo extends Component {
                     type="text"
                     className="form-control"
                     id="ipRuns"
-                    name="middleName"
+                    name="runs"
                     placeholder="Runs"
                     onChange={this.changeHandler}
                   />
@@ -89,7 +108,7 @@ export default class BatsmanInfo extends Component {
                     type="text"
                     className="form-control"
                     id="ipFours"
-                    name="fours"
+                    name="numberOfFours"
                     placeholder="Fours"
                     onChange={this.changeHandler}
                   />
@@ -102,7 +121,7 @@ export default class BatsmanInfo extends Component {
                     type="text"
                     className="form-control"
                     id="ipSixes"
-                    name="sixes"
+                    name="numberOfSixes"
                     placeholder="Sixes"
                     onChange={this.changeHandler}
                   />
@@ -114,7 +133,7 @@ export default class BatsmanInfo extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.handleSave}>
+            <Button variant="primary" onClick={this.saveClick}>
               Save
             </Button>
           </Modal.Footer>

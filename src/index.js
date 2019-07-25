@@ -6,12 +6,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Alert from 'react-s-alert';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 ReactDOM.render(
   <div>
-    <Alert stack={{limit: 3}} />
-
-    <App />
+    <Router>
+      <Alert stack={{limit: 3}} />
+      <App />
+    </Router>
   </div>,
   document.getElementById('root'),
 );

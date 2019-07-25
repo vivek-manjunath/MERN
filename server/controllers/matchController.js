@@ -1,4 +1,5 @@
 const Match = require("../models/Match");
+const Scorecard = require("../models/Scorecard");
 const mongoose = require("mongoose");
 
 module.exports = {
@@ -8,14 +9,20 @@ module.exports = {
       .populate("awayTeamId")
       .populate("tournamentId")
       .populate("umpiringTeamId")
+      .populate("winningTeamId")
       .then(matches => res.json(matches))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log(req.params.id);
+    console.log("Find by id: " + req.params.id);
     Match.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate("homeTeamId")
       .populate("awayTeamId")
+      .populate({
+        path: "scorecardId",
+        populate: { path: "teamA.battingScorecard.playerId" }
+      })
+      // .populate({ path: "scorecardId.teamA.battingScorecard.playerId" })
       .then(match => res.json(match))
       .catch(err => res.status(422).json(err));
   },
@@ -48,14 +55,88 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    Match.findOneAndUpdate(
-      {
-        _id: req.params.id
-      },
-      req.body
-    )
-      .then(match => res.json(match))
-      .catch(err => res.status(422).json(err));
+    console.log("Update called");
+    var _scoreCard = {};
+
+    Match.findOne(mongoose.Types.ObjectId(req.params.id), function(err, match) {
+      if (err) res.status(422).json(err);
+      if (!match.scorecardId) {
+        Scorecard.create({}).then(newScorecard => {
+          match.scorecardId = mongoose.Types.ObjectId(newScorecard._id);
+          match.save(err => {
+            if (err) res.status(422).json(err);
+            console.log("Match saved");
+            match.populate("scorecardId", (err, match) => {
+              res.status(200).json(match);
+            });
+          });
+        });
+      } else {
+        match.save(err => {
+          if (err) res.status(422).json(err);
+          console.log("Match saved");
+          match.populate("scorecardId", (err, match) => {
+            res.status(200).json(match);
+          });
+        });
+      }
+    });
+
+    // if (req.body && req.body.scorecardId) {
+    //   Scorecard.findByIdAndUpdate(
+    //     mongoose.Types.ObjectId(req.params.id),
+    //     req.body,
+    //     { new: true }
+    //   )
+    //     .then(scorecard => {
+    //       console.log("Scorecard updated: " + scorecard._id);
+
+    //       Match.findByIdAndUpdate(
+    //         mongoose.Types.ObjectId(req.params.id),
+    //         {
+    //           ...req.body,
+    //           scorecardId: mongoose.Types.ObjectId(newScorecard._id),
+    //           winningTeamId: mongoose.Types.ObjectId(req.body.winningTeamId)
+    //         },
+    //         { new: true }
+    //       )
+    //         .populate("homeTeamId")
+    //         .populate("awayTeamId")
+    //         .populate("winningTeamId")
+    //         .populate("scorecardId")
+    //         .then(match => {
+    //           console.log("Match updated: " + req.params.id);
+    //           res.json(match);
+    //         })
+    //         .catch(err => res.status(422).json(err));
+    //     })
+    //     .catch(err => console.log("Scorecard creation error: " + err));
+    // } else {
+    //   Scorecard.create(req.body.scoreCard)
+    //     .then(newScorecard => {
+    //       console.log("Scorecard created: " + newScorecard._id);
+
+    //       Match.findByIdAndUpdate(
+    //         mongoose.Types.ObjectId(req.params.id),
+    //         {
+    //           ...req.body,
+    //           scorecardId: mongoose.Types.ObjectId(newScorecard._id),
+    //           winningTeamId: mongoose.Types.ObjectId(req.body.winningTeamId)
+    //         },
+    //         { new: true }
+    //       )
+    //         .populate("homeTeamId")
+    //         .populate("awayTeamId")
+    //         .populate("winningTeamId")
+    //         .populate("scorecardId")
+    //         .then(match => {
+    //           console.log("Match updated: " + req.params.id);
+    //           res.json(match);
+    //         })
+    //         .catch(err => res.status(422).json(err));
+    //     })
+    //     .catch(err => console.log("Scorecard creation error: " + err));
+    // }
   },
   remove: function(req, res) {
     Match.findById({
