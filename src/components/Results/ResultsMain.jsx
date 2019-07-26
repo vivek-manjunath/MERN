@@ -210,7 +210,9 @@ export default class ResultsMain extends Component {
                                   />
                                 </div>
                                 <div className="col-md-3">
-                                  <span>102/2&nbsp;(15.3)</span>
+                                  {match.scorecardId &&
+                                    match.scorecardId.teamB &&
+                                    match.scorecardId.teamB.teamTotal}
                                 </div>
                               </div>
                               {/* <td>{match.awayTeamId.name}</td> */}

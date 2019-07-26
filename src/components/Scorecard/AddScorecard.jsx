@@ -268,12 +268,14 @@ export default class AddScorecard extends Component {
         <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
           <Tab eventKey="firstInning" title="First Inning">
             <div className="row mb-2">
-              <div className="col-lg-12">
-                <h5>Batting</h5>
+              <div className="col-2">
+                {/* <h5>Batting</h5> */}
                 <BatsmanInfo
                   addBatsmanClickHandler={this.addBatsman}
                   playersLookup={this.state.lookupData.awayTeamPlayers}
                 />
+              </div>
+              <div className="col-2">
                 <Extras />
               </div>
             </div>
