@@ -5,6 +5,7 @@ import TopPlayers from './TopPlayers';
 import Footer from './Footer';
 import News from './News';
 import Sponsorers from './Sponsorers';
+import API from '../utils/API';
 
 const homeJumbotronStyle = {
   backgroundImage: 'url("assets/tcl_home.jpg")',
@@ -13,6 +14,22 @@ const homeJumbotronStyle = {
 };
 
 export default class Home extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
+  componentDidMount() {
+    API.getTopBatsmen().then(res => {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          topBatsmen: res.data,
+        };
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -68,7 +85,10 @@ export default class Home extends Component {
                     <TopPlayers title="Most Valuable Players" />
                   </div>
                   <div className="col-4 mb-2">
-                    <TopPlayers title="Top Batsmen" />
+                    <TopPlayers
+                      players={this.state.topBatsmen}
+                      title="Top Batsmen"
+                    />
                   </div>
                   <div className="col-4 mb-2">
                     <TopPlayers title="Top Bowlers" />

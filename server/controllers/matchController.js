@@ -10,6 +10,7 @@ module.exports = {
       .populate("tournamentId")
       .populate("umpiringTeamId")
       .populate("winningTeamId")
+      .populate("scorecardId")
       .then(matches => res.json(matches))
       .catch(err => res.status(422).json(err));
   },
@@ -55,17 +56,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    console.log("Update called");
-    var _scoreCard = {};
-
     Match.findOne(mongoose.Types.ObjectId(req.params.id), function(err, match) {
       if (err) res.status(422).json(err);
+      match.winningTeamId = req.body.winningTeamId;
       if (!match.scorecardId) {
         Scorecard.create({}).then(newScorecard => {
           match.scorecardId = mongoose.Types.ObjectId(newScorecard._id);
           match.save(err => {
             if (err) res.status(422).json(err);
-            console.log("Match saved");
             match.populate("scorecardId", (err, match) => {
               res.status(200).json(match);
             });
@@ -74,7 +72,6 @@ module.exports = {
       } else {
         match.save(err => {
           if (err) res.status(422).json(err);
-          console.log("Match saved");
           match.populate("scorecardId", (err, match) => {
             res.status(200).json(match);
           });

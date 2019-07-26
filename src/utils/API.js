@@ -32,6 +32,9 @@ export default {
   savePlayer: function(playerData) {
     return axios.post('/api/players', playerData);
   },
+  getTopBatsmen: function() {
+    return axios.get('/api/players/getTopBatsmen');
+  },
   /*Tournament API methods*/
   getTournaments: function() {
     return axios.get('/api/tournaments');

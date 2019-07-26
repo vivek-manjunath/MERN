@@ -32,7 +32,8 @@ const scorecardSchema = new Schema({
           type: Number
         }
       }
-    ]
+    ],
+    teamTotal: { type: Number }
     // bowlingScorecardId: {type
     // }
   },

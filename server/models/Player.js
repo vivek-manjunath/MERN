@@ -18,30 +18,31 @@ const playerSchema = new Schema({
   },
   teamsPlayedFor: [
     {
-      _id: { type: Schema.Types.ObjectId, ref: 'Team' }
-    ,    
-    isActiveMember: Boolean
+      _id: { type: Schema.Types.ObjectId, ref: "Team" },
+      isActiveMember: Boolean
     }
   ],
+  runsScored: {
+    type: Number
+  },
   isActive: {
-    type: Boolean,
-    required: true
+    type: Boolean
   },
   createdDate: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   createdBy: {
-      type: String,
-      default: "System"
+    type: String,
+    default: "System"
   },
   updatedDate: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   updatedBy: {
-      type: String,
-      default: "System"
+    type: String,
+    default: "System"
   }
 });
 

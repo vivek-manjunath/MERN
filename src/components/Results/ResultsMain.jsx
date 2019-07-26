@@ -185,7 +185,11 @@ export default class ResultsMain extends Component {
                                     }`}
                                   />
                                 </div>
-                                <div className="col-md-3">100/2&nbsp;(16)</div>
+                                <div className="col-md-3">
+                                  {match.scorecardId &&
+                                    match.scorecardId.teamA &&
+                                    match.scorecardId.teamA.teamTotal}
+                                </div>
                               </div>
                               <div
                                 className={
@@ -233,21 +237,20 @@ export default class ResultsMain extends Component {
                             </td>
                             <td className="align-middle text-center">
                               <p>
-                                {match.scorecardId ? (
+                                {match.scorecardId && (
                                   <Link
                                     href="#"
-                                    to={`/Scorecard/${match.scorecardId}`}
+                                    to={`/Scorecard/${match.scorecardId._id}`}
                                     className="card-link text-info">
-                                    Scorecard
-                                  </Link>
-                                ) : (
-                                  <Link
-                                    href="#"
-                                    to={`/AddScorecard/${match._id}`}
-                                    className="card-link text-info">
-                                    Add
+                                    View
                                   </Link>
                                 )}
+                                <Link
+                                  href="#"
+                                  to={`/AddScorecard/${match._id}`}
+                                  className="card-link text-info">
+                                  Update
+                                </Link>
                               </p>
                             </td>
                           </tr>

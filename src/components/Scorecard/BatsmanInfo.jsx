@@ -69,7 +69,9 @@ export default class BatsmanInfo extends Component {
                     {this.props.playersLookup &&
                       this.props.playersLookup.map(player => {
                         return (
-                          <option value={player._id}>{player.firstName}</option>
+                          <option value={player._id}>
+                            {player.firstName}&nbsp;{player.lastName}
+                          </option>
                         );
                       })}
                   </select>

@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronCircleRight} from '@fortawesome/free-solid-svg-icons';
 import API from '../../utils/API';
 import {Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 const playerItemStyle = {
   width: '50%',
@@ -62,9 +63,11 @@ export default class TeamSquad extends Component {
                   </div>
 
                   <div className="btn-group">
-                    <button className="btn btn-xs btn-primary">
+                    <Link
+                      to={`/PlayerProfile/${player._id}`}
+                      className="btn btn-xs btn-primary">
                       View Profile
-                    </button>
+                    </Link>
                     <button className="btn btn-xs btn-default">Edit</button>
                     <button
                       className="btn-danger btn btn-xs"

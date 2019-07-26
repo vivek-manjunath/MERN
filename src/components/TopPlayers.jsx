@@ -16,9 +16,19 @@ export default class TopPlayers extends Component {
           <div class="card-header">{this.props.title}</div>
           <div className="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
+              {this.props.players &&
+                this.props.players.map(player => {
+                  return (
+                    <li class="list-group-item">
+                      <h6 className="font-weight-bold">
+                        {player.firstName}&nbsp;{player.lastName}
+                      </h6>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        Runs: {player.runsScored}
+                      </h6>
+                    </li>
+                  );
+                })}
             </ul>
           </div>
         </div>
