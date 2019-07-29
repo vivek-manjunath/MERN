@@ -15,16 +15,32 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log("Find by id: " + req.params.id);
     Match.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate("homeTeamId")
       .populate("awayTeamId")
+      .populate("winningTeamId")
       .populate({
         path: "scorecardId",
-        populate: { path: "teamA.battingScorecard.playerId" }
+        populate: [
+          { path: "teamA.battingScorecard.playerId" },
+          { path: "teamA.battingScorecard.fielder" },
+          { path: "teamA.battingScorecard.bowler" }
+        ]
       })
       // .populate({ path: "scorecardId.teamA.battingScorecard.playerId" })
-      .then(match => res.json(match))
+      .then(match => {
+        match.scorecardId.teamA.battingScorecard.map(batsmanInfo => {
+          batsmanInfo.playerId.fullName = batsmanInfo.playerId.firstName + " ";
+          if (batsmanInfo.playerId.middleName)
+            batsmanInfo.playerId.fullName +=
+              batsmanInfo.playerId.middleName + " ";
+          if (batsmanInfo.playerId.lastName)
+            batsmanInfo.playerId.fullName +=
+              batsmanInfo.playerId.lastName + " ";
+          console.log(batsmanInfo.playerId.fullName);
+        });
+        res.json(match);
+      })
       .catch(err => res.status(422).json(err));
   },
   filter: function(req, res) {

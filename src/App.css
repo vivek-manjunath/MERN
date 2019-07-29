@@ -132,3 +132,11 @@ body {
   font-size: 2rem;
   font-weight: 600;
 }
+
+.tcl-table {
+  font-size: 12px;
+}
+
+.tcl-link {
+  font-size: 12px;
+}

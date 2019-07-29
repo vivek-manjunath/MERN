@@ -6,6 +6,7 @@ import {Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 import Select from 'react-select';
 import BatsmanInfo from './BatsmanInfo';
 import Extras from './Extras';
+import BattingCard from './BattingCard';
 
 export default class AddScorecard extends Component {
   constructor() {
@@ -14,7 +15,11 @@ export default class AddScorecard extends Component {
       matchData: {
         homeTeamId: {},
         awayTeamId: {},
-        scorecardId: {teamA: {battingScorecard: []}, isActive: true},
+        winningTeamId: {},
+        scorecardId: {
+          teamA: {battingScorecard: []},
+          isActive: true,
+        },
       },
       lookupData: {},
     };
@@ -36,7 +41,7 @@ export default class AddScorecard extends Component {
         this.setState(prevState => {
           return {
             lookupData: {
-              ...prevState,
+              ...prevState.lookupData,
               homeTeamPlayers: res.data,
             },
           };
@@ -47,7 +52,7 @@ export default class AddScorecard extends Component {
         this.setState(prevState => {
           return {
             lookupData: {
-              ...prevState,
+              ...prevState.lookupData,
               awayTeamPlayers: res.data,
             },
           };
@@ -81,11 +86,16 @@ export default class AddScorecard extends Component {
   handleChange = e => {
     const {name, value} = e.target;
 
-    this.setState(prevState => {
-      return {
-        matchData: {...prevState.matchData, [name]: value},
-      };
-    });
+    this.setState(
+      prevState => {
+        return {
+          matchData: {...prevState.matchData, [name]: value},
+        };
+      },
+      () => {
+        console.log({...this.state});
+      },
+    );
   };
 
   addBatsman = batsmanInfo => {
@@ -130,190 +140,256 @@ export default class AddScorecard extends Component {
     );
   };
 
+  addExtras = extraInfo => {
+    this.setState(
+      prevState => {
+        return {
+          ...prevState,
+          matchData: {
+            ...prevState.matchData,
+            scorecardId: {
+              ...prevState.matchData.scorecardId,
+              teamA: {
+                ...prevState.matchData.scorecardId.teamA,
+                extras: extraInfo,
+              },
+            },
+          },
+        };
+      },
+      () => {
+        API.updateScorecard(
+          this.state.matchData.scorecardId._id,
+          this.state.matchData.scorecardId,
+        ).then(res => {
+          this.setState(prevState => {
+            return {
+              matchData: {
+                ...prevState.matchData,
+                scorecardId: res.data,
+              },
+            };
+          });
+        });
+      },
+    );
+  };
+
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="row justify-content-center">
-            <div className="col-12">
-              <div className="card bg-light border-radius-5px">
-                <div className="card-body">
-                  <div class="form-group row">
-                    <label for="lblMatch" class="col-sm-2 col-form-label">
-                      Match
-                    </label>
-                    <div class="col-sm-10">
-                      <label id="lblMatch">
+      <div className="row">
+        <div className="col-6">
+          <form onSubmit={this.handleSubmit}>
+            <div className="row justify-content-center">
+              <div className="col-12">
+                <div className="card bg-light border-radius-5px">
+                  <div className="card-body">
+                    <div class="form-group row">
+                      <label for="lblMatch" class="col-sm-2 col-form-label">
+                        Match
+                      </label>
+                      <div class="col-sm-10">
+                        <label id="lblMatch">
+                          <strong>
+                            {this.state.matchData.awayTeamId.name}
+                          </strong>
+                          <span>&nbsp;vs&nbsp;</span>
+                          <strong>
+                            {this.state.matchData.homeTeamId.name}
+                          </strong>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="lblMatch" class="col-sm-2 col-form-label">
                         <strong>{this.state.matchData.awayTeamId.name}</strong>
-                        <span>&nbsp;vs&nbsp;</span>
+                      </label>
+                      <div class="col-sm-10">
+                        <label id="lblMatch" className="col-form-label">
+                          <strong>
+                            {this.state.matchData.scorecardId.teamA.teamTotal}
+                          </strong>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="lblMatch" class="col-sm-2 col-form-label">
                         <strong>{this.state.matchData.homeTeamId.name}</strong>
                       </label>
+                      <div class="col-sm-10">
+                        <label id="lblMatch" className="col-form-label">
+                          <strong>
+                            {this.state.matchData.scorecardId.teamA.teamTotal}
+                          </strong>
+                        </label>
+                      </div>
                     </div>
+                    <fieldset class="form-group">
+                      <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">
+                          Toss won by
+                        </legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gridRadios"
+                              id="gridRadios1"
+                              value="option1"
+                            />
+                            <label class="form-check-label" for="gridRadios1">
+                              {this.state.matchData.awayTeamId.name}
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="gridRadios"
+                              id="gridRadios2"
+                              value="option2"
+                            />
+                            <label class="form-check-label" for="gridRadios2">
+                              {this.state.matchData.homeTeamId.name}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                      <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">
+                          Decision
+                        </legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="tossDecision"
+                              id="gridRadioBat"
+                              value="bat"
+                            />
+                            <label class="form-check-label" for="gridRadioBat">
+                              Bat
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="tossDecision"
+                              id="gridRadiosBowl"
+                              value="bowl"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="gridRadiosBowl">
+                              Bowl
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                      <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">
+                          Winning team
+                        </legend>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="winningTeamId"
+                              id="gridWinningTeamAway"
+                              value={this.state.matchData.awayTeamId._id}
+                              checked={
+                                this.state.matchData.awayTeamId._id ===
+                                this.state.matchData.winningTeamId._id
+                              }
+                              onChange={this.handleChange}
+                            />
+                            <label
+                              class="form-check-label"
+                              for="gridWinningTeamAway">
+                              {this.state.matchData.awayTeamId.name}
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="winningTeamId"
+                              id="gridWinningTeamHome"
+                              value={this.state.matchData.homeTeamId._id}
+                              checked={
+                                // this.state.matchData.homeTeamId._id ===
+                                // this.state.matchData.winningTeamId._id
+                                1 == 2
+                              }
+                              onChange={this.handleChange}
+                            />
+                            <label
+                              class="form-check-label"
+                              for="gridWinningTeamHome">
+                              {this.state.matchData.homeTeamId.name}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
                   </div>
-                  <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">
-                        Toss won by
-                      </legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios1"
-                            value="option1"
-                          />
-                          <label class="form-check-label" for="gridRadios1">
-                            {this.state.matchData.awayTeamId.name}
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="gridRadios"
-                            id="gridRadios2"
-                            value="option2"
-                          />
-                          <label class="form-check-label" for="gridRadios2">
-                            {this.state.matchData.homeTeamId.name}
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">
-                        Decision
-                      </legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="tossDecision"
-                            id="gridRadioBat"
-                            value="bat"
-                          />
-                          <label class="form-check-label" for="gridRadioBat">
-                            Bat
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="tossDecision"
-                            id="gridRadiosBowl"
-                            value="bowl"
-                          />
-                          <label class="form-check-label" for="gridRadiosBowl">
-                            Bowl
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                  <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">
-                        Winning team
-                      </legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="winningTeamId"
-                            id="gridWinningTeamAway"
-                            value={this.state.matchData.awayTeamId._id}
-                            onChange={this.handleChange}
-                          />
-                          <label
-                            class="form-check-label"
-                            for="gridWinningTeamAway">
-                            {this.state.matchData.awayTeamId.name}
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="winningTeamId"
-                            id="gridWinningTeamHome"
-                            value={this.state.matchData.homeTeamId._id}
-                            onChange={this.handleChange}
-                          />
-                          <label
-                            class="form-check-label"
-                            for="gridWinningTeamHome">
-                            {this.state.matchData.homeTeamId.name}
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                </div>
-                <div className="card-footer text-center">
-                  <button type="submit" className="btn btn-primary">
-                    Save
-                  </button>
+                  <div className="card-footer text-center">
+                    <button type="submit" className="btn btn-primary">
+                      Save
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </form>
-        <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
-          <Tab eventKey="firstInning" title="First Inning">
-            <div className="row mb-2">
-              <div className="col-2">
-                {/* <h5>Batting</h5> */}
-                <BatsmanInfo
-                  addBatsmanClickHandler={this.addBatsman}
-                  playersLookup={this.state.lookupData.awayTeamPlayers}
+          </form>
+        </div>
+        <div className="col-6">
+          <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
+            <Tab eventKey="firstInning" title="First Inning">
+              <div className="row mb-2">
+                <div className="col-2">
+                  <BatsmanInfo
+                    addBatsmanClickHandler={this.addBatsman}
+                    awayTeamPlayersLookup={
+                      this.state.lookupData.awayTeamPlayers
+                    }
+                    homeTeamPlayersLookup={
+                      this.state.lookupData.homeTeamPlayers
+                    }
+                  />
+                </div>
+                <div className="col-2">
+                  {this.state.matchData.scorecardId.teamA.extras ? (
+                    <Extras
+                      addExtrasClickHanlder={this.addExtras}
+                      extraData={this.state.matchData.scorecardId.teamA.extras}
+                    />
+                  ) : (
+                    <h6>Loading...</h6>
+                  )}
+                </div>
+              </div>
+              {this.state.matchData && this.state.matchData.scorecardId ? (
+                <BattingCard
+                  scoreCardData={this.state.matchData.scorecardId.teamA}
                 />
-              </div>
-              <div className="col-2">
-                <Extras />
-              </div>
-            </div>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Batsman</th>
-                  <th scope="col">R</th>
-                  <th scope="col">B</th>
-                  <th scope="col">4s</th>
-                  <th scope="col">6s</th>
-                  <th scope="col">SR</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.matchData && this.state.matchData.scorecardId
-                  ? this.state.matchData.scorecardId.teamA.battingScorecard.map(
-                      item => {
-                        return (
-                          <tr>
-                            <td>{item.playerId.firstName}</td>
-                            <td>{item.runs}</td>
-                            <td>{item.balls}</td>
-                            <td>{item.numberOfFours}</td>
-                            <td>{item.numberOfSixes}</td>
-                            <td>{item.strikeRate}</td>
-                          </tr>
-                        );
-                      },
-                    )
-                  : 'Scorecard not available'}
-              </tbody>
-            </table>
-          </Tab>
-          <Tab eventKey="secondInning" title="Secong Inning">
-            {/* <Sonnet /> */}
-          </Tab>
-        </Tabs>
+              ) : (
+                'Scorecard not available'
+              )}
+            </Tab>
+            <Tab eventKey="secondInning" title="Secong Inning">
+              {/* <Sonnet /> */}
+            </Tab>
+          </Tabs>
+        </div>
       </div>
     );
   }

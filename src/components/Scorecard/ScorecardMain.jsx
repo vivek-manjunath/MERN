@@ -13,6 +13,7 @@ export default class ScorecardMain extends Component {
         teamA: {
           teamId: {},
           battingScorecard: [],
+          extras: {},
         },
       },
     };
@@ -36,62 +37,7 @@ export default class ScorecardMain extends Component {
             <div>
               <div className="row">
                 <div className="col-md-12">
-                  <h5>{this.state.scorecardData.teamA.teamId.name}</h5>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <table className="table table-striped table-sm mb-2 scorecard-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Batsmen</th>
-                        <th scope="col" />
-                        <th scope="col">Runs</th>
-                        <th scope="col">Balls</th>
-                        <th scope="col">SR</th>
-                        <th scope="col">4s</th>
-                        <th scope="col">6s</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.scorecardData.teamA.battingScorecard.map(
-                        item => {
-                          let playerFullName = item.playerId.firstName
-                            ? item.playerId.firstName
-                            : '' + ' ' + item.playerId.middleName
-                            ? item.playerId.middleName
-                            : '' + ' ' + item.playerId.lastName
-                            ? item.playerId.lastName
-                            : '';
-
-                          return (
-                            <tr key={item.playerId._id}>
-                              <th scope="row">{playerFullName}</th>
-                              <td>{item.dismissal}</td>
-                              <td>{item.runs}</td>
-                              <td>{item.balls}</td>
-                              <td>{item.strikeRate}</td>
-                              <td>{item.numberOfFours}</td>
-                              <td>{item.numberOfSixes}</td>
-                            </tr>
-                          );
-                        },
-                      )}
-                      <tr className="bg-primary text-white">
-                        <th scope="row">Total</th>
-                        <td>(9 wickets; 16 overs)</td>
-                        <td>
-                          <strong>
-                            {this.state.scorecardData.teamA.teamTotal}
-                          </strong>
-                        </td>
-                        <td />
-                        <td />
-                        <td />
-                        <td />
-                      </tr>
-                    </tbody>
-                  </table>
+                  <BattingCard scoreCardData={this.state.scorecardData.teamA} />
                 </div>
               </div>
             </div>

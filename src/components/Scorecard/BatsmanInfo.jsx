@@ -55,19 +55,67 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Batsman</label>
-                  {/* <TextInput
-                    id="selBatsman"
-                    name="playerId"
-                    value={this.state.batsmanInfo.playerId}
-                    onChange={this.changeHandler}
-                  /> */}
                   <select
                     name="playerId"
                     className="form-control"
                     onChange={this.changeHandler}>
                     <option>Choose</option>
-                    {this.props.playersLookup &&
-                      this.props.playersLookup.map(player => {
+                    {this.props.awayTeamPlayersLookup &&
+                      this.props.awayTeamPlayersLookup.map(player => {
+                        return (
+                          <option key={player._id} value={player._id}>
+                            {player.firstName}&nbsp;{player.lastName}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label for="selBatsman">Mode of dismissal</label>
+                  <select
+                    name="dismissal"
+                    className="form-control"
+                    onChange={this.changeHandler}>
+                    <option>Choose</option>
+                    <option>Caught</option>
+                    <option>Bowled</option>
+                    <option>Runout</option>
+                    <option>Hit wicket</option>
+                    <option>Stumped</option>
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label for="selBatsman">Fielder</label>
+                  <select
+                    name="fielder"
+                    className="form-control"
+                    onChange={this.changeHandler}>
+                    <option>Choose</option>
+                    {this.props.homeTeamPlayersLookup &&
+                      this.props.homeTeamPlayersLookup.map(player => {
+                        return (
+                          <option value={player._id}>
+                            {player.firstName}&nbsp;{player.lastName}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label for="selBatsman">Bowler</label>
+                  <select
+                    name="bowler"
+                    className="form-control"
+                    onChange={this.changeHandler}>
+                    <option>Choose</option>
+                    {this.props.homeTeamPlayersLookup &&
+                      this.props.homeTeamPlayersLookup.map(player => {
                         return (
                           <option value={player._id}>
                             {player.firstName}&nbsp;{player.lastName}

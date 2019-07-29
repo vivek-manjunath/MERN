@@ -7,19 +7,10 @@ import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../Elements/TextInput';
 
 export default class Extras extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      teams: [],
-      playerInfo: {
-        firstName: {
-          value: '',
-          placeholder: 'First Name',
-        },
-        middleName: '',
-        lastName: '',
-      },
-      show: false,
+      extraData: this.props.extraData,
     };
   }
   handleClose = e => {
@@ -28,6 +19,25 @@ export default class Extras extends Component {
 
   handleShow = e => {
     this.setState({show: true});
+  };
+
+  changeHandler = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    this.setState(
+      prevState => {
+        return {
+          extraData: {...prevState.extraData, [name]: value},
+        };
+      },
+      () => console.log(this.state.extraData),
+    );
+  };
+
+  saveClick = () => {
+    this.props.addExtrasClickHanlder(this.state.extraData);
+    this.handleClose();
   };
 
   render() {
@@ -46,38 +56,39 @@ export default class Extras extends Component {
             <form>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="selBatsman">Wides</label>
-                  <TextInput
-                    id="selBatsman"
-                    name="firstName"
-                    value={this.state.playerInfo.firstName.value}
-                    placeholder={this.state.playerInfo.firstName.placeholder}
+                  <label for="ipWides">Wides</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="ipWides"
+                    name="wides"
+                    onChange={this.changeHandler}
+                    value={this.state.extraData.wides}
+                  />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label for="ipNoBalls">No balls</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="ipNoBalls"
+                    name="noBalls"
+                    value={this.state.extraData.noBalls}
                     onChange={this.changeHandler}
                   />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="ipRuns">No balls</label>
+                  <label for="ipByes">Byes</label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
-                    id="ipRuns"
-                    name="middleName"
-                    placeholder="Runs"
-                    onChange={this.changeHandler}
-                  />
-                </div>
-              </div>
-              <div className="form-row">
-                <div className="form-group col-md-12">
-                  <label for="ipBalls">Overthrow</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="ipBalls"
-                    name="balls"
-                    placeholder="Balls"
+                    id="ipByes"
+                    name="byes"
+                    value={this.state.extraData.byes}
                     onChange={this.changeHandler}
                   />
                 </div>
@@ -88,7 +99,7 @@ export default class Extras extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.handleSave}>
+            <Button variant="primary" onClick={this.saveClick}>
               Save
             </Button>
           </Modal.Footer>

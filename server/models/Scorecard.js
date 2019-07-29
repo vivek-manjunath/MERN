@@ -16,6 +16,14 @@ const scorecardSchema = new Schema({
         dismissal: {
           type: String
         },
+        fielder: {
+          type: Schema.Types.ObjectId,
+          ref: "Player"
+        },
+        bowler: {
+          type: Schema.Types.ObjectId,
+          ref: "Player"
+        },
         runs: {
           type: Number
         },
@@ -33,7 +41,22 @@ const scorecardSchema = new Schema({
         }
       }
     ],
-    teamTotal: { type: Number }
+    teamTotal: { type: Number },
+    extras: {
+      wides: {
+        type: Number
+      },
+      noBalls: {
+        type: Number
+      },
+      byes: {
+        type: Number
+      },
+      totalExtras: {
+        type: Number
+      }
+    }
+
     // bowlingScorecardId: {type
     // }
   },

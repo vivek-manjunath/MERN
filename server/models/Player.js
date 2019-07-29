@@ -10,8 +10,10 @@ const playerSchema = new Schema({
     type: String
   },
   lastName: {
-    type: String,
-    required: true
+    type: String
+  },
+  fullName: {
+    type: String
   },
   dob: {
     type: Date
@@ -47,6 +49,7 @@ const playerSchema = new Schema({
 });
 
 playerSchema.methods.getFullName = () => {
+  console.log("FS: " + this.firstName);
   return this.firstName + " " + this.middleName + " " + this.lastName;
 };
 
