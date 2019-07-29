@@ -8,6 +8,10 @@ import BatsmanInfo from './BatsmanInfo';
 import Extras from './Extras';
 import BattingCard from './BattingCard';
 
+const teamTotalContainer = {
+  paddingLeft: '10px',
+};
+
 export default class AddScorecard extends Component {
   constructor() {
     super();
@@ -178,18 +182,18 @@ export default class AddScorecard extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-6">
+        <div className="col-4">
           <form onSubmit={this.handleSubmit}>
             <div className="row justify-content-center">
               <div className="col-12">
                 <div className="card bg-light border-radius-5px">
-                  <div className="card-body">
+                  <div className="card-body result-summary-container">
                     <div class="form-group row">
-                      <label for="lblMatch" class="col-sm-2 col-form-label">
+                      <label for="lblMatch" class="col-sm-4 col-form-label">
                         Match
                       </label>
-                      <div class="col-sm-10">
-                        <label id="lblMatch">
+                      <div class="col-sm-8">
+                        <label id="lblMatch" className="col-form-label">
                           <strong>
                             {this.state.matchData.awayTeamId.name}
                           </strong>
@@ -200,36 +204,13 @@ export default class AddScorecard extends Component {
                         </label>
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label for="lblMatch" class="col-sm-2 col-form-label">
-                        <strong>{this.state.matchData.awayTeamId.name}</strong>
-                      </label>
-                      <div class="col-sm-10">
-                        <label id="lblMatch" className="col-form-label">
-                          <strong>
-                            {this.state.matchData.scorecardId.teamA.teamTotal}
-                          </strong>
-                        </label>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="lblMatch" class="col-sm-2 col-form-label">
-                        <strong>{this.state.matchData.homeTeamId.name}</strong>
-                      </label>
-                      <div class="col-sm-10">
-                        <label id="lblMatch" className="col-form-label">
-                          <strong>
-                            {this.state.matchData.scorecardId.teamA.teamTotal}
-                          </strong>
-                        </label>
-                      </div>
-                    </div>
+
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0">
+                        <legend class="col-form-label col-sm-4 pt-0">
                           Toss won by
                         </legend>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -259,10 +240,10 @@ export default class AddScorecard extends Component {
                     </fieldset>
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0">
+                        <legend class="col-form-label col-sm-4 pt-0">
                           Decision
                         </legend>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -294,10 +275,10 @@ export default class AddScorecard extends Component {
                     </fieldset>
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0">
+                        <legend class="col-form-label col-sm-4 pt-0">
                           Winning team
                         </legend>
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -340,6 +321,38 @@ export default class AddScorecard extends Component {
                         </div>
                       </div>
                     </fieldset>
+                    <div
+                      style={teamTotalContainer}
+                      className="bg-dark text-white border-radius-5px">
+                      <div class="form-group row">
+                        <label for="lblMatch" class="col-sm-4 col-form-label">
+                          <strong>
+                            {this.state.matchData.awayTeamId.name}
+                          </strong>
+                        </label>
+                        <div class="col-sm-8">
+                          <label id="lblMatch" className="col-form-label">
+                            <strong>
+                              {this.state.matchData.scorecardId.teamA.teamTotal}
+                            </strong>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="lblMatch" class="col-sm-4 col-form-label">
+                          <strong>
+                            {this.state.matchData.homeTeamId.name}
+                          </strong>
+                        </label>
+                        <div class="col-sm-8">
+                          <label id="lblMatch" className="col-form-label">
+                            <strong>
+                              {this.state.matchData.scorecardId.teamA.teamTotal}
+                            </strong>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="card-footer text-center">
                     <button type="submit" className="btn btn-primary">
@@ -351,7 +364,7 @@ export default class AddScorecard extends Component {
             </div>
           </form>
         </div>
-        <div className="col-6">
+        <div className="col-8">
           <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
             <Tab eventKey="firstInning" title="First Inning">
               <div className="row mb-2">
