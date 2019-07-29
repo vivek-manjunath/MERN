@@ -323,17 +323,19 @@ export default class AddScorecard extends Component {
                     </fieldset>
                     <div
                       style={teamTotalContainer}
-                      className="bg-dark text-white border-radius-5px">
+                      className="bg-secondary text-white border-radius-5px">
                       <div class="form-group row">
                         <label for="lblMatch" class="col-sm-4 col-form-label">
                           <strong>
                             {this.state.matchData.awayTeamId.name}
                           </strong>
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                           <label id="lblMatch" className="col-form-label">
                             <strong>
-                              {this.state.matchData.scorecardId.teamA.teamTotal}
+                              {this.state.matchData.scorecardId &&
+                                this.state.matchData.scorecardId.teamA
+                                  .teamTotal}
                             </strong>
                           </label>
                         </div>
@@ -344,10 +346,12 @@ export default class AddScorecard extends Component {
                             {this.state.matchData.homeTeamId.name}
                           </strong>
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                           <label id="lblMatch" className="col-form-label">
                             <strong>
-                              {this.state.matchData.scorecardId.teamA.teamTotal}
+                              {this.state.matchData.scorecardId &&
+                                this.state.matchData.scorecardId.teamA
+                                  .teamTotal}
                             </strong>
                           </label>
                         </div>
@@ -380,7 +384,8 @@ export default class AddScorecard extends Component {
                   />
                 </div>
                 <div className="col-2">
-                  {this.state.matchData.scorecardId.teamA.extras ? (
+                  {this.state.matchData.scorecardId &&
+                  this.state.matchData.scorecardId.teamA.extras ? (
                     <Extras
                       addExtrasClickHanlder={this.addExtras}
                       extraData={this.state.matchData.scorecardId.teamA.extras}

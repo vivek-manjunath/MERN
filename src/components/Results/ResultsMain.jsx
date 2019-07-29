@@ -129,7 +129,7 @@ export default class ResultsMain extends Component {
             </div>
             <div className="col-md-10">
               <div>
-                <table className="table table-sm">
+                <table className="table table-sm tcl-table">
                   <thead className="">
                     <tr className="table-active">
                       <th scope="col" className="text-left">
