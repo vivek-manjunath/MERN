@@ -142,3 +142,11 @@ body {
 .result-summary-container {
   font-size: 12px;
 }
+
+.dropdown-menu {
+  left: -7rem !important;
+}
+
+.text-muted a {
+  color: #868e96 !important;
+}

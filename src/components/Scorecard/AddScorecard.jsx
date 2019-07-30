@@ -19,7 +19,7 @@ export default class AddScorecard extends Component {
       matchData: {
         homeTeamId: {},
         awayTeamId: {},
-        winningTeamId: {},
+        winningTeamId: '',
         scorecardId: {
           teamA: {battingScorecard: []},
           isActive: true,
@@ -38,6 +38,7 @@ export default class AddScorecard extends Component {
             homeTeamId: res.data.homeTeamId,
             awayTeamId: res.data.awayTeamId,
             scorecardId: res.data.scorecardId,
+            winningTeamId: res.data.winningTeamId,
           },
         };
       });
@@ -287,8 +288,8 @@ export default class AddScorecard extends Component {
                               id="gridWinningTeamAway"
                               value={this.state.matchData.awayTeamId._id}
                               checked={
-                                this.state.matchData.awayTeamId._id ===
-                                this.state.matchData.winningTeamId._id
+                                this.state.matchData.awayTeamId._id ==
+                                this.state.matchData.winningTeamId
                               }
                               onChange={this.handleChange}
                             />
@@ -306,9 +307,8 @@ export default class AddScorecard extends Component {
                               id="gridWinningTeamHome"
                               value={this.state.matchData.homeTeamId._id}
                               checked={
-                                // this.state.matchData.homeTeamId._id ===
-                                // this.state.matchData.winningTeamId._id
-                                1 == 2
+                                this.state.matchData.homeTeamId._id ==
+                                this.state.matchData.winningTeamId
                               }
                               onChange={this.handleChange}
                             />

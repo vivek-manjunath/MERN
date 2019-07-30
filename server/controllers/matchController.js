@@ -9,7 +9,6 @@ module.exports = {
       .populate("awayTeamId")
       .populate("tournamentId")
       .populate("umpiringTeamId")
-      .populate("winningTeamId")
       .populate("scorecardId")
       .then(matches => res.json(matches))
       .catch(err => res.status(422).json(err));
@@ -18,7 +17,6 @@ module.exports = {
     Match.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate("homeTeamId")
       .populate("awayTeamId")
-      .populate("winningTeamId")
       .populate({
         path: "scorecardId",
         populate: [

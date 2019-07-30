@@ -172,8 +172,7 @@ export default class ResultsMain extends Component {
                                   'row ' +
                                   (match.homeTeamId &&
                                   match.winningTeamId &&
-                                  match.homeTeamId._id ===
-                                    match.winningTeamId._id
+                                  match.homeTeamId._id === match.winningTeamId
                                     ? 'text-dark font-weight-bold'
                                     : 'text-muted')
                                 }>
@@ -186,9 +185,11 @@ export default class ResultsMain extends Component {
                                   />
                                 </div>
                                 <div className="col-md-3">
-                                  {match.scorecardId &&
-                                    match.scorecardId.teamA &&
-                                    match.scorecardId.teamA.teamTotal}
+                                  <strong>
+                                    {match.scorecardId &&
+                                      match.scorecardId.teamA &&
+                                      match.scorecardId.teamA.teamTotal}
+                                  </strong>
                                 </div>
                               </div>
                               <div
@@ -196,8 +197,7 @@ export default class ResultsMain extends Component {
                                   'row ' +
                                   (match.awayTeamId &&
                                   match.winningTeamId &&
-                                  match.awayTeamId._id ===
-                                    match.winningTeamId._id
+                                  match.awayTeamId._id === match.winningTeamId
                                     ? 'text-dark font-weight-bold'
                                     : 'text-muted')
                                 }>
@@ -210,9 +210,11 @@ export default class ResultsMain extends Component {
                                   />
                                 </div>
                                 <div className="col-md-3">
-                                  {match.scorecardId &&
-                                    match.scorecardId.teamB &&
-                                    match.scorecardId.teamB.teamTotal}
+                                  <strong>
+                                    {match.scorecardId &&
+                                      match.scorecardId.teamB &&
+                                      match.scorecardId.teamB.teamTotal}
+                                  </strong>
                                 </div>
                               </div>
                               {/* <td>{match.awayTeamId.name}</td> */}
