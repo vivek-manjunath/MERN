@@ -90,10 +90,10 @@ export default class TeamProfile extends Component {
               </div>
             </div> */}
               <div className="row">
-                <div className="col-1">
+                <div className="col-sm-1">
                   <h4>Squad</h4>
                 </div>
-                <div className="col-11">
+                <div className="col-sm-11">
                   <ManagePlayer
                     teamId={this.state.teamData._id}
                     refreshSquad={this.refreshSquadCallBack}
@@ -101,7 +101,7 @@ export default class TeamProfile extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-12">
+                <div className="col-sm-12">
                   <TeamSquad
                     teamId={this.state.teamData._id}
                     refresh={this.state.refershSquad}

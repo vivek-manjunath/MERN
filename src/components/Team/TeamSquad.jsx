@@ -54,7 +54,7 @@ export default class TeamSquad extends Component {
               player.lastName;
 
             return (
-              <div className="col-4">
+              <div className="col-sm-4">
                 <div className="bd-callout bd-callout-info">
                   <div>
                     <h4>

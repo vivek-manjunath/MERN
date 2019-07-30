@@ -41,68 +41,35 @@ export default class Home extends Component {
         </div> */}
 
         <div className="row">
-          <div className="col-8 mb-2">
+          <div className="col-sm-8 mb-2">
             <div className="row">
-              <div className="col-12">
-                {/* <div class="jumbotron bg-white text-dark">
-                  <div class="container">
-                    <h1>
-                      <strong>Tampa Cricket League</strong>
-                    </h1>
-                  </div>
-                </div> */}
-                {/* <table className="table table-sm">
-                  <tr>
-                    <td>
-                      <div className="card">
-                        <div className="card-body">
-                          <h6>Best 11 vs Allies</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="card">
-                        <div className="card-body">
-                          <h6>Best 11 vs Allies</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="card">
-                        <div className="card-body">
-                          <h6>Best 11 vs Allies</h6>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </table> */}
-              </div>
+              <div className="col-sm-12" />
             </div>
             <div className="row">
-              <div className="col-12">
+              <div className="col-sm-12">
                 <div className="row">
-                  <div className="col-4 mb-2">
+                  <div className="col-sm-4 mb-2">
                     <TopPlayers title="Most Valuable Players" />
                   </div>
-                  <div className="col-4 mb-2">
+                  <div className="col-sm-4 mb-2">
                     <TopPlayers
                       players={this.state.topBatsmen}
                       title="Top Batsmen"
                     />
                   </div>
-                  <div className="col-4 mb-2">
+                  <div className="col-sm-4 mb-2">
                     <TopPlayers title="Top Bowlers" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-12">
+              <div className="col-sm-12">
                 <Sponsorers title="Sponsorers" />
               </div>
             </div>
           </div>
-          <div className="col-4 mb-2">
+          <div className="col-sm-4 mb-2">
             <News title="Latest News" />
           </div>
         </div>
