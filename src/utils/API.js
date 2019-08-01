@@ -93,4 +93,7 @@ export default {
   register: function(userData) {
     return axios.post('/api/auth/register', userData);
   },
+  login: function(email, password) {
+    return axios.post('/api/auth/login', {email, password});
+  },
 };
