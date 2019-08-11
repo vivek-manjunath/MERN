@@ -7,6 +7,7 @@ import Select from 'react-select';
 import BatsmanInfo from './BatsmanInfo';
 import Extras from './Extras';
 import BattingCard from './BattingCard';
+import BowlerInfo from './BowlerInfo';
 
 const teamTotalContainer = {
   paddingLeft: '10px',
@@ -21,7 +22,8 @@ export default class AddScorecard extends Component {
         awayTeamId: {},
         winningTeamId: '',
         scorecardId: {
-          teamA: {battingScorecard: []},
+          firstInning: {battingScorecard: {}},
+          secondInning: {battingScorecard: {}},
           isActive: true,
         },
       },
@@ -33,13 +35,7 @@ export default class AddScorecard extends Component {
     API.getMatch(this.props.match.params.matchId).then(res => {
       this.setState(prevState => {
         return {
-          matchData: {
-            ...prevState.matchData,
-            homeTeamId: res.data.homeTeamId,
-            awayTeamId: res.data.awayTeamId,
-            scorecardId: res.data.scorecardId,
-            winningTeamId: res.data.winningTeamId,
-          },
+          matchData: res.data,
         };
       });
       API.getPlayersByTeam(res.data.homeTeamId._id).then(res => {
@@ -68,24 +64,37 @@ export default class AddScorecard extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    API.updateMatch(this.props.match.params.matchId, this.state.matchData).then(
-      res => {
-        console.log(res.data.scorecardId);
-        this.setState(
-          prevState => {
-            return {
-              matchData: {
-                ...prevState.matchData,
-                scorecardId: res.data.scorecardId,
-              },
-            };
-          },
-          () => {
-            console.log(this.state.matchData);
-          },
-        );
-      },
-    );
+
+    if (this.state.matchData.tossWinningTeamId === this.state.matchData.homeTeamId && this.state.matchData.tossDecision == 'bat') {
+      this.state.matchData.scorecardId.firstInning.battingTeamId = this.state.matchData.homeTeamId._id;
+      this.state.matchData.scorecardId.firstInning.bowlingTeamId = this.state.matchData.awayTeamId._id;
+
+      this.state.matchData.scorecardId.secondInning.battingTeamId = this.state.matchData.awayTeamId._id;
+      this.state.matchData.scorecardId.secondInning.bowlingTeamId = this.state.matchData.homeTeamId._id;
+    } else {
+      this.state.matchData.scorecardId.firstInning.battingTeamId = this.state.matchData.awayTeamId._id;
+      this.state.matchData.scorecardId.firstInning.bowlingTeamId = this.state.matchData.homeTeamId._id;
+
+      this.state.matchData.scorecardId.secondInning.battingTeamId = this.state.matchData.homeTeamId._id;
+      this.state.matchData.scorecardId.secondInning.bowlingTeamId = this.state.matchData.awayTeamId._id;
+    }
+
+    API.updateMatch(this.props.match.params.matchId, this.state.matchData).then(res => {
+      console.log(res.data.scorecardId);
+      this.setState(
+        prevState => {
+          return {
+            matchData: {
+              ...prevState.matchData,
+              scorecardId: res.data.scorecardId,
+            },
+          };
+        },
+        () => {
+          console.log(this.state.matchData);
+        },
+      );
+    });
   };
 
   handleChange = e => {
@@ -103,11 +112,56 @@ export default class AddScorecard extends Component {
     );
   };
 
-  addBatsman = batsmanInfo => {
-    // var scorecard = {teamA: {battingScorecard: []}};
-    // scorecard.teamA.teamId = this.state.matchData.homeTeamId._id;
-    // scorecard.teamA.battingScorecard.push(batsmanInfo);
+  // addBatsman = batsmanInfo => {
+  //   this.setState(
+  //     prevState => {
+  //       return {
+  //         ...prevState,
+  //         matchData: {
+  //           ...prevState.matchData,
+  //           scorecardId: {
+  //             ...prevState.matchData.scorecardId,
+  //             firstInning: {
+  //               ...prevState.matchData.scorecardId.firstInning,
+  //               battingScorecard: {
+  //                 ...prevState.matchData.scorecardId.firstInning
+  //                   .battingScorecard,
+  //                 batsmanList: [
+  //                   ...prevState.matchData.scorecardId.firstInning
+  //                     .battingScorecard.batsmanList,
+  //                   batsmanInfo,
+  //                 ],
+  //               },
+  //             },
+  //           },
+  //         },
+  //       };
+  //     },
+  //     () => {
+  //       API.updateScorecard(
+  //         this.state.matchData.scorecardId._id,
+  //         this.state.matchData.scorecardId,
+  //       ).then(res => {
+  //         this.setState(prevState => {
+  //           return {
+  //             matchData: {
+  //               ...prevState.matchData,
+  //               scorecardId: res.data,
+  //             },
+  //           };
+  //         });
+  //       });
+  //     },
+  //   );
+  // };
 
+  addBatsman = batsmanInfo => {
+    API.addBatsmanInfo(this.state.matchData.scorecardId.firstInning.battingScorecard._id, batsmanInfo).then(res => {
+      console.log('Batsman added');
+    });
+  };
+
+  addBowler = bowlerInfo => {
     this.setState(
       prevState => {
         return {
@@ -116,22 +170,16 @@ export default class AddScorecard extends Component {
             ...prevState.matchData,
             scorecardId: {
               ...prevState.matchData.scorecardId,
-              teamA: {
-                ...prevState.matchData.scorecardId.teamA,
-                battingScorecard: [
-                  ...prevState.matchData.scorecardId.teamA.battingScorecard,
-                  batsmanInfo,
-                ],
+              teamB: {
+                ...prevState.matchData.scorecardId.teamB,
+                bowlingScorecard: [...prevState.matchData.scorecardId.teamB.bowlingScorecard, bowlerInfo],
               },
             },
           },
         };
       },
       () => {
-        API.updateScorecard(
-          this.state.matchData.scorecardId._id,
-          this.state.matchData.scorecardId,
-        ).then(res => {
+        API.updateScorecard(this.state.matchData.scorecardId._id, this.state.matchData.scorecardId).then(res => {
           this.setState(prevState => {
             return {
               matchData: {
@@ -163,10 +211,7 @@ export default class AddScorecard extends Component {
         };
       },
       () => {
-        API.updateScorecard(
-          this.state.matchData.scorecardId._id,
-          this.state.matchData.scorecardId,
-        ).then(res => {
+        API.updateScorecard(this.state.matchData.scorecardId._id, this.state.matchData.scorecardId).then(res => {
           this.setState(prevState => {
             return {
               matchData: {
@@ -178,6 +223,12 @@ export default class AddScorecard extends Component {
         });
       },
     );
+  };
+
+  addBattingScorecard = () => {
+    API.addBattingScorecard(this.state.matchData.scorecardId._id).then(res => {
+      console.log('Batting scorecard added');
+    });
   };
 
   render() {
@@ -195,30 +246,26 @@ export default class AddScorecard extends Component {
                       </label>
                       <div class="col-sm-8">
                         <label id="lblMatch" className="col-form-label">
-                          <strong>
-                            {this.state.matchData.awayTeamId.name}
-                          </strong>
+                          <strong>{this.state.matchData.awayTeamId.name}</strong>
                           <span>&nbsp;vs&nbsp;</span>
-                          <strong>
-                            {this.state.matchData.homeTeamId.name}
-                          </strong>
+                          <strong>{this.state.matchData.homeTeamId.name}</strong>
                         </label>
                       </div>
                     </div>
 
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-4 pt-0">
-                          Toss won by
-                        </legend>
+                        <legend class="col-form-label col-sm-4 pt-0">Toss won by</legend>
                         <div class="col-sm-8">
                           <div class="form-check">
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="gridRadios"
+                              name="tossWinningTeamId"
                               id="gridRadios1"
-                              value="option1"
+                              value={this.state.matchData.awayTeamId._id}
+                              checked={this.state.matchData.awayTeamId._id == this.state.matchData.tossWinningTeamId}
+                              onChange={this.handleChange}
                             />
                             <label class="form-check-label" for="gridRadios1">
                               {this.state.matchData.awayTeamId.name}
@@ -228,9 +275,11 @@ export default class AddScorecard extends Component {
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="gridRadios"
+                              name="tossWinningTeamId"
                               id="gridRadios2"
-                              value="option2"
+                              value={this.state.matchData.homeTeamId._id}
+                              checked={this.state.matchData.homeTeamId._id == this.state.matchData.tossWinningTeamId}
+                              onChange={this.handleChange}
                             />
                             <label class="form-check-label" for="gridRadios2">
                               {this.state.matchData.homeTeamId.name}
@@ -241,9 +290,7 @@ export default class AddScorecard extends Component {
                     </fieldset>
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-4 pt-0">
-                          Decision
-                        </legend>
+                        <legend class="col-form-label col-sm-4 pt-0">Decision</legend>
                         <div class="col-sm-8">
                           <div class="form-check">
                             <input
@@ -252,6 +299,8 @@ export default class AddScorecard extends Component {
                               name="tossDecision"
                               id="gridRadioBat"
                               value="bat"
+                              onChange={this.handleChange}
+                              checked={this.state.matchData.tossDecision == 'bat'}
                             />
                             <label class="form-check-label" for="gridRadioBat">
                               Bat
@@ -264,10 +313,10 @@ export default class AddScorecard extends Component {
                               name="tossDecision"
                               id="gridRadiosBowl"
                               value="bowl"
+                              onChange={this.handleChange}
+                              checked={this.state.matchData.tossDecision == 'bowl'}
                             />
-                            <label
-                              class="form-check-label"
-                              for="gridRadiosBowl">
+                            <label class="form-check-label" for="gridRadiosBowl">
                               Bowl
                             </label>
                           </div>
@@ -276,9 +325,7 @@ export default class AddScorecard extends Component {
                     </fieldset>
                     <fieldset class="form-group">
                       <div class="row">
-                        <legend class="col-form-label col-sm-4 pt-0">
-                          Winning team
-                        </legend>
+                        <legend class="col-form-label col-sm-4 pt-0">Winning team</legend>
                         <div class="col-sm-8">
                           <div class="form-check">
                             <input
@@ -287,15 +334,10 @@ export default class AddScorecard extends Component {
                               name="winningTeamId"
                               id="gridWinningTeamAway"
                               value={this.state.matchData.awayTeamId._id}
-                              checked={
-                                this.state.matchData.awayTeamId._id ==
-                                this.state.matchData.winningTeamId
-                              }
+                              checked={this.state.matchData.awayTeamId._id == this.state.matchData.winningTeamId}
                               onChange={this.handleChange}
                             />
-                            <label
-                              class="form-check-label"
-                              for="gridWinningTeamAway">
+                            <label class="form-check-label" for="gridWinningTeamAway">
                               {this.state.matchData.awayTeamId.name}
                             </label>
                           </div>
@@ -306,61 +348,42 @@ export default class AddScorecard extends Component {
                               name="winningTeamId"
                               id="gridWinningTeamHome"
                               value={this.state.matchData.homeTeamId._id}
-                              checked={
-                                this.state.matchData.homeTeamId._id ==
-                                this.state.matchData.winningTeamId
-                              }
+                              checked={this.state.matchData.homeTeamId._id == this.state.matchData.winningTeamId}
                               onChange={this.handleChange}
                             />
-                            <label
-                              class="form-check-label"
-                              for="gridWinningTeamHome">
+                            <label class="form-check-label" for="gridWinningTeamHome">
                               {this.state.matchData.homeTeamId.name}
                             </label>
                           </div>
                         </div>
                       </div>
                     </fieldset>
-                    <div
-                      style={teamTotalContainer}
-                      className="bg-secondary text-white border-radius-5px">
+                    <div style={teamTotalContainer}>
                       <div class="form-group row">
                         <label for="lblMatch" class="col-sm-4 col-form-label">
-                          <strong>
-                            {this.state.matchData.awayTeamId.name}
-                          </strong>
+                          <strong>{this.state.matchData.awayTeamId.name}</strong>
                         </label>
                         <div class="col-sm-4">
                           <label id="lblMatch" className="col-form-label">
-                            <strong>
-                              {this.state.matchData.scorecardId &&
-                                this.state.matchData.scorecardId.teamA
-                                  .teamTotal}
-                            </strong>
+                            <strong>{this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning.battingScorecard.totalRunsScored}</strong>
                           </label>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="lblMatch" class="col-sm-4 col-form-label">
-                          <strong>
-                            {this.state.matchData.homeTeamId.name}
-                          </strong>
+                          <strong>{this.state.matchData.homeTeamId.name}</strong>
                         </label>
                         <div class="col-sm-4">
                           <label id="lblMatch" className="col-form-label">
-                            <strong>
-                              {this.state.matchData.scorecardId &&
-                                this.state.matchData.scorecardId.teamA
-                                  .teamTotal}
-                            </strong>
+                            <strong>{this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning.battingScorecard.totalRunsScored}</strong>
                           </label>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="card-footer text-center">
-                    <button type="submit" className="btn btn-primary">
-                      Save
+                    <button type="submit" className="btn btn-sm btn-success">
+                      Update Match Summary
                     </button>
                   </div>
                 </div>
@@ -369,43 +392,30 @@ export default class AddScorecard extends Component {
           </form>
         </div>
         <div className="col-8">
-          <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="firstInning" id="uncontrolled-tab-example" className="mb-3">
             <Tab eventKey="firstInning" title="First Inning">
               <div className="row mb-2">
                 <div className="col-3">
                   <BatsmanInfo
                     addBatsmanClickHandler={this.addBatsman}
-                    awayTeamPlayersLookup={
-                      this.state.lookupData.awayTeamPlayers
-                    }
-                    homeTeamPlayersLookup={
-                      this.state.lookupData.homeTeamPlayers
-                    }
+                    awayTeamPlayersLookup={this.state.lookupData.awayTeamPlayers}
+                    homeTeamPlayersLookup={this.state.lookupData.homeTeamPlayers}
                   />
                 </div>
+                <div>
+                  <BowlerInfo addBowlerClickHandler={this.addBowler} homeTeamPlayersLookup={this.state.lookupData.homeTeamPlayers} />
+                </div>
                 <div className="col-4">
-                  {this.state.matchData.scorecardId &&
-                  this.state.matchData.scorecardId.teamA.extras ? (
-                    <Extras
-                      addExtrasClickHanlder={this.addExtras}
-                      extraData={this.state.matchData.scorecardId.teamA.extras}
-                    />
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.extras ? (
+                    <Extras addExtrasClickHanlder={this.addExtras} extraData={this.state.matchData.scorecardId.firstInning.extras} />
                   ) : (
                     <h6>Loading...</h6>
                   )}
                 </div>
               </div>
-              {this.state.matchData && this.state.matchData.scorecardId ? (
-                <BattingCard
-                  scoreCardData={this.state.matchData.scorecardId.teamA}
-                />
-              ) : (
-                'Scorecard not available'
-              )}
+              {this.state.matchData && this.state.matchData.scorecardId ? <BattingCard scoreCardData={this.state.matchData.scorecardId.firstInning} /> : 'Scorecard not available'}
             </Tab>
-            <Tab eventKey="secondInning" title="Secong Inning">
-              {/* <Sonnet /> */}
-            </Tab>
+            <Tab eventKey="secondInning" title="Secong Inning" />
           </Tabs>
         </div>
       </div>

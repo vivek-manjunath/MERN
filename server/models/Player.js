@@ -1,56 +1,63 @@
-const mongoose = require("mongoose");
+/** @format */
+
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const playerSchema = new Schema({
   firstName: {
     type: String,
-    required: true
+    required: true,
   },
   middleName: {
-    type: String
+    type: String,
   },
   lastName: {
-    type: String
+    type: String,
   },
   fullName: {
-    type: String
+    type: String,
   },
   dob: {
-    type: Date
+    type: Date,
   },
   teamsPlayedFor: [
     {
-      _id: { type: Schema.Types.ObjectId, ref: "Team" },
-      isActiveMember: Boolean
-    }
+      _id: {type: Schema.Types.ObjectId, ref: 'Team'},
+      isActiveMember: Boolean,
+    },
   ],
   runsScored: {
-    type: Number
+    type: Number,
+  },
+  wicketsTaken: {
+    type: Number,
   },
   isActive: {
-    type: Boolean
+    type: Boolean,
   },
   createdDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   createdBy: {
     type: String,
-    default: "System"
+    default: 'System',
   },
   updatedDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedBy: {
     type: String,
-    default: "System"
-  }
+    default: 'System',
+  },
 });
 
-playerSchema.methods.getFullName = () => {
-  console.log("FS: " + this.firstName);
-  return this.firstName + " " + this.middleName + " " + this.lastName;
-};
+//Post middleware
+playerSchema.post('find', players => {
+  players.map(player => {
+    player.fullName = player.firstName + ' ' + player.lastName;
+  });
+});
 
-module.exports = mongoose.model("Player", playerSchema, "Player");
+module.exports = mongoose.model('Player', playerSchema, 'Player');

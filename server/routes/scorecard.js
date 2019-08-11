@@ -12,6 +12,10 @@ router
   .put(scorecardController.update)
   .delete(scorecardController.remove);
 
+router
+  .route("/addBattingScorecard/:id")
+  .put(scorecardController.addBattingScorecard);
+
 // router
 //     .route('/filter')
 //     .post(matchController.filter)

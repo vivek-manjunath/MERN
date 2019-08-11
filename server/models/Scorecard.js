@@ -2,68 +2,43 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const scorecardSchema = new Schema({
-  teamA: {
-    teamId: {
+  firstInning: {
+    battingTeamId: {
       type: Schema.Types.ObjectId,
       ref: "Team"
     },
-    battingScorecard: [
-      {
-        playerId: {
-          type: Schema.Types.ObjectId,
-          ref: "Player"
-        },
-        dismissal: {
-          type: String
-        },
-        fielder: {
-          type: Schema.Types.ObjectId,
-          ref: "Player"
-        },
-        bowler: {
-          type: Schema.Types.ObjectId,
-          ref: "Player"
-        },
-        runs: {
-          type: Number
-        },
-        balls: {
-          type: Number
-        },
-        strikeRate: {
-          type: Number
-        },
-        numberOfFours: {
-          type: Number
-        },
-        numberOfSixes: {
-          type: Number
-        }
-      }
-    ],
-    teamTotal: { type: Number },
-    extras: {
-      wides: {
-        type: Number
-      },
-      noBalls: {
-        type: Number
-      },
-      byes: {
-        type: Number
-      },
-      totalExtras: {
-        type: Number
-      }
+    battingScorecard: {
+      type: Schema.Types.ObjectId,
+      ref: "BattingScorecard"
+    },
+    bowlingTeamId: {
+      type: Schema.Types.ObjectId,
+      ref: "Team"
+    },
+    bowlingScorecard: {
+      type: Schema.Types.ObjectId,
+      ref: "BowlingScorecard"
     }
-
-    // bowlingScorecardId: {type
-    // }
   },
-  // teamB: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Team'
-  // },
+  secondInning: {
+    battingTeamId: {
+      type: Schema.Types.ObjectId,
+      ref: "Team"
+    },
+    battingScorecard: {
+      type: Schema.Types.ObjectId,
+      ref: "BattingScorecard"
+    },
+    bowlingTeamId: {
+      type: Schema.Types.ObjectId,
+      ref: "Team"
+    },
+    bowlingScorecard: {
+      type: Schema.Types.ObjectId,
+      ref: "BowlingScorecard"
+    }
+  },
+
   isActive: {
     type: Boolean
   },

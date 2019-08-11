@@ -6,12 +6,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../Elements/TextInput';
 
-export default class Extras extends Component {
+export default class BowlerInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      extraData: this.props.extraData,
-    };
+    this.state = {batsmanInfo: {}};
   }
   handleClose = e => {
     this.setState({show: false});
@@ -22,21 +20,20 @@ export default class Extras extends Component {
   };
 
   changeHandler = e => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const {name, value} = e.target;
 
     this.setState(
       prevState => {
         return {
-          extraData: {...prevState.extraData, [name]: value},
+          bowlerInfo: {...prevState.bowlerInfo, [name]: value},
         };
       },
-      () => console.log(this.state.extraData),
+      () => console.log(this.state.bowlerInfo),
     );
   };
 
   saveClick = () => {
-    this.props.addExtrasClickHanlder(this.state.extraData);
+    this.props.addBowlerClickHandler(this.state.bowlerInfo);
     this.handleClose();
   };
 
@@ -45,31 +42,47 @@ export default class Extras extends Component {
       <div>
         <button className="btn btn-xs btn-outline-success" onClick={this.handleShow}>
           <FontAwesomeIcon icon={faPlusCircle} />
-          &nbsp; Add extras
+          &nbsp; Add Bowler
         </button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Extras</Modal.Title>
+            <Modal.Title>Add Bowler</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="ipWides">Wides</label>
-                  <input type="number" className="form-control" id="ipWides" name="wides" onChange={this.changeHandler} value={this.state.extraData.wides} />
+                  <label for="selBatsman">Bowler</label>
+                  <select name="playerId" className="form-control" onChange={this.changeHandler}>
+                    <option>Choose</option>
+                    {this.props.homeTeamPlayersLookup &&
+                      this.props.homeTeamPlayersLookup.map(player => {
+                        return (
+                          <option value={player._id}>
+                            {player.firstName}&nbsp;{player.lastName}
+                          </option>
+                        );
+                      })}
+                  </select>
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="ipNoBalls">No balls</label>
-                  <input type="number" className="form-control" id="ipNoBalls" name="noBalls" value={this.state.extraData.noBalls} onChange={this.changeHandler} />
+                  <label for="ipRuns">Runs</label>
+                  <input type="text" className="form-control" id="ipRuns" name="runs" placeholder="Runs" onChange={this.changeHandler} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="ipByes">Byes</label>
-                  <input type="number" className="form-control" id="ipByes" name="byes" value={this.state.extraData.byes} onChange={this.changeHandler} />
+                  <label for="ipOversBowled">Overs Bowled</label>
+                  <input type="text" className="form-control" id="ipOversBowled" name="oversBowled" placeholder="Overs Bowled" onChange={this.changeHandler} />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-12">
+                  <label for="ipWickets">Wickets</label>
+                  <input type="text" className="form-control" id="ipWickets" name="wickets" placeholder="Wickets" onChange={this.changeHandler} />
                 </div>
               </div>
             </form>

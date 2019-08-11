@@ -1,5 +1,7 @@
-const Player = require("../models/Player");
-const mongoose = require("mongoose");
+/** @format */
+
+const Player = require('../models/Player');
+const mongoose = require('mongoose');
 
 module.exports = {
   findAll: function(req, res) {
@@ -13,9 +15,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   getTopBatsmen: function(req, res) {
-    console.log("Get top players");
+    console.log('Get top players');
     Player.find()
-      .sort({ runsScored: -1 })
+      .sort({runsScored: -1})
       .limit(3)
       .then(batsmen => {
         res.json(batsmen);
@@ -24,10 +26,10 @@ module.exports = {
   },
   findByTeam: function(req, res) {
     Player.find({
-      "teamsPlayedFor._id": mongoose.Types.ObjectId(req.params.id),
-      "teamsPlayedFor.isActiveMember": true
+      'teamsPlayedFor._id': mongoose.Types.ObjectId(req.params.id),
+      'teamsPlayedFor.isActiveMember': true,
     })
-      .populate("teamsPlayedFor._id")
+      .populate('teamsPlayedFor._id')
       .exec((err, player) => {
         if (err) res.status(422).json(err);
         res.json(player);
@@ -37,14 +39,14 @@ module.exports = {
     let _newPlayerInfo = req.body;
     _newPlayerInfo = {
       ..._newPlayerInfo,
-      teamsPlayedFor: [{ _id: _newPlayerInfo.team, isActiveMember: true }]
+      teamsPlayedFor: [{_id: _newPlayerInfo.team, isActiveMember: true}],
     };
     Player.create(_newPlayerInfo)
       .then(newPlayer => res.json(newPlayer))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    Player.findOneAndUpdate({ teamId: req.params.id }, req.body)
+    Player.findOneAndUpdate({teamId: req.params.id}, req.body)
       .then(player => res.json(player))
       .catch(err => res.status(422).json(err));
   },
@@ -57,5 +59,5 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       })
       .catch(err => res.status(422).json(err));
-  }
+  },
 };

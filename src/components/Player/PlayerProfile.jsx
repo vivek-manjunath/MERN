@@ -20,12 +20,7 @@ export default class PlayerProfile extends Component {
     });
   };
   render() {
-    let playerFullName =
-      this.state.playerInfo.firstName +
-      ' ' +
-      this.state.playerInfo.middleName +
-      ' ' +
-      this.state.playerInfo.lastName;
+    let playerFullName = this.state.playerInfo.firstName + ' ' + this.state.playerInfo.middleName + ' ' + this.state.playerInfo.lastName;
     return (
       // <div class="jumbotron jumbotron-fluid bg-grey">
       //   <div class="container">
@@ -58,7 +53,7 @@ export default class PlayerProfile extends Component {
       //     </p>
       //   </div>
       // </div>
-      <div class="card text-white bg-primary mb-3">
+      <div class="card text-white bg-primary mb-3 border-radius-5px">
         <div class="card-body">
           <div className="row">
             <div className="col-6">
@@ -76,15 +71,11 @@ export default class PlayerProfile extends Component {
                 </li>
                 <li>
                   <span className="player-stats-label">Runs</span>
-                  <span className="player-stats-value">
-                    {this.state.playerInfo.runsScored
-                      ? this.state.playerInfo.runsScored
-                      : 0}
-                  </span>
+                  <span className="player-stats-value">{this.state.playerInfo.runsScored ? this.state.playerInfo.runsScored : 0}</span>
                 </li>
                 <li>
                   <span className="player-stats-label">Wickets</span>
-                  <span className="player-stats-value">0</span>
+                  <span className="player-stats-value">{this.state.playerInfo.wicketsTaken ? this.state.playerInfo.wicketsTaken : 0}</span>
                 </li>
               </ul>
             </div>

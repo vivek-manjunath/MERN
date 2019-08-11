@@ -41,10 +41,10 @@ export default class BatsmanInfo extends Component {
   render() {
     return (
       <div>
-        <Button className="btn btn-xs btn-success" onClick={this.handleShow}>
+        <button className="btn btn-xs btn-outline-success" onClick={this.handleShow}>
           <FontAwesomeIcon icon={faPlusCircle} />
           &nbsp; Add batsman
-        </Button>
+        </button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
@@ -55,10 +55,7 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Batsman</label>
-                  <select
-                    name="playerId"
-                    className="form-control"
-                    onChange={this.changeHandler}>
+                  <select name="playerId" className="form-control" onChange={this.changeHandler}>
                     <option>Choose</option>
                     {this.props.awayTeamPlayersLookup &&
                       this.props.awayTeamPlayersLookup.map(player => {
@@ -74,10 +71,7 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Mode of dismissal</label>
-                  <select
-                    name="dismissal"
-                    className="form-control"
-                    onChange={this.changeHandler}>
+                  <select name="dismissal" className="form-control" onChange={this.changeHandler}>
                     <option>Choose</option>
                     <option>Caught</option>
                     <option>Bowled</option>
@@ -90,10 +84,7 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Fielder</label>
-                  <select
-                    name="fielder"
-                    className="form-control"
-                    onChange={this.changeHandler}>
+                  <select name="fielder" className="form-control" onChange={this.changeHandler}>
                     <option>Choose</option>
                     {this.props.homeTeamPlayersLookup &&
                       this.props.homeTeamPlayersLookup.map(player => {
@@ -109,10 +100,7 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="selBatsman">Bowler</label>
-                  <select
-                    name="bowler"
-                    className="form-control"
-                    onChange={this.changeHandler}>
+                  <select name="bowler" className="form-control" onChange={this.changeHandler}>
                     <option>Choose</option>
                     {this.props.homeTeamPlayersLookup &&
                       this.props.homeTeamPlayersLookup.map(player => {
@@ -128,53 +116,25 @@ export default class BatsmanInfo extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipRuns">Runs</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="ipRuns"
-                    name="runs"
-                    placeholder="Runs"
-                    onChange={this.changeHandler}
-                  />
+                  <input type="text" className="form-control" id="ipRuns" name="runs" placeholder="Runs" onChange={this.changeHandler} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipBalls">Balls</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="ipBalls"
-                    name="balls"
-                    placeholder="Balls"
-                    onChange={this.changeHandler}
-                  />
+                  <input type="text" className="form-control" id="ipBalls" name="balls" placeholder="Balls" onChange={this.changeHandler} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipFours">4s</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="ipFours"
-                    name="numberOfFours"
-                    placeholder="Fours"
-                    onChange={this.changeHandler}
-                  />
+                  <input type="text" className="form-control" id="ipFours" name="numberOfFours" placeholder="Fours" onChange={this.changeHandler} />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipSixes">6s</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="ipSixes"
-                    name="numberOfSixes"
-                    placeholder="Sixes"
-                    onChange={this.changeHandler}
-                  />
+                  <input type="text" className="form-control" id="ipSixes" name="numberOfSixes" placeholder="Sixes" onChange={this.changeHandler} />
                 </div>
               </div>
             </form>

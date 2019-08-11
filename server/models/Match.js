@@ -1,68 +1,77 @@
-const mongoose = require("mongoose");
+/** @format */
+
+const mongoose = require('mongoose');
+const Scorecard = require('./Scorecard');
 const Schema = mongoose.Schema;
 
 const matchSchema = new Schema({
   tournamentId: {
     type: Schema.Types.ObjectId,
-    ref: "Tournament",
-    required: true
+    ref: 'Tournament',
+    required: true,
   },
   homeTeamId: {
     type: Schema.Types.ObjectId,
-    ref: "Team",
-    required: true
+    ref: 'Team',
+    required: true,
   },
   awayTeamId: {
     type: Schema.Types.ObjectId,
-    ref: "Team",
-    required: true
+    ref: 'Team',
+    required: true,
   },
   scorecardId: {
     type: Schema.Types.ObjectId,
-    ref: "Scorecard",
-    required: false
+    ref: 'Scorecard',
+    required: false,
+    // default: function() {
+    //   return new Scorecard();
+    // }
   },
   datePlayed: {
-    type: Date
+    type: Date,
   },
   timePlayed: {
-    type: String
+    type: String,
   },
   venue: {
-    type: String
+    type: String,
   },
   umpiringTeamId: {
     type: Schema.Types.ObjectId,
-    ref: "Team"
+    ref: 'Team',
   },
   tossWinningTeamId: {
     type: Schema.Types.ObjectId,
-    ref: "Team"
+    ref: 'Team',
+  },
+  tossDecision: {
+    type: String,
   },
   winningTeamId: {
     type: Schema.Types.ObjectId,
-    ref: "Team"
+    ref: 'Team',
   },
   manOfTheMatchPlayerId: {
     type: Schema.Types.ObjectId,
-    ref: "Player"
+    ref: 'Player',
   },
   createdDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   createdBy: {
     type: String,
-    default: "System"
+    default: 'System',
   },
   updatedDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedBy: {
     type: String,
-    default: "System"
-  }
+    default: 'System',
+  },
 });
 
-module.exports = mongoose.model("Match", matchSchema, "Match");
+module.exports = mongoose.model('Match', matchSchema, 'Match');

@@ -10,11 +10,18 @@ export default class ScorecardMain extends Component {
     super();
     this.state = {
       scorecardData: {
-        teamA: {
-          teamId: {},
-          battingScorecard: [],
-          extras: {},
-        },
+        // teamA: {
+        //   teamId: {},
+        //   battingScorecard: [],
+        //   extras: {},
+        // },
+        // teamB: {
+        //   teamId: {},
+        //   battingScorecard: [],
+        //   bowlingScorecard: [],
+        //   extras: {},
+        // },
+        firstInning: {},
       },
     };
   }
@@ -37,7 +44,7 @@ export default class ScorecardMain extends Component {
             <div>
               <div className="row">
                 <div className="col-md-12">
-                  <BattingCard scoreCardData={this.state.scorecardData.teamA} />
+                  <BattingCard scoreCardData={this.state.scorecardData.firstInning} />
                 </div>
               </div>
             </div>
@@ -45,7 +52,7 @@ export default class ScorecardMain extends Component {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <BowlingCard />
+            {/* <BowlingCard scoreCardData={this.state.scorecardData.firstInning.bowlingScorecard} /> */}
           </div>
         </div>
       </div>

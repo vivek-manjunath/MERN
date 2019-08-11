@@ -46,32 +46,23 @@ export default class TeamSquad extends Component {
       <div className="row">
         {this.state.players && this.state.players.length > 0 ? (
           this.state.players.map(player => {
-            let playerFullName =
-              player.firstName +
-              ' ' +
-              player.middleName +
-              ' ' +
-              player.lastName;
+            let playerFullName = player.firstName + ' ' + player.middleName + ' ' + player.lastName;
 
             return (
               <div className="col-sm-4">
                 <div className="bd-callout bd-callout-info">
                   <div>
                     <h4>
-                      <strong>{playerFullName}</strong>
+                      <strong>{player.fullName}</strong>
                     </h4>
                   </div>
 
                   <div className="btn-group">
-                    <Link
-                      to={`/PlayerProfile/${player._id}`}
-                      className="btn btn-xs btn-primary">
+                    <Link to={`/PlayerProfile/${player._id}`} className="btn btn-xs btn-primary">
                       View Profile
                     </Link>
                     <button className="btn btn-xs btn-default">Edit</button>
-                    <button
-                      className="btn-danger btn btn-xs"
-                      onClick={this.deletePlayer.bind(this, player._id)}>
+                    <button className="btn-danger btn btn-xs" onClick={this.deletePlayer.bind(this, player._id)}>
                       Delete
                     </button>
                   </div>

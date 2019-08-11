@@ -8,7 +8,7 @@ export default class Standings extends Component {
       <div className="row">
         <div className="col-12">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-success">
+            <label class="btn btn-sm btn-success">
               <input
                 type="radio"
                 name="options"
@@ -18,7 +18,7 @@ export default class Standings extends Component {
               />{' '}
               Pool
             </label>
-            <label class="btn btn-success">
+            <label class="btn btn-sm btn-success">
               <input
                 type="radio"
                 name="options"

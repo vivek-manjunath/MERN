@@ -85,6 +85,26 @@ export default {
   updateScorecard: function(id, scorecardData) {
     return axios.put('/api/scorecards/' + id, scorecardData);
   },
+  addBattingScorecard: function(id) {
+    return axios.put('/api/scorecards/addBattingScorecard/' + id);
+  },
+
+  /*Batting scorecard API methods*/
+  getBattingScorecard: function(id) {
+    return axios.get('/api/battingScorecard/' + id);
+  },
+  deleteBattingScorecard: function(id) {
+    return axios.delete('/api/battingScorecard/' + id);
+  },
+  createBattingScorecard: function(battingScorecardData) {
+    return axios.post('/api/battingScorecard', battingScorecardData);
+  },
+  updateBattingScorecard: function(id, battingScorecardData) {
+    return axios.put('/api/battingScorecard/' + id, battingScorecardData);
+  },
+  addBatsmanInfo: function(battingScorecardId, batsmanInfo) {
+    return axios.put('/api/battingScorecard/addBatsmanInfo/' + battingScorecardId, batsmanInfo);
+  },
   // filterMatches: function (filterInfo) {
   //     return axios.post('/api/matches/filter', filterInfo);
   // },
