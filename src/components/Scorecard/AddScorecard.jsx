@@ -201,7 +201,7 @@ export default class AddScorecard extends Component {
             <Tab eventKey="firstInning" title="First Inning">
               <div className="row mb-2">
                 <div className="col-3">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning.battingTeamId && (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.battingTeamId && (
                     <BatsmanInfo
                       addBatsmanClickHandler={this.addBatsman}
                       battingTeamId={this.state.matchData.scorecardId.firstInning.battingTeamId}

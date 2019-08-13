@@ -45,7 +45,9 @@ export default class ViewScorecard extends Component {
           </div>
           <div className="row">
             <div className="col-md-6">
-              {this.state.scorecardData.firstInning.bowlingScorecard.bowlerList && <BowlingCard scoreCardData={this.state.scorecardData.firstInning.bowlingScorecard.bowlerList} />}
+              {this.state.scorecardData.firstInning && this.state.scorecardData.firstInning.bowlingScorecard.bowlerList && (
+                <BowlingCard scoreCardData={this.state.scorecardData.firstInning.bowlingScorecard.bowlerList} />
+              )}
             </div>
           </div>
         </div>
@@ -64,7 +66,7 @@ export default class ViewScorecard extends Component {
           </div>
           <div className="row">
             <div className="col-md-6">
-              {this.state.scorecardData.secondInning.bowlingScorecard.bowlerList && (
+              {this.state.scorecardData.secondInning && this.state.scorecardData.secondInning.bowlingScorecard.bowlerList && (
                 <BowlingCard scoreCardData={this.state.scorecardData.secondInning.bowlingScorecard.bowlerList} />
               )}
             </div>
