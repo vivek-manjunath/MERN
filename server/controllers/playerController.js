@@ -24,6 +24,15 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  getTopBowlers: function(req, res) {
+    Player.find()
+      .sort({wicketsTaken: -1})
+      .limit(3)
+      .then(bowlers => {
+        res.json(bowlers);
+      })
+      .catch(err => res.status(422).json(err));
+  },
   findByTeam: function(req, res) {
     Player.find({
       'teamsPlayedFor._id': mongoose.Types.ObjectId(req.params.id),

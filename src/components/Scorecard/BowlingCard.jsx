@@ -20,17 +20,8 @@ export default function BowlingCard(props) {
           {props.scoreCardData.map(bowlerInfo => {
             return (
               <tr>
-                <th scope="row">
-                  {
-                    <PlayerLink
-                      playerName={bowlerInfo.playerId.firstName}
-                      playerProfileUrl={`/PlayerProfile/${
-                        bowlerInfo.playerId._id
-                      }`}
-                    />
-                  }
-                </th>
-                <td>{bowlerInfo.oversBowled}</td>
+                <th scope="row">{<PlayerLink playerName={bowlerInfo.playerId.fullName} playerProfileUrl={`/PlayerProfile/${bowlerInfo.playerId._id}`} />}</th>
+                <td>{bowlerInfo.overs}</td>
                 <td>{bowlerInfo.runs}</td>
                 <td>{bowlerInfo.wickets}</td>
                 <td>{bowlerInfo.economy}</td>

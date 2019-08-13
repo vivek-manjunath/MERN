@@ -9,7 +9,9 @@ export default function BattingCard({scoreCardData}) {
       {scoreCardData && scoreCardData.battingTeamId && (
         <div className="row">
           <div className="col-md-12">
-            <h4>{scoreCardData.battingTeamId.name}</h4>
+            <h4>
+              <strong>{scoreCardData.battingTeamId.name}</strong>
+            </h4>
           </div>
         </div>
       )}
@@ -31,20 +33,11 @@ export default function BattingCard({scoreCardData}) {
               {scoreCardData &&
                 scoreCardData.battingScorecard.batsmanList &&
                 scoreCardData.battingScorecard.batsmanList.map(item => {
-                  let dismissalText = item.dismissal
-                    ? item.fielder && 'c ' + item.fielder.firstName + ' b ' + item.bowler.firstName
-                    : 'not out';
+                  let dismissalText = item.dismissal ? item.fielder && 'c ' + item.fielder.firstName + ' b ' + item.bowler.firstName : 'not out';
 
                   return (
                     <tr key={item.playerId._id}>
-                      <th scope="row">
-                        {
-                          <PlayerLink
-                            playerName={item.playerId.fullName}
-                            playerProfileUrl={`/PlayerProfile/${item.playerId._id}`}
-                          />
-                        }
-                      </th>
+                      <th scope="row">{<PlayerLink playerName={item.playerId.fullName} playerProfileUrl={`/PlayerProfile/${item.playerId._id}`} />}</th>
                       <td>{dismissalText}</td>
                       <td>{item.runs}</td>
                       <td>{item.balls}</td>
@@ -58,17 +51,11 @@ export default function BattingCard({scoreCardData}) {
                 <th scope="row">EXTRAS</th>
                 <td>
                   {'nb ' +
-                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.noBalls
-                      ? scoreCardData.extras.noBalls
-                      : 0) +
+                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.noBalls ? scoreCardData.extras.noBalls : 0) +
                     ', w ' +
-                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.wides
-                      ? scoreCardData.extras.wides
-                      : 0) +
+                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.wides ? scoreCardData.extras.wides : 0) +
                     ', b ' +
-                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.byes
-                      ? scoreCardData.extras.byes
-                      : 0)}
+                    (scoreCardData && scoreCardData.extras && scoreCardData.extras.byes ? scoreCardData.extras.byes : 0)}
                 </td>
                 <td>{scoreCardData && scoreCardData.extras && scoreCardData.extras.totalExtras}</td>
                 <td />

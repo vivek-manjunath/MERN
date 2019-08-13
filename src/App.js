@@ -31,7 +31,7 @@ import About from './components/About';
 import PlayerProfile from './components/Player/PlayerProfile';
 import ManagePlayer from './components/Player/ManagePlayer';
 import CreateFixture from './components/Fixture/CreateFixture';
-import ScorecardMain from './components/Scorecard/ScorecardMain';
+import ViewScorecard from './components/Scorecard/ViewScorecard';
 import TournamentMain from './components/Tournament/TournamentMain';
 import Login from './components/User/Login';
 import FixtureList from './components/Fixture/FixtureList';
@@ -53,62 +53,17 @@ class App extends Component {
           <Route className="fade" path="/About" component={About} />
           <Route className="fade" path="/Tournaments" component={Tournaments} />
           <Route className="fade" exact path="/Teams" component={Teams} />
-          <Route
-            className="fade"
-            exact
-            path="/Teams/:id"
-            component={TeamProfile}
-          />
+          <Route className="fade" exact path="/Teams/:id" component={TeamProfile} />
           <Route className="fade" exact path="/NewTeam" component={NewTeam} />
-          <Route
-            className="fade"
-            exact
-            path="/CreateFixture"
-            component={CreateFixture}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/PlayerProfile/:playerId"
-            component={PlayerProfile}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/ManagePlayer"
-            component={ManagePlayer}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/Scorecard/:scorecardId"
-            component={ScorecardMain}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/AddScorecard/:matchId"
-            component={AddScorecard}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/Tournament"
-            component={TournamentMain}
-          />
+          <Route className="fade" exact path="/CreateFixture" component={CreateFixture} />
+          <Route className="fade" exact path="/PlayerProfile/:playerId" component={PlayerProfile} />
+          <Route className="fade" exact path="/ManagePlayer" component={ManagePlayer} />
+          <Route className="fade" exact path="/Scorecard/:scorecardId" component={ViewScorecard} />
+          <Route className="fade" exact path="/AddScorecard/:matchId" component={AddScorecard} />
+          <Route className="fade" exact path="/Tournament" component={TournamentMain} />
           <Route className="fade" exact path="/Login" component={Login} />
-          <Route
-            className="fade"
-            exact
-            path="/Fixtures"
-            component={FixtureList}
-          />
-          <Route
-            className="fade"
-            exact
-            path="/Standings"
-            component={Standings}
-          />
+          <Route className="fade" exact path="/Fixtures" component={FixtureList} />
+          <Route className="fade" exact path="/Standings" component={Standings} />
           <Route className="fade" exact path="/Schedule" component={Schedule} />
           <Route className="fade" exact path="/Register" component={Register} />
         </div>

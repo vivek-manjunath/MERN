@@ -35,6 +35,9 @@ export default {
   getTopBatsmen: function() {
     return axios.get('/api/players/getTopBatsmen');
   },
+  getTopBowlers: function() {
+    return axios.get('/api/players/getTopBowlers');
+  },
   /*Tournament API methods*/
   getTournaments: function() {
     return axios.get('/api/tournaments');
@@ -104,6 +107,11 @@ export default {
   },
   addBatsmanInfo: function(battingScorecardId, batsmanInfo) {
     return axios.put('/api/battingScorecard/addBatsmanInfo/' + battingScorecardId, batsmanInfo);
+  },
+
+  /*Bowling scorecard API methods*/
+  addBowlerInfo: function(bowlingScorecardId, bowlerInfo) {
+    return axios.put('/api/bowlingScorecard/addBowlerInfo/' + bowlingScorecardId, bowlerInfo);
   },
   // filterMatches: function (filterInfo) {
   //     return axios.post('/api/matches/filter', filterInfo);

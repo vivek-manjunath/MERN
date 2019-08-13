@@ -28,6 +28,14 @@ export default class Home extends Component {
         };
       });
     });
+    API.getTopBowlers().then(res => {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          topBowlers: res.data,
+        };
+      });
+    });
   }
 
   render() {
@@ -52,13 +60,10 @@ export default class Home extends Component {
                     <TopPlayers title="Most Valuable Players" />
                   </div>
                   <div className="col-sm-4 mb-2">
-                    <TopPlayers
-                      players={this.state.topBatsmen}
-                      title="Top Batsmen"
-                    />
+                    <TopPlayers statType="topThreeBatsmen" players={this.state.topBatsmen} title="Top Batsmen" />
                   </div>
                   <div className="col-sm-4 mb-2">
-                    <TopPlayers title="Top Bowlers" />
+                    <TopPlayers statType="topThreeBowlers" players={this.state.topBowlers} title="Top Bowlers" />
                   </div>
                 </div>
               </div>

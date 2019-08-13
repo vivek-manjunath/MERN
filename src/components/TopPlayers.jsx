@@ -23,9 +23,8 @@ export default class TopPlayers extends Component {
                       <h6 className="font-weight-bold">
                         {player.firstName}&nbsp;{player.lastName}
                       </h6>
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        Runs: {player.runsScored}
-                      </h6>
+                      {this.props.statType == 'topThreeBatsmen' && <h6 className="card-subtitle mb-2 text-muted">Runs: {player.runsScored}</h6>}
+                      {this.props.statType == 'topThreeBowlers' && <h6 className="card-subtitle mb-2 text-muted">Wickets: {player.wicketsTaken}</h6>}
                     </li>
                   );
                 })}

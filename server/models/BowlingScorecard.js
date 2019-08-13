@@ -1,4 +1,6 @@
-const mongoose = require("mongoose");
+/** @format */
+
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bowlingScorecardSchema = new Schema({
@@ -6,48 +8,54 @@ const bowlingScorecardSchema = new Schema({
     {
       playerId: {
         type: Schema.Types.ObjectId,
-        ref: "Player"
+        ref: 'Player',
       },
-      overBowled: {
-        type: Number
+      overs: {
+        type: Number,
       },
       maidens: {
-        type: Number
+        type: Number,
       },
       runs: {
-        type: Number
+        type: Number,
       },
       wickets: {
-        type: Number
+        type: Number,
       },
       economy: {
-        type: Number
-      }
-    }
+        type: Number,
+      },
+    },
   ],
   isActive: {
-    type: Boolean
+    type: Boolean,
   },
   createdDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   createdBy: {
     type: String,
-    default: "System"
+    default: 'System',
   },
   updatedDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedBy: {
     type: String,
-    default: "System"
-  }
+    default: 'System',
+  },
 });
 
-module.exports = mongoose.model(
-  "BowlingScorecard",
-  bowlingScorecardSchema,
-  "BowlingScorecard"
-);
+bowlingScorecardSchema.pre('save', function(next) {
+  this.bowlerList.map(bowlerInfo => {
+    if (bowlerInfo.runs && bowlerInfo.overs) {
+      bowlerInfo.economy = bowlerInfo.runs / bowlerInfo.overs;
+      bowlerInfo.economy = bowlerInfo.economy.toFixed(2);
+    }
+    next();
+  });
+});
+
+module.exports = mongoose.model('BowlingScorecard', bowlingScorecardSchema, 'BowlingScorecard');

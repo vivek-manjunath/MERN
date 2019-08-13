@@ -5,12 +5,27 @@ import {Modal, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../Elements/TextInput';
+import API from '../../utils/API';
 
 export default class BowlerInfo extends Component {
   constructor(props) {
     super(props);
-    this.state = {batsmanInfo: {}};
+    this.state = {bowlerInfo: {}};
   }
+
+  componentDidMount() {
+    API.getPlayersByTeam(this.props.bowlingTeamId).then(res => {
+      this.setState(prevState => {
+        return {
+          lookupData: {
+            ...prevState.lookupData,
+            bowlingTeamLookup: res.data,
+          },
+        };
+      });
+    });
+  }
+
   handleClose = e => {
     this.setState({show: false});
   };
@@ -33,7 +48,7 @@ export default class BowlerInfo extends Component {
   };
 
   saveClick = () => {
-    this.props.addBowlerClickHandler(this.state.bowlerInfo);
+    this.props.addBowlerClickHandler(this.props.bowlingScorecardId, this.state.bowlerInfo);
     this.handleClose();
   };
 
@@ -56,8 +71,8 @@ export default class BowlerInfo extends Component {
                   <label for="selBatsman">Bowler</label>
                   <select name="playerId" className="form-control" onChange={this.changeHandler}>
                     <option>Choose</option>
-                    {this.props.homeTeamPlayersLookup &&
-                      this.props.homeTeamPlayersLookup.map(player => {
+                    {this.state.lookupData &&
+                      this.state.lookupData.bowlingTeamLookup.map(player => {
                         return (
                           <option value={player._id}>
                             {player.firstName}&nbsp;{player.lastName}
@@ -75,8 +90,8 @@ export default class BowlerInfo extends Component {
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
-                  <label for="ipOversBowled">Overs Bowled</label>
-                  <input type="text" className="form-control" id="ipOversBowled" name="oversBowled" placeholder="Overs Bowled" onChange={this.changeHandler} />
+                  <label for="ipOversBowled">Overs</label>
+                  <input type="text" className="form-control" id="ipOvers" name="overs" placeholder="Overs" onChange={this.changeHandler} />
                 </div>
               </div>
               <div className="form-row">

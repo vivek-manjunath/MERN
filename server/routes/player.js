@@ -1,19 +1,22 @@
-const router = require("express").Router();
-const playerController = require("../controllers/playerController");
+/** @format */
 
-router.route("/getTopBatsmen/").get(playerController.getTopBatsmen);
+const router = require('express').Router();
+const playerController = require('../controllers/playerController');
+
+router.route('/getTopBatsmen/').get(playerController.getTopBatsmen);
+router.route('/getTopBowlers/').get(playerController.getTopBowlers);
 router
-  .route("/")
+  .route('/')
   .get(playerController.findAll)
   .post(playerController.create);
 
 router
-  .route("/:id")
+  .route('/:id')
   .get(playerController.findById)
   .put(playerController.update)
   .delete(playerController.remove);
 
-router.route("/getPlayersByTeam/:id").get(playerController.findByTeam);
+router.route('/getPlayersByTeam/:id').get(playerController.findByTeam);
 // router.route("/getTopBatsmen/").get(playerController.getTopBatsmen);
 
 module.exports = router;

@@ -57,7 +57,14 @@ export default class Extras extends Component {
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipWides">Wides</label>
-                  <input type="number" className="form-control" id="ipWides" name="wides" onChange={this.changeHandler} value={this.state.extraData.wides} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="ipWides"
+                    name="wides"
+                    onChange={this.changeHandler}
+                    value={this.state.extraData && this.state.extraData.wides}
+                  />
                 </div>
               </div>
               <div className="form-row">

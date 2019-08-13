@@ -25,6 +25,18 @@ module.exports = {
         path: 'scorecardId',
         populate: {path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.playerId'}},
       })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'firstInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.playerId'}},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}},
+      })
       //.populate({path: 'scorecardId.firstInning.battingScorecard.batsmanList', populate: "playerId"})
       // .populate({ path: "scorecardId.teamA.battingScorecard.playerId" })
       .then(match => {
