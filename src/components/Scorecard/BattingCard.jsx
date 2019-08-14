@@ -66,10 +66,12 @@ export default function BattingCard({scoreCardData}) {
               <tr className="bg-primary text-white">
                 <th scope="row">Total</th>
                 <td>
-                  <span>{'(' + (scoreCardData.bowlingScorecard.totalOversBowled ? scoreCardData.bowlingScorecard.totalOversBowled : 0) + ' overs)'}</span>
+                  <span>
+                    {'(' + (scoreCardData.bowlingScorecard && scoreCardData.bowlingScorecard.totalOversBowled ? scoreCardData.bowlingScorecard.totalOversBowled : 0) + ' overs)'}
+                  </span>
                 </td>
                 <td>
-                  <strong>{scoreCardData && scoreCardData.battingScorecard.totalRunsScored}</strong>
+                  <strong>{scoreCardData && scoreCardData.battingScorecard && scoreCardData.battingScorecard.totalRunsScored}</strong>
                 </td>
                 <td />
                 <td />
