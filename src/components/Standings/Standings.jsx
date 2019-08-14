@@ -9,23 +9,10 @@ export default class Standings extends Component {
         <div className="col-12">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-sm btn-success">
-              <input
-                type="radio"
-                name="options"
-                id="option1"
-                autocomplete="off"
-                checked=""
-              />{' '}
-              Pool
+              <input type="radio" name="options" id="option1" autocomplete="off" checked="" /> Pool
             </label>
             <label class="btn btn-sm btn-success">
-              <input
-                type="radio"
-                name="options"
-                id="option2"
-                autocomplete="off"
-              />{' '}
-              Overall
+              <input type="radio" name="options" id="option2" autocomplete="off" /> Overall
             </label>
           </div>
         </div>
