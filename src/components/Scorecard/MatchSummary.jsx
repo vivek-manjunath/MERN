@@ -136,7 +136,9 @@ export default function MatchSummary(props) {
                     </label>
                     <div class="col-sm-4">
                       <label id="lblMatch" className="col-form-label">
-                        <strong>{props.matchData.scorecardId && props.matchData.scorecardId.firstInning.battingScorecard.totalRunsScored}</strong>
+                        <strong>
+                          {props.matchData.scorecardId && props.matchData.scorecardId.firstInning && props.matchData.scorecardId.firstInning.battingScorecard.totalRunsScored}
+                        </strong>
                       </label>
                     </div>
                   </div>
@@ -146,7 +148,9 @@ export default function MatchSummary(props) {
                     </label>
                     <div class="col-sm-4">
                       <label id="lblMatch" className="col-form-label">
-                        <strong>{props.matchData.scorecardId && props.matchData.scorecardId.secondInning.battingScorecard.totalRunsScored}</strong>
+                        <strong>
+                          {props.matchData.scorecardId && props.matchData.scorecardId.secondInning && props.matchData.scorecardId.secondInning.battingScorecard.totalRunsScored}
+                        </strong>
                       </label>
                     </div>
                   </div>
