@@ -35,7 +35,7 @@ import ViewScorecard from './components/Scorecard/ViewScorecard';
 import TournamentMain from './components/Tournament/TournamentMain';
 import Login from './components/User/Login';
 import FixtureList from './components/Fixture/FixtureList';
-import AddScorecard from './components/Scorecard/AddScorecard';
+import UpdateScorecard from './components/Scorecard/UpdateScorecard';
 import Standings from './components/Standings/Standings';
 import Schedule from './components/Schedule/Schedule';
 import Register from './components/User/Register';
@@ -59,7 +59,7 @@ class App extends Component {
           <Route className="fade" exact path="/PlayerProfile/:playerId" component={PlayerProfile} />
           <Route className="fade" exact path="/ManagePlayer" component={ManagePlayer} />
           <Route className="fade" exact path="/Scorecard/:scorecardId" component={ViewScorecard} />
-          <Route className="fade" exact path="/AddScorecard/:matchId" component={AddScorecard} />
+          <Route className="fade" exact path="/UpdateScorecard/:matchId" component={UpdateScorecard} />
           <Route className="fade" exact path="/Tournament" component={TournamentMain} />
           <Route className="fade" exact path="/Login" component={Login} />
           <Route className="fade" exact path="/Fixtures" component={FixtureList} />

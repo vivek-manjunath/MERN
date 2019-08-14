@@ -15,9 +15,13 @@ module.exports = {
     Scorecard.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate({path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.playerId'}})
       .populate({path: 'firstInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}})
+      .populate({path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.fielder'}})
+      .populate({path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.bowler'}})
       .populate('firstInning.battingTeamId')
       .populate({path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.playerId'}})
       .populate({path: 'secondInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}})
+      .populate({path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.fielder'}})
+      .populate({path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.bowler'}})
       .populate('secondInning.battingTeamId')
       .exec((err, scorecard) => {
         if (err) res.status(422).json(err);

@@ -6,10 +6,8 @@ import ResultList from './ResultList';
 import FixtureList from '../Fixture/FixtureList';
 import API from '../../utils/API';
 import Select from 'react-select';
-
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-
 import ErrorBoundary from '../ErrorBoundary';
 import Matches from './Matches';
 
@@ -89,9 +87,7 @@ export default class ResultsMain extends Component {
               <div>
                 <form action="">
                   <div className="form-group">
-                    <label htmlFor="selTournament">
-                      Tournament-{this.state.showBlockUi}
-                    </label>
+                    <label htmlFor="selTournament">Tournament-{this.state.showBlockUi}</label>
                     <Select
                       id="selTournament"
                       name="tournamentId"
@@ -119,9 +115,7 @@ export default class ResultsMain extends Component {
                     />
                   </div>
                   <div className="form-group">
-                    <button
-                      className="btn btn-sm btn-primary pull-right"
-                      onClick={this.clearFilters}>
+                    <button className="btn btn-sm btn-primary pull-right" onClick={this.clearFilters}>
                       Clear
                     </button>
                   </div>

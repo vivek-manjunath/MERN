@@ -12,7 +12,7 @@ import BowlerInfo from './BowlerInfo';
 import MatchSummary from './MatchSummary';
 import Common from '../../utils/Common';
 
-export default class AddScorecard extends Component {
+export default class UpdateScorecard extends Component {
   constructor() {
     super();
     this.state = {

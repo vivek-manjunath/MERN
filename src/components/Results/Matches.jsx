@@ -36,62 +36,28 @@ export default function Matches(props) {
         <tbody>
           {props.matches && props.matches.length > 0 ? (
             props.matches.map(match => {
-              const homeTeamName = match.homeTeamId
-                ? match.homeTeamId.name
-                : '';
-              const awayTeamName = match.awayTeamId
-                ? match.awayTeamId.name
-                : '';
-              const umpiringTeamName = match.umpiringTeamId
-                ? match.umpiringTeamId.name
-                : '';
+              const homeTeamName = match.homeTeamId ? match.homeTeamId.name : '';
+              const awayTeamName = match.awayTeamId ? match.awayTeamId.name : '';
+              const umpiringTeamName = match.umpiringTeamId ? match.umpiringTeamId.name : '';
               return (
                 <tr key={match._id}>
                   <td>
                     <div
-                      className={
-                        'row ' +
-                        (match.homeTeamId &&
-                        match.winningTeamId &&
-                        match.homeTeamId._id === match.winningTeamId
-                          ? 'text-dark font-weight-bold'
-                          : 'text-muted')
-                      }>
+                      className={'row ' + (match.homeTeamId && match.winningTeamId && match.homeTeamId._id === match.winningTeamId ? 'text-dark font-weight-bold' : 'text-muted')}>
                       <div className="col-md-9">
-                        <TeamName
-                          teamName={homeTeamName}
-                          teamProfileUrl={`teams/${match.homeTeamId._id}`}
-                        />
+                        <TeamName teamName={homeTeamName} teamProfileUrl={`teams/${match.homeTeamId._id}`} />
                       </div>
                       <div className="col-md-3">
-                        <strong>
-                          {match.scorecardId &&
-                            match.scorecardId.teamA &&
-                            match.scorecardId.teamA.teamTotal}
-                        </strong>
+                        <strong>{match.scorecardId && match.scorecardId.teamA && match.scorecardId.teamA.teamTotal}</strong>
                       </div>
                     </div>
                     <div
-                      className={
-                        'row ' +
-                        (match.awayTeamId &&
-                        match.winningTeamId &&
-                        match.awayTeamId._id === match.winningTeamId
-                          ? 'text-dark font-weight-bold'
-                          : 'text-muted')
-                      }>
+                      className={'row ' + (match.awayTeamId && match.winningTeamId && match.awayTeamId._id === match.winningTeamId ? 'text-dark font-weight-bold' : 'text-muted')}>
                       <div className="col-md-9">
-                        <TeamName
-                          teamName={awayTeamName}
-                          teamProfileUrl={`/teams/${match.awayTeamId._id}`}
-                        />
+                        <TeamName teamName={awayTeamName} teamProfileUrl={`/teams/${match.awayTeamId._id}`} />
                       </div>
                       <div className="col-md-3">
-                        <strong>
-                          {match.scorecardId &&
-                            match.scorecardId.teamB &&
-                            match.scorecardId.teamB.teamTotal}
-                        </strong>
+                        <strong>{match.scorecardId && match.scorecardId.teamB && match.scorecardId.teamB.teamTotal}</strong>
                       </div>
                     </div>
                     {/* <td>{match.awayTeamId.name}</td> */}
@@ -120,17 +86,11 @@ export default function Matches(props) {
                     <td className="align-middle text-center">
                       <p>
                         {match.scorecardId && (
-                          <Link
-                            href="#"
-                            to={`/Scorecard/${match.scorecardId._id}`}
-                            className="card-link text-info">
+                          <Link href="#" to={`/Scorecard/${match.scorecardId._id}`} className="card-link text-info">
                             View
                           </Link>
                         )}
-                        <Link
-                          href="#"
-                          to={`/AddScorecard/${match._id}`}
-                          className="card-link text-info">
+                        <Link href="#" to={`/UpdateScorecard/${match._id}`} className="card-link text-info">
                           Update
                         </Link>
                       </p>
