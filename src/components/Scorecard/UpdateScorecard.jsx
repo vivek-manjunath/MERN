@@ -217,9 +217,12 @@ export default class UpdateScorecard extends Component {
               ) : (
                 'Batting scorecard not available'
               )}
-              {this.state.matchData && this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList && (
-                <BowlingCard scoreCardData={this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList} />
-              )}
+              {this.state.matchData &&
+                this.state.matchData.scorecardId &&
+                this.state.matchData.scorecardId.firstInning &&
+                this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList && (
+                  <BowlingCard scoreCardData={this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList} />
+                )}
             </Tab>
             <Tab eventKey="secondInning" title="Secong Inning">
               <div className="row mb-2">
