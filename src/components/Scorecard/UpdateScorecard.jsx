@@ -194,7 +194,7 @@ export default class UpdateScorecard extends Component {
                   )}
                 </div>
                 <div>
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning.bowlingTeamId && (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.bowlingTeamId && (
                     <BowlerInfo
                       addBowlerClickHandler={this.addBowler}
                       bowlingScorecardId={this.state.matchData.scorecardId.firstInning.bowlingScorecard._id}
@@ -224,7 +224,7 @@ export default class UpdateScorecard extends Component {
             <Tab eventKey="secondInning" title="Secong Inning">
               <div className="row mb-2">
                 <div className="col-3">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning.battingTeamId && (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.battingTeamId && (
                     <BatsmanInfo
                       addBatsmanClickHandler={this.addBatsman}
                       battingTeamId={this.state.matchData.scorecardId.secondInning.battingTeamId}
@@ -234,7 +234,7 @@ export default class UpdateScorecard extends Component {
                   )}
                 </div>
                 <div>
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning.bowlingTeamId && (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.bowlingTeamId && (
                     <BowlerInfo
                       addBowlerClickHandler={this.addBowler}
                       bowlingScorecardId={this.state.matchData.scorecardId.secondInning.bowlingScorecard._id}
@@ -257,7 +257,7 @@ export default class UpdateScorecard extends Component {
               ) : (
                 'Batting scorecard not available'
               )}
-              {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList && (
+              {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList && (
                 <BowlingCard scoreCardData={this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList} />
               )}
             </Tab>
