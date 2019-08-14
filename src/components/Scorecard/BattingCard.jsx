@@ -33,7 +33,7 @@ export default function BattingCard({scoreCardData}) {
               {scoreCardData &&
                 scoreCardData.battingScorecard.batsmanList &&
                 scoreCardData.battingScorecard.batsmanList.map(item => {
-                  let dismissalText = item.dismissal ? item.fielder && 'c ' + item.fielder.firstName + ' b ' + item.bowler.firstName : 'not out';
+                  let dismissalText = item.dismissal ? item.fielder && 'c ' + item.fielder.fullName + ' b ' + item.bowler.fullName : 'not out';
 
                   return (
                     <tr key={item.playerId._id}>
@@ -65,7 +65,9 @@ export default function BattingCard({scoreCardData}) {
               </tr>
               <tr className="bg-primary text-white">
                 <th scope="row">Total</th>
-                <td>(9 wickets; 16 overs)</td>
+                <td>
+                  <span>{'(' + (scoreCardData.bowlingScorecard.totalOversBowled ? scoreCardData.bowlingScorecard.totalOversBowled : 0) + ' overs)'}</span>
+                </td>
                 <td>
                   <strong>{scoreCardData && scoreCardData.battingScorecard.totalRunsScored}</strong>
                 </td>

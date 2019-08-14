@@ -27,6 +27,14 @@ module.exports = {
       })
       .populate({
         path: 'scorecardId',
+        populate: {path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.bowler'}},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.fielder'}},
+      })
+      .populate({
+        path: 'scorecardId',
         populate: {path: 'firstInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}},
       })
       .populate({
@@ -36,6 +44,14 @@ module.exports = {
       .populate({
         path: 'scorecardId',
         populate: {path: 'secondInning.bowlingScorecard', populate: {path: 'bowlerList.playerId'}},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.bowler'}},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.fielder'}},
       })
       //.populate({path: 'scorecardId.firstInning.battingScorecard.batsmanList', populate: "playerId"})
       // .populate({ path: "scorecardId.teamA.battingScorecard.playerId" })
@@ -86,16 +102,41 @@ module.exports = {
     match.tossWinningTeamId = req.body.tossWinningTeamId;
     match.tossDecision = req.body.tossDecision;
     if (!match.scorecardId) {
+      var firstInningBattingTeamId = '';
+      var firstInningBowlingTeamId = '';
+      var secondInningBattingTeamId = '';
+      var secondInningBowlingTeamId = '';
+
+      if (
+        (match.tossWinningTeamId === req.body.homeTeamId._id && match.tossDecision == 'bat') ||
+        (match.tossWinningTeamId === req.body.awayTeamId._id && match.tossDecision == 'bowl')
+      ) {
+        firstInningBattingTeamId = req.body.homeTeamId._id;
+        firstInningBowlingTeamId = req.body.awayTeamId._id;
+
+        secondInningBattingTeamId = req.body.awayTeamId._id;
+        secondInningBowlingTeamId = req.body.homeTeamId._id;
+      } else {
+        firstInningBattingTeamId = req.body.awayTeamId._id;
+        firstInningBowlingTeamId = req.body.homeTeamId._id;
+
+        secondInningBattingTeamId = req.body.homeTeamId._id;
+        secondInningBowlingTeamId = req.body.awayTeamId._id;
+      }
       var firstInningBattingScorecard = await BattingScorecard.create({});
       var firstInningBowlingScorecard = await BowlingScorecard.create({});
       var secondInningBattingScorecard = await BattingScorecard.create({});
       var secondInningBowlingScorecard = await BowlingScorecard.create({});
       var newScorecard = await Scorecard.create({
         firstInning: {
+          battingTeamId: firstInningBattingTeamId,
+          bowlingTeamId: firstInningBowlingTeamId,
           battingScorecard: firstInningBattingScorecard,
           bowlingScorecard: firstInningBowlingScorecard,
         },
         secondInning: {
+          battingTeamId: secondInningBattingTeamId,
+          bowlingTeamId: secondInningBowlingTeamId,
           battingScorecard: secondInningBattingScorecard,
           bowlingScorecard: secondInningBowlingScorecard,
         },

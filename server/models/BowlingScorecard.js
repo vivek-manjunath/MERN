@@ -27,6 +27,9 @@ const bowlingScorecardSchema = new Schema({
       },
     },
   ],
+  totalOversBowled: {
+    type: Number,
+  },
   isActive: {
     type: Boolean,
   },
@@ -49,13 +52,15 @@ const bowlingScorecardSchema = new Schema({
 });
 
 bowlingScorecardSchema.pre('save', function(next) {
+  this.totalOversBowled = 0;
   this.bowlerList.map(bowlerInfo => {
     if (bowlerInfo.runs && bowlerInfo.overs) {
       bowlerInfo.economy = bowlerInfo.runs / bowlerInfo.overs;
       bowlerInfo.economy = bowlerInfo.economy.toFixed(2);
     }
-    next();
+    this.totalOversBowled += bowlerInfo.overs;
   });
+  next();
 });
 
 module.exports = mongoose.model('BowlingScorecard', bowlingScorecardSchema, 'BowlingScorecard');

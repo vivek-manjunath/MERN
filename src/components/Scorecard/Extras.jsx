@@ -63,20 +63,34 @@ export default class Extras extends Component {
                     id="ipWides"
                     name="wides"
                     onChange={this.changeHandler}
-                    value={this.state.extraData && this.state.extraData.wides}
+                    value={this.state.extraData ? this.state.extraData.wides : 0}
                   />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipNoBalls">No balls</label>
-                  <input type="number" className="form-control" id="ipNoBalls" name="noBalls" value={this.state.extraData.noBalls} onChange={this.changeHandler} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="ipNoBalls"
+                    name="noBalls"
+                    value={this.state.extraData ? this.state.extraData.noBalls : 0}
+                    onChange={this.changeHandler}
+                  />
                 </div>
               </div>
               <div className="form-row">
                 <div className="form-group col-md-12">
                   <label for="ipByes">Byes</label>
-                  <input type="number" className="form-control" id="ipByes" name="byes" value={this.state.extraData.byes} onChange={this.changeHandler} />
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="ipByes"
+                    name="byes"
+                    value={this.state.extraData ? this.state.extraData.byes : 0}
+                    onChange={this.changeHandler}
+                  />
                 </div>
               </div>
             </form>

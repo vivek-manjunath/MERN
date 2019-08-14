@@ -77,6 +77,7 @@ const battingScorecardSchema = new Schema({
 });
 
 battingScorecardSchema.pre('save', function(next) {
+  console.log('pre called');
   this.totalRunsScored = 0;
   this.batsmanList.map(batsmanInfo => {
     this.totalRunsScored += batsmanInfo.runs;
@@ -84,8 +85,8 @@ battingScorecardSchema.pre('save', function(next) {
       batsmanInfo.strikeRate = (batsmanInfo.runs / batsmanInfo.balls) * 100;
       batsmanInfo.strikeRate = batsmanInfo.strikeRate.toFixed(2);
     }
-    next();
   });
+  next();
 });
 
 module.exports = mongoose.model('BattingScorecard', battingScorecardSchema, 'BattingScorecard');

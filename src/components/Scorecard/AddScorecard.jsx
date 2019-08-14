@@ -64,23 +64,6 @@ export default class AddScorecard extends Component {
   updateMatchSummary = e => {
     e.preventDefault();
 
-    if (
-      (this.state.matchData.tossWinningTeamId === this.state.matchData.homeTeamId._id && this.state.matchData.tossDecision == 'bat') ||
-      (this.state.matchData.tossWinningTeamId === this.state.matchData.awayTeamId._id && this.state.matchData.tossDecision == 'bowl')
-    ) {
-      this.state.matchData.scorecardId.firstInning.battingTeamId = this.state.matchData.homeTeamId._id;
-      this.state.matchData.scorecardId.firstInning.bowlingTeamId = this.state.matchData.awayTeamId._id;
-
-      this.state.matchData.scorecardId.secondInning.battingTeamId = this.state.matchData.awayTeamId._id;
-      this.state.matchData.scorecardId.secondInning.bowlingTeamId = this.state.matchData.homeTeamId._id;
-    } else {
-      this.state.matchData.scorecardId.firstInning.battingTeamId = this.state.matchData.awayTeamId._id;
-      this.state.matchData.scorecardId.firstInning.bowlingTeamId = this.state.matchData.homeTeamId._id;
-
-      this.state.matchData.scorecardId.secondInning.battingTeamId = this.state.matchData.homeTeamId._id;
-      this.state.matchData.scorecardId.secondInning.bowlingTeamId = this.state.matchData.awayTeamId._id;
-    }
-
     API.updateMatch(this.props.match.params.matchId, this.state.matchData).then(res => {
       console.log(res.data.scorecardId);
       this.setState(
@@ -220,7 +203,7 @@ export default class AddScorecard extends Component {
                   )}
                 </div>
                 <div className="col-4">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.extras ? (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning ? (
                     <Extras addExtrasClickHanlder={this.addExtras} extraData={this.state.matchData.scorecardId.firstInning.extras} />
                   ) : (
                     <h6>Loading...</h6>
@@ -260,7 +243,7 @@ export default class AddScorecard extends Component {
                   )}
                 </div>
                 <div className="col-4">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.extras ? (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning ? (
                     <Extras addExtrasClickHanlder={this.addExtras} extraData={this.state.matchData.scorecardId.secondInning.extras} />
                   ) : (
                     <h6>Loading...</h6>
