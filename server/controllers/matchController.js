@@ -143,18 +143,19 @@ module.exports = {
       });
       console.log('3');
       match.scorecardId = mongoose.Types.ObjectId(newScorecard._id);
-    } else {
-      Scorecard.findOne(mongoose.Types.ObjectId(match.scorecardId._id), function(err, scorecard) {
-        scorecard.firstInning.battingTeamId = req.body.scorecardId.firstInning.battingTeamId;
-        scorecard.firstInning.bowlingTeamId = req.body.scorecardId.firstInning.bowlingTeamId;
-        scorecard.secondInning.battingTeamId = req.body.scorecardId.secondInning.battingTeamId;
-        scorecard.secondInning.bowlingTeamId = req.body.scorecardId.secondInning.bowlingTeamId;
-
-        scorecard.save(err => {
-          if (err) res.status(422).json(err);
-        });
-      });
     }
+    // else {
+    //   Scorecard.findOne(mongoose.Types.ObjectId(match.scorecardId._id), function(err, scorecard) {
+    //     scorecard.firstInning.battingTeamId = req.body.scorecardId.firstInning.battingTeamId;
+    //     scorecard.firstInning.bowlingTeamId = req.body.scorecardId.firstInning.bowlingTeamId;
+    //     scorecard.secondInning.battingTeamId = req.body.scorecardId.secondInning.battingTeamId;
+    //     scorecard.secondInning.bowlingTeamId = req.body.scorecardId.secondInning.bowlingTeamId;
+
+    //     scorecard.save(err => {
+    //       if (err) res.status(422).json(err);
+    //     });
+    //   });
+    // }
     console.log('4');
     match.save(err => {
       if (err) res.status(422).json(err);

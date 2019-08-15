@@ -79,6 +79,7 @@ export default class UpdateScorecard extends Component {
           console.log(this.state.matchData);
         },
       );
+      Common.alertSuccess('Match summary updated');
     });
   };
 
