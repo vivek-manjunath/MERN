@@ -79,6 +79,9 @@ class TopNavigation extends Component {
                   <NavDropdown.Item as={Link} to="/Register">
                     Register
                   </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/CreateTournament">
+                    Create Tournament
+                  </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <Nav.Link onClick={this.handleShow}>Login</Nav.Link>

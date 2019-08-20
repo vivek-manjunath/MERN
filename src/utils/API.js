@@ -51,6 +51,9 @@ export default {
   saveTournament: function(tournamentData) {
     return axios.post('/api/tournaments', tournamentData);
   },
+  updateTournament: function(id, tournamentData) {
+    return axios.put('/api/tournaments/' + id, tournamentData);
+  },
 
   /*Match API methods*/
   getMatches: function() {

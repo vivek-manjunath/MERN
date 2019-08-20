@@ -4,6 +4,7 @@ const Match = require('../models/Match');
 const Scorecard = require('../models/Scorecard');
 const BattingScorecard = require('../models/BattingScorecard');
 const BowlingScorecard = require('../models/BowlingScorecard');
+const Tournament = require('../models/Tournament');
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -53,17 +54,15 @@ module.exports = {
         path: 'scorecardId',
         populate: {path: 'secondInning.battingScorecard', populate: {path: 'batsmanList.fielder'}},
       })
-      //.populate({path: 'scorecardId.firstInning.battingScorecard.batsmanList', populate: "playerId"})
-      // .populate({ path: "scorecardId.teamA.battingScorecard.playerId" })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'firstInning.battingTeamId'},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.battingTeamId'},
+      })
       .then(match => {
-        if (match.scorecardId && match.scorecardId.teamA && match.scorecardId.teamA.battingScorecard) {
-          match.scorecardId.teamA.battingScorecard.map(batsmanInfo => {
-            batsmanInfo.playerId.fullName = batsmanInfo.playerId.firstName + ' ';
-            if (batsmanInfo.playerId.middleName) batsmanInfo.playerId.fullName += batsmanInfo.playerId.middleName + ' ';
-            if (batsmanInfo.playerId.lastName) batsmanInfo.playerId.fullName += batsmanInfo.playerId.lastName + ' ';
-            console.log(batsmanInfo.playerId.fullName);
-          });
-        }
         res.json(match);
       })
       .catch(err => res.status(422).json(err));
@@ -144,81 +143,45 @@ module.exports = {
       console.log('3');
       match.scorecardId = mongoose.Types.ObjectId(newScorecard._id);
     }
-    // else {
-    //   Scorecard.findOne(mongoose.Types.ObjectId(match.scorecardId._id), function(err, scorecard) {
-    //     scorecard.firstInning.battingTeamId = req.body.scorecardId.firstInning.battingTeamId;
-    //     scorecard.firstInning.bowlingTeamId = req.body.scorecardId.firstInning.bowlingTeamId;
-    //     scorecard.secondInning.battingTeamId = req.body.scorecardId.secondInning.battingTeamId;
-    //     scorecard.secondInning.bowlingTeamId = req.body.scorecardId.secondInning.bowlingTeamId;
-
-    //     scorecard.save(err => {
-    //       if (err) res.status(422).json(err);
-    //     });
-    //   });
-    // }
     console.log('4');
-    match.save(err => {
+    match.save(async err => {
       if (err) res.status(422).json(err);
+      console.log('Id---------' + match.tournamentId);
+
+      //Update tournament stats
+      var currentTournament = await Tournament.findOne(mongoose.Types.ObjectId(match.tournamentId));
+
+      var homeTeamMatches = await Match.find({tournamentId: match.tournamentId, $or: [{homeTeamId: match.homeTeamId}, {awayTeamId: match.homeTeamId}]});
+      var awayTeamMatches = await Match.find({tournamentId: match.tournamentId, $or: [{homeTeamId: match.awayTeamId}, {awayTeamId: match.awayTeamId}]});
+
+      // playedMatches.map(playedMatch => {
+      //   console.log(playedMatch._id);
+      //   console.log(playedMatch.homeTeamId + '---' + playedMatch.awayTeamId);
+      // });
+
+      currentTournament.participatingTeams.map(team => {
+        if (team.teamId.equals(match.homeTeamId)) {
+          team.totalMatches = homeTeamMatches;
+        }
+        if (team.teamId.equals(match.awayTeamId)) {
+          team.totalMatches = awayTeamMatches;
+        }
+        // if (team.teamId.equals(match.winningTeamId)) {
+        //   team.totalWins = team.totalWins | 0;
+        //   team.totalWins++;
+        // }
+      });
+
+      currentTournament.save(err => {
+        if (err) res.status(422).json(err);
+
+        console.log('Tournament saved');
+      });
+
       match.populate('scorecardId', (err, match) => {
         res.status(200).json(match);
       });
     });
-
-    // if (req.body && req.body.scorecardId) {
-    //   Scorecard.findByIdAndUpdate(
-    //     mongoose.Types.ObjectId(req.params.id),
-    //     req.body,
-    //     { new: true }
-    //   )
-    //     .then(scorecard => {
-    //       console.log("Scorecard updated: " + scorecard._id);
-
-    //       Match.findByIdAndUpdate(
-    //         mongoose.Types.ObjectId(req.params.id),
-    //         {
-    //           ...req.body,
-    //           scorecardId: mongoose.Types.ObjectId(newScorecard._id),
-    //           winningTeamId: mongoose.Types.ObjectId(req.body.winningTeamId)
-    //         },
-    //         { new: true }
-    //       )
-    //         .populate("homeTeamId")
-    //         .populate("awayTeamId")
-    //         .populate("winningTeamId")
-    //         .populate("scorecardId")
-    //         .then(match => {
-    //           console.log("Match updated: " + req.params.id);
-    //           res.json(match);
-    //         })
-    //         .catch(err => res.status(422).json(err));
-    //     })
-    //     .catch(err => console.log("Scorecard creation error: " + err));
-    // } else {
-    //   Scorecard.create(req.body.scoreCard)
-    //     .then(newScorecard => {
-    //       console.log("Scorecard created: " + newScorecard._id);
-
-    //       Match.findByIdAndUpdate(
-    //         mongoose.Types.ObjectId(req.params.id),
-    //         {
-    //           ...req.body,
-    //           scorecardId: mongoose.Types.ObjectId(newScorecard._id),
-    //           winningTeamId: mongoose.Types.ObjectId(req.body.winningTeamId)
-    //         },
-    //         { new: true }
-    //       )
-    //         .populate("homeTeamId")
-    //         .populate("awayTeamId")
-    //         .populate("winningTeamId")
-    //         .populate("scorecardId")
-    //         .then(match => {
-    //           console.log("Match updated: " + req.params.id);
-    //           res.json(match);
-    //         })
-    //         .catch(err => res.status(422).json(err));
-    //     })
-    //     .catch(err => console.log("Scorecard creation error: " + err));
-    // }
   },
   remove: function(req, res) {
     Match.findById({

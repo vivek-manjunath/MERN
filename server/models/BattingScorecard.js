@@ -77,7 +77,6 @@ const battingScorecardSchema = new Schema({
 });
 
 battingScorecardSchema.pre('save', function(next) {
-  console.log('pre called');
   this.totalRunsScored = 0;
   this.batsmanList.map(batsmanInfo => {
     this.totalRunsScored += batsmanInfo.runs;

@@ -194,20 +194,9 @@ export default class UpdateScorecard extends Component {
                     />
                   )}
                 </div>
-                <div>
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.bowlingTeamId && (
-                    <BowlerInfo
-                      addBowlerClickHandler={this.addBowler}
-                      bowlingScorecardId={this.state.matchData.scorecardId.firstInning.bowlingScorecard._id}
-                      bowlingTeamId={this.state.matchData.scorecardId.firstInning.bowlingTeamId}
-                    />
-                  )}
-                </div>
                 <div className="col-4">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning ? (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && (
                     <Extras addExtrasClickHanlder={this.addExtras} extraData={this.state.matchData.scorecardId.firstInning.extras} />
-                  ) : (
-                    <h6>Loading...</h6>
                   )}
                 </div>
               </div>
@@ -222,7 +211,16 @@ export default class UpdateScorecard extends Component {
                 this.state.matchData.scorecardId &&
                 this.state.matchData.scorecardId.firstInning &&
                 this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList && (
-                  <BowlingCard scoreCardData={this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList} />
+                  <div>
+                    {this.state.matchData.scorecardId && this.state.matchData.scorecardId.firstInning && this.state.matchData.scorecardId.firstInning.bowlingTeamId && (
+                      <BowlerInfo
+                        addBowlerClickHandler={this.addBowler}
+                        bowlingScorecardId={this.state.matchData.scorecardId.firstInning.bowlingScorecard._id}
+                        bowlingTeamId={this.state.matchData.scorecardId.firstInning.bowlingTeamId}
+                      />
+                    )}
+                    <BowlingCard scoreCardData={this.state.matchData.scorecardId.firstInning.bowlingScorecard.bowlerList} />
+                  </div>
                 )}
             </Tab>
             <Tab eventKey="secondInning" title="Secong Inning">
@@ -237,20 +235,10 @@ export default class UpdateScorecard extends Component {
                     />
                   )}
                 </div>
-                <div>
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.bowlingTeamId && (
-                    <BowlerInfo
-                      addBowlerClickHandler={this.addBowler}
-                      bowlingScorecardId={this.state.matchData.scorecardId.secondInning.bowlingScorecard._id}
-                      bowlingTeamId={this.state.matchData.scorecardId.secondInning.bowlingTeamId}
-                    />
-                  )}
-                </div>
+
                 <div className="col-4">
-                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning ? (
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && (
                     <Extras addExtrasClickHanlder={this.addExtras} extraData={this.state.matchData.scorecardId.secondInning.extras} />
-                  ) : (
-                    <h6>Loading...</h6>
                   )}
                 </div>
               </div>
@@ -262,7 +250,16 @@ export default class UpdateScorecard extends Component {
                 'Batting scorecard not available'
               )}
               {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList && (
-                <BowlingCard scoreCardData={this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList} />
+                <div>
+                  {this.state.matchData.scorecardId && this.state.matchData.scorecardId.secondInning && this.state.matchData.scorecardId.secondInning.bowlingTeamId && (
+                    <BowlerInfo
+                      addBowlerClickHandler={this.addBowler}
+                      bowlingScorecardId={this.state.matchData.scorecardId.secondInning.bowlingScorecard._id}
+                      bowlingTeamId={this.state.matchData.scorecardId.secondInning.bowlingTeamId}
+                    />
+                  )}
+                  <BowlingCard scoreCardData={this.state.matchData.scorecardId.secondInning.bowlingScorecard.bowlerList} />
+                </div>
               )}
             </Tab>
           </Tabs>
