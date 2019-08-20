@@ -151,8 +151,8 @@ module.exports = {
       //Update tournament stats
       var currentTournament = await Tournament.findOne(mongoose.Types.ObjectId(match.tournamentId));
 
-      var homeTeamMatches = await Match.find({tournamentId: match.tournamentId, $or: [{homeTeamId: match.homeTeamId}, {awayTeamId: match.homeTeamId}]});
-      var awayTeamMatches = await Match.find({tournamentId: match.tournamentId, $or: [{homeTeamId: match.awayTeamId}, {awayTeamId: match.awayTeamId}]});
+      var homeTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.homeTeamId}, {awayTeamId: match.homeTeamId}]});
+      var awayTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.awayTeamId}, {awayTeamId: match.awayTeamId}]});
 
       // playedMatches.map(playedMatch => {
       //   console.log(playedMatch._id);
@@ -161,9 +161,11 @@ module.exports = {
 
       currentTournament.participatingTeams.map(team => {
         if (team.teamId.equals(match.homeTeamId)) {
+          console.log('A -> ' + homeTeamMatches);
           team.totalMatches = homeTeamMatches;
         }
         if (team.teamId.equals(match.awayTeamId)) {
+          console.log('B -> ' + awayTeamMatches);
           team.totalMatches = awayTeamMatches;
         }
         // if (team.teamId.equals(match.winningTeamId)) {
@@ -174,7 +176,6 @@ module.exports = {
 
       currentTournament.save(err => {
         if (err) res.status(422).json(err);
-
         console.log('Tournament saved');
       });
 
