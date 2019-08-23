@@ -12,7 +12,7 @@ export default class Standings extends Component {
   }
 
   componentDidMount() {
-    API.getTournament('5d595b1f149ccb41b5543639').then(res => {
+    API.getTournament('5d5b77d36fc66a00306ea2b2').then(res => {
       if (res && res.data) {
         this.setState(prevState => {
           return {
