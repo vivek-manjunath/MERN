@@ -2,6 +2,8 @@
 
 import React, {Component} from 'react';
 import API from '../../utils/API';
+import Overall from '../Standings/Overall';
+import ByPool from './ByPool';
 
 export default class Standings extends Component {
   constructor(props) {
@@ -21,6 +23,11 @@ export default class Standings extends Component {
     });
   }
 
+  handelChange = e => {
+    const {name, value} = e.target;
+    this.setState({[name]: value});
+  };
+
   render() {
     return (
       <div>
@@ -28,46 +35,18 @@ export default class Standings extends Component {
           <div className="col-12">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <label class="btn btn-sm btn-success">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked="" /> Pool
+                <input type="radio" name="view" value="byPool" id="option1" onChange={this.handelChange} autocomplete="off" checked="" /> Pool
               </label>
               <label class="btn btn-sm btn-success">
-                <input type="radio" name="options" id="option2" autocomplete="off" /> Overall
+                <input type="radio" name="view" value="overall" id="option2" onChange={this.handelChange} autocomplete="off" /> Overall
               </label>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-sm-12">
-            <table class="table table-hover table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Teams</th>
-                  <th scope="col">Played</th>
-                  <th scope="col">Won</th>
-                  <th scope="col">Lost</th>
-                  <th scope="col">Tied</th>
-                  <th scope="col">N/R</th>
-                  <th scope="col">NRR</th>
-                  <th scope="col">Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.participatingTeams.map(team => {
-                  return (
-                    <tr>
-                      <td>{team.teamId.name}</td>
-                      <td>{team.totalMatches}</td>
-                      <td>{team.totalWins}</td>
-                      <td />
-                      <td />
-                      <td />
-                      <td />
-                      <td />
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            {this.state.view === 'overall' && <Overall teams={this.state.participatingTeams} />}
+            {this.state.view === 'byPool' && <ByPool teams={this.state.participatingTeams} />}
           </div>
         </div>
       </div>

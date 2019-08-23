@@ -35,8 +35,9 @@
     "eject": "react-scripts eject",
     "client": "react-scripts start",
     "server": "nodemon server",
+    "server-debug": "nodemon --inspect server",
     "start": "npm run server",
-    "dev-start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "dev-start": "concurrently --kill-others \"npm run server-debug\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "eslintConfig": {

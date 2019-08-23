@@ -23,6 +23,7 @@ const tournamentSchema = new Schema({
       totalOversFaced: {type: Number},
       totalRunsAllowed: {type: Number},
       totalOversBowled: {type: Number},
+      noResults: {type: Number},
       points: {type: Number},
       netRunRate: {type: Number},
       pool: {type: String},

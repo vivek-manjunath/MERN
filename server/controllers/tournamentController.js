@@ -6,13 +6,21 @@ const mongoose = require('mongoose');
 module.exports = {
   findAll: function(req, res) {
     Tournament.find()
+      .populate({path: 'participatingTeams.teamId'})
       .then(tournaments => res.json(tournaments))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     Tournament.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate({path: 'participatingTeams.teamId'})
-      .then(tournament => res.json(tournament))
+      .then(tournament => {
+        // tournament.participatingTeams.sort((a, b) => {
+        //   let a_points = a.points | 0;
+        //   let b_points = b.points | 0;
+        //   return a_points < b_points;
+        // });
+        res.json(tournament);
+      })
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {

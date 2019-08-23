@@ -94,9 +94,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: async function(req, res) {
-    console.log('1');
     var match = await Match.findOne(mongoose.Types.ObjectId(req.params.id));
-    console.log('2');
     match.winningTeamId = req.body.winningTeamId;
     match.tossWinningTeamId = req.body.tossWinningTeamId;
     match.tossDecision = req.body.tossDecision;
@@ -140,44 +138,12 @@ module.exports = {
           bowlingScorecard: secondInningBowlingScorecard,
         },
       });
-      console.log('3');
       match.scorecardId = mongoose.Types.ObjectId(newScorecard._id);
     }
-    console.log('4');
     match.save(async err => {
       if (err) res.status(422).json(err);
-      console.log('Id---------' + match.tournamentId);
-
       //Update tournament stats
-      var currentTournament = await Tournament.findOne(mongoose.Types.ObjectId(match.tournamentId));
-
-      var homeTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.homeTeamId}, {awayTeamId: match.homeTeamId}]});
-      var awayTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.awayTeamId}, {awayTeamId: match.awayTeamId}]});
-
-      // playedMatches.map(playedMatch => {
-      //   console.log(playedMatch._id);
-      //   console.log(playedMatch.homeTeamId + '---' + playedMatch.awayTeamId);
-      // });
-
-      currentTournament.participatingTeams.map(team => {
-        if (team.teamId.equals(match.homeTeamId)) {
-          console.log('A -> ' + homeTeamMatches);
-          team.totalMatches = homeTeamMatches;
-        }
-        if (team.teamId.equals(match.awayTeamId)) {
-          console.log('B -> ' + awayTeamMatches);
-          team.totalMatches = awayTeamMatches;
-        }
-        // if (team.teamId.equals(match.winningTeamId)) {
-        //   team.totalWins = team.totalWins | 0;
-        //   team.totalWins++;
-        // }
-      });
-
-      currentTournament.save(err => {
-        if (err) res.status(422).json(err);
-        console.log('Tournament saved');
-      });
+      await updateTournamentStats(match);
 
       match.populate('scorecardId', (err, match) => {
         res.status(200).json(match);
@@ -193,3 +159,33 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 };
+
+async function updateTournamentStats(match) {
+  var currentTournament = await Tournament.findOne(mongoose.Types.ObjectId(match.tournamentId));
+
+  var homeTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.homeTeamId}, {awayTeamId: match.homeTeamId}]});
+  var awayTeamMatches = await Match.count({tournamentId: match.tournamentId, $or: [{homeTeamId: match.awayTeamId}, {awayTeamId: match.awayTeamId}]});
+  var homeTeamTotalWins = await Match.count({tournamentId: match.tournamentId, winningTeamId: match.homeTeamId});
+  var awayTeamTotalWins = await Match.count({tournamentId: match.tournamentId, winningTeamId: match.awayTeamId});
+  var homeTeamTotalLosses = await Match.count({tournamentId: match.tournamentId, winningTeamId: {$ne: match.homeTeamId}});
+  var awayTeamTotalLosses = await Match.count({tournamentId: match.tournamentId, winningTeamId: {$ne: match.awayTeamId}});
+
+  currentTournament.participatingTeams.map(team => {
+    if (team.teamId.equals(match.homeTeamId)) {
+      team.totalMatches = homeTeamMatches;
+      team.totalWins = homeTeamTotalWins;
+      team.totalLosses = homeTeamTotalLosses;
+      team.points = homeTeamTotalWins * 2;
+    }
+    if (team.teamId.equals(match.awayTeamId)) {
+      team.totalMatches = awayTeamMatches;
+      team.totalWins = awayTeamTotalWins;
+      team.totalLosses = awayTeamTotalLosses;
+      team.points = awayTeamTotalWins * 2;
+    }
+  });
+
+  currentTournament.save(err => {
+    if (err) res.status(422).json(err);
+  });
+}
