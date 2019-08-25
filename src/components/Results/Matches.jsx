@@ -4,6 +4,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import TeamName from '../Team/TeamName';
 import DataNotAvailable from '../Common/DataNotAvailable';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCircle} from '@fortawesome/free-solid-svg-icons';
 
 export default function Matches(props) {
   return (
@@ -42,23 +44,45 @@ export default function Matches(props) {
               return (
                 <tr key={match._id}>
                   <td>
-                    <div
-                      className={'row ' + (match.homeTeamId && match.winningTeamId && match.homeTeamId._id === match.winningTeamId ? 'text-dark font-weight-bold' : 'text-muted')}>
-                      <div className="col-md-9">
+                    <div className={'row ' + (match.homeTeamId && match.winningTeamId && match.homeTeamId._id === match.winningTeamId ? 'color-black' : 'text-muted')}>
+                      <div className="col-md-9 inline-display">
                         <TeamName teamName={homeTeamName} teamProfileUrl={`teams/${match.homeTeamId._id}`} />
+                        {match.homeTeamId && match.winningTeamId && match.homeTeamId._id === match.winningTeamId && (
+                          <FontAwesomeIcon className="text-success winner-indicator" icon={faCircle} />
+                        )}
                       </div>
-                      <div className="col-md-3">
-                        <strong>{match.scorecardId && match.scorecardId.teamA && match.scorecardId.teamA.teamTotal}</strong>
-                      </div>
+                      {/* <div className="col-md-3">
+                        <span>
+                          {match.scorecardId &&
+                            match.scorecardId &&
+                            match.scorecardId.firstInning.battingTeamId === match.homeTeamId._id &&
+                            match.scorecardId.firstInning.battingScorecard.totalRunsScored}
+                          {match.scorecardId &&
+                            match.scorecardId &&
+                            match.scorecardId.secondInning.battingTeamId === match.homeTeamId._id &&
+                            match.scorecardId.secondInning.battingScorecard.totalRunsScored}
+                        </span>
+                      </div> */}
                     </div>
-                    <div
-                      className={'row ' + (match.awayTeamId && match.winningTeamId && match.awayTeamId._id === match.winningTeamId ? 'text-dark font-weight-bold' : 'text-muted')}>
-                      <div className="col-md-9">
+                    <div className={'row ' + (match.awayTeamId && match.winningTeamId && match.awayTeamId._id === match.winningTeamId ? 'color-black' : 'text-muted')}>
+                      <div className="col-md-9 inline-display">
                         <TeamName teamName={awayTeamName} teamProfileUrl={`/teams/${match.awayTeamId._id}`} />
+                        {match.homeTeamId && match.winningTeamId && match.awayTeamId._id === match.winningTeamId && (
+                          <FontAwesomeIcon className="text-success winner-indicator" icon={faCircle} />
+                        )}
                       </div>
-                      <div className="col-md-3">
-                        <strong>{match.scorecardId && match.scorecardId.teamB && match.scorecardId.teamB.teamTotal}</strong>
-                      </div>
+                      {/* <div className="col-md-3">
+                        <span>
+                          {match.scorecardId &&
+                            match.scorecardId &&
+                            match.scorecardId.firstInning.battingTeamId === match.awayTeamId._id &&
+                            match.scorecardId.firstInning.battingScorecard.totalRunsScored}
+                          {match.scorecardId &&
+                            match.scorecardId &&
+                            match.scorecardId.secondInning.battingTeamId === match.awayTeamId._id &&
+                            match.scorecardId.secondInning.battingScorecard.totalRunsScored}
+                        </span>
+                      </div> */}
                     </div>
                     {/* <td>{match.awayTeamId.name}</td> */}
                   </td>
@@ -86,11 +110,11 @@ export default function Matches(props) {
                     <td className="align-middle text-center">
                       <p>
                         {match.scorecardId && (
-                          <Link href="#" to={`/Scorecard/${match.scorecardId._id}`} className="card-link text-info">
+                          <Link href="#" to={`/Scorecard/${match.scorecardId._id}`} className="card-link">
                             View
                           </Link>
                         )}
-                        <Link href="#" to={`/UpdateScorecard/${match._id}`} className="card-link text-info">
+                        <Link href="#" to={`/UpdateScorecard/${match._id}`} className="card-link">
                           Update
                         </Link>
                       </p>

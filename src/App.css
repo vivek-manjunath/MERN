@@ -135,6 +135,15 @@ body {
 
 .tcl-table {}
 
+.standings-table {
+  font-size: 0.75rem;
+}
+
+.standings-pool-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .tcl-link {
   font-size: 12px;
 }
@@ -149,4 +158,21 @@ body {
 
 .text-muted a {
   color: #868e96 !important;
+}
+
+.team-name {
+  font-weight: 600;
+}
+
+.color-black {
+  color: #000000;
+}
+
+.inline-display {
+  display: flex
+}
+
+.winner-indicator {
+  padding-top: 8px;
+  padding-left: 5px;
 }

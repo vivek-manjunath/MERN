@@ -55,6 +55,7 @@ const battingScorecardSchema = new Schema({
   totalRunsScored: {
     type: Number,
   },
+  totalWicketsLost: {type: Number},
   isActive: {
     type: Boolean,
   },
@@ -78,8 +79,10 @@ const battingScorecardSchema = new Schema({
 
 battingScorecardSchema.pre('save', function(next) {
   this.totalRunsScored = 0;
+  this.totalWicketsLost = 0;
   this.batsmanList.map(batsmanInfo => {
     this.totalRunsScored += batsmanInfo.runs;
+    this.totalWicketsLost += batsmanInfo.dismissal ? 1 : 0;
     if (batsmanInfo.runs && batsmanInfo.balls) {
       batsmanInfo.strikeRate = (batsmanInfo.runs / batsmanInfo.balls) * 100;
       batsmanInfo.strikeRate = batsmanInfo.strikeRate.toFixed(2);

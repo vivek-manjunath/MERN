@@ -15,6 +15,14 @@ module.exports = {
       .populate('tournamentId')
       .populate('umpiringTeamId')
       .populate('scorecardId')
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'firstInning.battingScorecard'},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.battingScorecard'},
+      })
       .then(matches => res.json(matches))
       .catch(err => res.status(422).json(err));
   },
@@ -62,6 +70,14 @@ module.exports = {
         path: 'scorecardId',
         populate: {path: 'secondInning.battingTeamId'},
       })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'firstInning.bowlingTeamId'},
+      })
+      .populate({
+        path: 'scorecardId',
+        populate: {path: 'secondInning.bowlingTeamId'},
+      })
       .then(match => {
         res.json(match);
       })
@@ -85,6 +101,7 @@ module.exports = {
       .populate('awayTeamId')
       .populate('tournamentId')
       .populate('umpiringTeamId')
+      .populate('scorecardId')
       .then(matches => res.json(matches))
       .catch(err => res.status(422).json(err));
   },

@@ -6,9 +6,7 @@ import {Link} from 'react-router-dom';
 export default function TeamName(props) {
   return (
     <div>
-      <Link to={props.teamProfileUrl}>
-        <strong>{props.teamName}</strong>
-      </Link>
+      <span className="team-name">{props.teamName}</span>
     </div>
   );
 }

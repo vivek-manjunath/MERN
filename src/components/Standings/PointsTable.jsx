@@ -5,7 +5,7 @@ import React from 'react';
 export default function PointsTable(props) {
   return (
     <div>
-      <table class="table table-hover table-sm tcl-table">
+      <table class="table table-hover table-sm standings-table">
         <thead>
           <tr>
             <th scope="col">Teams</th>

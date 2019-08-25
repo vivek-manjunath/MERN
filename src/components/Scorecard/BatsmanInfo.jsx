@@ -14,7 +14,7 @@ export default class BatsmanInfo extends Component {
   }
 
   componentDidMount() {
-    API.getPlayersByTeam(this.props.battingTeamId).then(res => {
+    API.getPlayersByTeam(this.props.battingTeamId._id).then(res => {
       this.setState(prevState => {
         return {
           lookupData: {
@@ -25,7 +25,7 @@ export default class BatsmanInfo extends Component {
       });
     });
 
-    API.getPlayersByTeam(this.props.bowlingTeamId).then(res => {
+    API.getPlayersByTeam(this.props.bowlingTeamId._id).then(res => {
       this.setState(prevState => {
         return {
           lookupData: {
@@ -87,7 +87,7 @@ export default class BatsmanInfo extends Component {
                       this.state.lookupData.battingTeamLookup.map(player => {
                         return (
                           <option key={player._id} value={player._id}>
-                            {player.firstName}&nbsp;{player.lastName}
+                            {player.fullName}
                           </option>
                         );
                       })}

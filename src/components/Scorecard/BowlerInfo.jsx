@@ -14,7 +14,7 @@ export default class BowlerInfo extends Component {
   }
 
   componentDidMount() {
-    API.getPlayersByTeam(this.props.bowlingTeamId).then(res => {
+    API.getPlayersByTeam(this.props.bowlingTeamId._id).then(res => {
       this.setState(prevState => {
         return {
           lookupData: {

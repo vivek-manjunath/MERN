@@ -68,6 +68,8 @@ export default function BattingCard({scoreCardData}) {
                 <td>
                   <span>
                     {'(' +
+                      (scoreCardData && scoreCardData.battingScorecard && scoreCardData.battingScorecard.totalWicketsLost ? scoreCardData.battingScorecard.totalWicketsLost : 0) +
+                      ' wickets; ' +
                       (scoreCardData && scoreCardData.bowlingScorecard && scoreCardData.bowlingScorecard.totalOversBowled ? scoreCardData.bowlingScorecard.totalOversBowled : 0) +
                       ' overs)'}
                   </span>
