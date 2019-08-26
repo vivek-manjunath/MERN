@@ -53,7 +53,7 @@ export default class Home extends Component {
             <div className="row">
               <div className="col-sm-12" />
             </div>
-            <div className="row">
+            <div className="row mb-3">
               <div className="col-sm-12">
                 <div className="row">
                   <div className="col-sm-4 mb-2">

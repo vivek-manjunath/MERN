@@ -87,7 +87,7 @@ export default class ResultsMain extends Component {
               <div>
                 <form action="">
                   <div className="form-group">
-                    <label htmlFor="selTournament">Tournament-{this.state.showBlockUi}</label>
+                    <label htmlFor="selTournament">Tournament</label>
                     <Select
                       id="selTournament"
                       name="tournamentId"
