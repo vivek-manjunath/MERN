@@ -7,7 +7,7 @@ export default function PlayerLink({playerName, playerProfileUrl}) {
   return (
     <div>
       <Link className="tcl-link" to={playerProfileUrl}>
-        {playerName}
+        <span className="text-primary font-weight-bold">{playerName}</span>
       </Link>
     </div>
   );

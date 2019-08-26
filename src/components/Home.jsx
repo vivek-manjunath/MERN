@@ -57,7 +57,7 @@ export default class Home extends Component {
               <div className="col-sm-12">
                 <div className="row">
                   <div className="col-sm-4 mb-2">
-                    <TopPlayers title="Most Valuable Players" />
+                    <TopPlayers statType="topThreeBatsmen" title="Most Valuable Players" players={this.state.topBatsmen} />
                   </div>
                   <div className="col-sm-4 mb-2">
                     <TopPlayers statType="topThreeBatsmen" players={this.state.topBatsmen} title="Top Batsmen" />

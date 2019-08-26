@@ -26,7 +26,7 @@ import Teams from './components/Team/Teams';
 import TeamProfile from './components/Team/TeamProfile';
 import ResultsMain from './components/Results/ResultsMain';
 import NewTeam from './components/Team/NewTeam';
-import Stats from './components/Stats';
+import Stats from './components/Stats/Stats';
 import About from './components/About';
 import PlayerProfile from './components/Player/PlayerProfile';
 import ManagePlayer from './components/Player/ManagePlayer';
