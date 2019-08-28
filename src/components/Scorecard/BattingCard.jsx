@@ -9,9 +9,9 @@ export default function BattingCard({scoreCardData}) {
       {scoreCardData && scoreCardData.battingTeamId && (
         <div className="row">
           <div className="col-md-12">
-            <h4>
-              <strong>{scoreCardData.battingTeamId.name}</strong>
-            </h4>
+            <h6>
+              <span className="font-weight-600">{scoreCardData.battingTeamId.name + ' innings'}</span>
+            </h6>
           </div>
         </div>
       )}

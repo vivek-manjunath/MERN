@@ -106,11 +106,12 @@ export default function Matches(props) {
                       <small>{umpiringTeamName}</small>
                     </p>
                   </td>
+
                   {props.hideScorecardCol !== true && (
                     <td className="align-middle text-center">
                       <p>
                         {match.scorecardId && (
-                          <Link href="#" to={`/Scorecard/${match.scorecardId._id}`} className="card-link">
+                          <Link href="#" to={`/ViewScorecard/${match._id}`} className="card-link">
                             View
                           </Link>
                         )}

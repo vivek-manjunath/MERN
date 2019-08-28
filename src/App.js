@@ -59,7 +59,7 @@ class App extends Component {
           <Route className="fade" exact path="/CreateFixture" component={CreateFixture} />
           <Route className="fade" exact path="/PlayerProfile/:playerId" component={PlayerProfile} />
           <Route className="fade" exact path="/ManagePlayer" component={ManagePlayer} />
-          <Route className="fade" exact path="/Scorecard/:scorecardId" component={ViewScorecard} />
+          <Route className="fade" exact path="/ViewScorecard/:matchId" component={ViewScorecard} />
           <Route className="fade" exact path="/UpdateScorecard/:matchId" component={UpdateScorecard} />
           <Route className="fade" exact path="/CreateTournament" component={CreateTournament} />
           <Route className="fade" exact path="/SetupTournament" component={SetupTournament} />

@@ -30,6 +30,8 @@ module.exports = {
     Match.findOne(mongoose.Types.ObjectId(req.params.id))
       .populate('homeTeamId')
       .populate('awayTeamId')
+      .populate('winningTeamId')
+      .populate('tossWinningTeamId')
       .populate({
         path: 'scorecardId',
         populate: {path: 'firstInning.battingScorecard', populate: {path: 'batsmanList.playerId'}},

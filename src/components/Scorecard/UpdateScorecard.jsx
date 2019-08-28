@@ -19,7 +19,8 @@ export default class UpdateScorecard extends Component {
       matchData: {
         homeTeamId: {},
         awayTeamId: {},
-        winningTeamId: '',
+        winningTeamId: {},
+        tossWinningTeamId: {},
         scorecardId: {
           firstInning: {battingScorecard: {}, bowlingScorecard: {}},
           secondInning: {battingScorecard: {}, bowlingScorecard: {}},
@@ -37,27 +38,6 @@ export default class UpdateScorecard extends Component {
           matchData: res.data,
         };
       });
-      // API.getPlayersByTeam(res.data.homeTeamId._id).then(res => {
-      //   this.setState(prevState => {
-      //     return {
-      //       lookupData: {
-      //         ...prevState.lookupData,
-      //         homeTeamPlayers: res.data,
-      //       },
-      //     };
-      //   });
-      // });
-
-      // API.getPlayersByTeam(res.data.awayTeamId._id).then(res => {
-      //   this.setState(prevState => {
-      //     return {
-      //       lookupData: {
-      //         ...prevState.lookupData,
-      //         awayTeamPlayers: res.data,
-      //       },
-      //     };
-      //   });
-      // });
     });
   }
 

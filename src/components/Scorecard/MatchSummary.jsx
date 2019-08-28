@@ -36,7 +36,7 @@ export default function MatchSummary(props) {
                             name="tossWinningTeamId"
                             id="gridRadios1"
                             value={props.matchData.awayTeamId._id}
-                            checked={props.matchData.awayTeamId._id == props.matchData.tossWinningTeamId}
+                            checked={props.matchData.awayTeamId._id == props.matchData.tossWinningTeamId._id}
                             onChange={props.handleChange}
                           />
                           <label class="form-check-label" for="gridRadios1">
@@ -50,7 +50,7 @@ export default function MatchSummary(props) {
                             name="tossWinningTeamId"
                             id="gridRadios2"
                             value={props.matchData.homeTeamId._id}
-                            checked={props.matchData.homeTeamId._id == props.matchData.tossWinningTeamId}
+                            checked={props.matchData.homeTeamId._id == props.matchData.tossWinningTeamId._id}
                             onChange={props.handleChange}
                           />
                           <label class="form-check-label" for="gridRadios2">
@@ -114,7 +114,7 @@ export default function MatchSummary(props) {
                             name="winningTeamId"
                             id="gridWinningTeamAway"
                             value={props.matchData.awayTeamId._id}
-                            checked={props.matchData.awayTeamId._id == props.matchData.winningTeamId}
+                            checked={props.matchData.awayTeamId._id == props.matchData.winningTeamId._id}
                             onChange={props.handleChange}
                           />
 
@@ -129,7 +129,7 @@ export default function MatchSummary(props) {
                             name="winningTeamId"
                             id="gridWinningTeamHome"
                             value={props.matchData.homeTeamId._id}
-                            checked={props.matchData.homeTeamId._id == props.matchData.winningTeamId}
+                            checked={props.matchData.homeTeamId._id == props.matchData.winningTeamId._id}
                             onChange={props.handleChange}
                           />
                           <label class="form-check-label" for="gridWinningTeamHome">
