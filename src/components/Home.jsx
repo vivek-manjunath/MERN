@@ -41,18 +41,8 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        {/* <div className="jumbotron jumbotron-fluid" style={homeJumbotronStyle}>
-          <div className="container text-center text-white">            
-            <h1 className="display-4">Tampa Cricket League</h1>
-            <p className="lead">Home of cricket in Tampa Bay area.</p>
-          </div>
-        </div> */}
-
-        <div className="row">
+        <div className="row mb-3">
           <div className="col-sm-8 mb-2">
-            <div className="row">
-              <div className="col-sm-12" />
-            </div>
             <div className="row mb-3">
               <div className="col-sm-12">
                 <div className="row">
@@ -69,15 +59,32 @@ export default class Home extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-sm-12">
-                <Sponsorers title="Sponsorers" />
+              <div className="col-sm-4">
+                <div class="bs-callout bs-callout-primary">
+                  <h4>225</h4>
+                  Matches played
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div class="bs-callout bs-callout-primary">
+                  <h4>2000</h4>
+                  Runs scored
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div class="bs-callout bs-callout-primary">
+                  <h4>225</h4>
+                  Wickets taken
+                </div>
               </div>
             </div>
           </div>
           <div className="col-sm-4 mb-2">
             <News title="Latest News" />
+            <Sponsorers title="Sponsorers" />
           </div>
         </div>
+
         <Footer />
       </div>
     );

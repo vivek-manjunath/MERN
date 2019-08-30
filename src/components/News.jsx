@@ -6,7 +6,7 @@ import {ListGroup} from 'react-bootstrap';
 export default class News extends Component {
   render() {
     return (
-      <div>
+      <div className="mb-3">
         <div className="card shadow">
           <div className="card-header font-weight-bold">{this.props.title}</div>
           <div className="card-body">
