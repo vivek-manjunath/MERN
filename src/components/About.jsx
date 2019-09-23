@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 export default class About extends Component {
   render() {
     return (
-      <div>
+      <div className="container-fluid section">
         <div class="card bg-light mb-3 border-radius-5px shadow">
           <div class="card-body">
             <p class="card-text">

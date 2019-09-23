@@ -40,7 +40,7 @@ export default class Standings extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid section">
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group">

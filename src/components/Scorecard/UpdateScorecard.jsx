@@ -156,7 +156,7 @@ export default class UpdateScorecard extends Component {
 
   render() {
     return (
-      <div className="row">
+      <div className="row container-fluid section">
         <div className="col-4">
           <MatchSummary updateMatchSummary={this.updateMatchSummary} matchData={this.state.matchData} handleChange={this.handleChange} />
         </div>

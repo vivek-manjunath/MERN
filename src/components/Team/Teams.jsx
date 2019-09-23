@@ -40,7 +40,7 @@ class Teams extends Component {
   render() {
     return (
       <ErrorBoundary>
-        <div>
+        <div className="container-fluid section">
           <div className="row">
             {this.state.teams.map(team => {
               return (
@@ -48,10 +48,7 @@ class Teams extends Component {
                   <TeamCard
                     teamId={team._id}
                     teamName={team.name}
-                    deleteClickHandler={this.deleteTeamClick.bind(
-                      this,
-                      team._id,
-                    )}
+                    deleteClickHandler={this.deleteTeamClick.bind(this, team._id)}
                     teamProfileUrl={`${this.props.match.path}/${team._id}`}
                   />
                 </div>

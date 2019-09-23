@@ -29,7 +29,7 @@ const matchSchema = new Schema({
     // }
   },
   datePlayed: {
-    type: Date,
+    type: String,
   },
   timePlayed: {
     type: String,
@@ -74,8 +74,9 @@ const matchSchema = new Schema({
   },
 });
 
-// matchSchema.post('save', function(next) {
-//   next();
-// });
+matchSchema.pre('save', function(next) {
+  console.log('date played--->' + this.datePlayed);
+  next();
+});
 
 module.exports = mongoose.model('Match', matchSchema, 'Match');

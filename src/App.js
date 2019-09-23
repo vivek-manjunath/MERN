@@ -44,9 +44,9 @@ import Register from './components/User/Register';
 class App extends Component {
   render() {
     return (
-      <div>
-        <TopNavigation> </TopNavigation>
-        <div className="container">
+      <div className="">
+        <TopNavigation></TopNavigation>
+        <div>
           <Route className="fade" exact path="/" component={Home} />
           <Route className="fade" path="/Home" component={Home} />
           <Route className="fade" path="/Results" component={ResultsMain} />

@@ -38,9 +38,9 @@ class TopNavigation extends Component {
   render() {
     return (
       <div>
-        <Navbar className="navbar navbar-expand-lg navbar-dark fixed-top bg-primary" expand="lg">
+        <Navbar className="navbar navbar-expand-lg navbar-dark fixed-top bg-tcl-header" expand="lg">
           <Navbar.Brand as={Link} to="/Home">
-            <strong>Tampa Cricket League</strong>
+            <strong>TCL</strong>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

@@ -15,11 +15,7 @@ export default class CreateFixture extends Component {
     this.state = {
       tournaments: [],
       teams: [],
-      venues: [
-        {venueId: 1, venueName: 'Evans 1'},
-        {venueId: 1, venueName: 'Evans 2'},
-        {venueId: 1, venueName: 'Evans Center'},
-      ],
+      venues: [{venueId: 1, venueName: 'Evans 1'}, {venueId: 1, venueName: 'Evans 2'}, {venueId: 1, venueName: 'Evans Center'}],
       fixtureInfo: {
         tournamentId: '',
         homeTeamId: '',
@@ -58,18 +54,17 @@ export default class CreateFixture extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    this.setState(
-      prevState => {
-        return {
-          fixtureInfo: {...prevState.fixtureInfo},
-        };
-      },
-      () => {
-        API.saveMatch(this.state.fixtureInfo)
-          .then(res => Common.alertSuccess('new match created'))
-          .catch(err => console.log(err));
-      },
-    );
+
+    API.saveMatch({
+      awayTeamId: this.state.fixtureInfo.awayTeamId,
+      datePlayed: this.state.fixtureInfo.datePlayed.toLocaleString(),
+      homeTeamId: this.state.fixtureInfo.homeTeamId,
+      tournamentId: this.state.fixtureInfo.tournamentId,
+      umpiringTeamId: this.state.fixtureInfo.umpiringTeamId,
+      venue: this.state.fixtureInfo.venue,
+    })
+      .then(res => Common.alertSuccess('new match created'))
+      .catch(err => console.log(err));
   };
   render() {
     return (
@@ -83,18 +78,11 @@ export default class CreateFixture extends Component {
                   <div className="form-row">
                     <div class="form-group col-md-6">
                       <label htmlFor="selectTeam1">Home Team</label>
-                      <select
-                        id="selHomeTeam"
-                        name="homeTeamId"
-                        class="form-control"
-                        onChange={this.changeHandler}>
+                      <select id="selHomeTeam" name="homeTeamId" class="form-control" onChange={this.changeHandler}>
                         <option selected>Select</option>
                         {this.state.teams.map(team => {
                           return (
-                            <option
-                              id={team._id}
-                              key={team._id}
-                              value={team._id}>
+                            <option id={team._id} key={team._id} value={team._id}>
                               {team.name}
                             </option>
                           );
@@ -103,18 +91,11 @@ export default class CreateFixture extends Component {
                     </div>
                     <div class="form-group col-md-6">
                       <label for="selectTeam2">Away Team</label>
-                      <select
-                        id="selAwayTeam"
-                        name="awayTeamId"
-                        class="form-control"
-                        onChange={this.changeHandler}>
+                      <select id="selAwayTeam" name="awayTeamId" class="form-control" onChange={this.changeHandler}>
                         <option selected>Select</option>
                         {this.state.teams.map(team => {
                           return (
-                            <option
-                              id={team._id}
-                              key={team._id}
-                              value={team._id}>
+                            <option id={team._id} key={team._id} value={team._id}>
                               {team.name}
                             </option>
                           );
@@ -125,18 +106,11 @@ export default class CreateFixture extends Component {
                   <div className="form-row">
                     <div class="form-group col-md-6">
                       <label for="selectUmpiringTeam">Umpiring Team</label>
-                      <select
-                        id="selectUmpiringTeam"
-                        class="form-control"
-                        name="umpiringTeamId"
-                        onChange={this.changeHandler}>
+                      <select id="selectUmpiringTeam" class="form-control" name="umpiringTeamId" onChange={this.changeHandler}>
                         <option selected>Select</option>
                         {this.state.teams.map(team => {
                           return (
-                            <option
-                              id={team._id}
-                              key={team._id}
-                              value={team._id}>
+                            <option id={team._id} key={team._id} value={team._id}>
                               {team.name}
                             </option>
                           );
@@ -145,18 +119,11 @@ export default class CreateFixture extends Component {
                     </div>
                     <div class="form-group col-md-6">
                       <label htmlFor="selectTournament">Tournament</label>
-                      <select
-                        id="selectTournament"
-                        name="tournamentId"
-                        class="form-control"
-                        onChange={this.changeHandler}>
+                      <select id="selectTournament" name="tournamentId" class="form-control" onChange={this.changeHandler}>
                         <option selected>Choose...</option>
                         {this.state.tournaments.map(tournament => {
                           return (
-                            <option
-                              id={tournament._id}
-                              key={tournament._id}
-                              value={tournament._id}>
+                            <option id={tournament._id} key={tournament._id} value={tournament._id}>
                               {tournament.name}
                             </option>
                           );
@@ -168,18 +135,10 @@ export default class CreateFixture extends Component {
                   <div className="form-row">
                     <div class="form-group col-md-6">
                       <label for="selectVenue">Venue</label>
-                      <select
-                        id="selectVenue"
-                        name="venue"
-                        class="form-control"
-                        onChange={this.changeHandler}>
+                      <select id="selectVenue" name="venue" class="form-control" onChange={this.changeHandler}>
                         <option selected>Select</option>
                         {this.state.venues.map(venue => {
-                          return (
-                            <option value={venue.venueName}>
-                              {venue.venueName}
-                            </option>
-                          );
+                          return <option value={venue.venueName}>{venue.venueName}</option>;
                         })}
                       </select>
                     </div>
@@ -188,51 +147,18 @@ export default class CreateFixture extends Component {
                       <DatePicker
                         id="inputDate"
                         className="form-control"
-                        placeholder="mm/dd/yyyy"
                         name="datePlayed"
                         showTimeSelect
                         dateFormat="MM/dd/yyyy h:mm aa"
                         timeFormat="h:mm aa"
                         selected={this.state.fixtureInfo.datePlayed}
                         onChange={this.handleDateChange}
+                        autoComplete="off"
                       />
                     </div>
                   </div>
                   <div className="form-row" />
                 </div>
-                {/* <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-                </div>
-                <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-                </div>
-            </div> */}
                 <div className="card-footer text-center">
                   <button type="submit" class="btn btn-primary">
                     Save

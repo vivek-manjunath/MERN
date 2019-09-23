@@ -82,7 +82,7 @@ export default class ResultsMain extends Component {
     return (
       <ErrorBoundary>
         <BlockUi tag="div" blocking={this.state.showBlockUi}>
-          <div className="row">
+          <div className="row container-fluid section">
             <div className="col-md-2 right-vertical-line">
               <div>
                 <form action="">
